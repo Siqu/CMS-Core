@@ -1,13 +1,13 @@
 services:
   siqu.cms_core.doctrine.listener.cms_user_listener:
-    class: Siqu\CMSCore\Doctrine\Listener\CMSUserListener
+    class: Siqu\CMS\Core\Doctrine\Listener\CMSUserListener
     public: false
     arguments:
       - '@siqu.cms_core.util.password_updater'
     tags:
       - { name: 'doctrine.event_listener' }
   siqu.cms_core.util.password_updater:
-    class: Siqu\CMSCore\Util\PasswordUpdater
+    class: Siqu\CMS\Core\Util\PasswordUpdater
     public: false
     arguments:
       - '@security.encoder_factory'

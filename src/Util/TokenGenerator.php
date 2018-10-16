@@ -1,10 +1,10 @@
 <?php
 
-namespace Siqu\CMSCore\Util;
+namespace Siqu\CMS\Core\Util;
 
 /**
  * Class TokenGenerator
- * @package Siqu\CMSCore\Util
+ * @package Siqu\CMS\Core\Util
  */
 class TokenGenerator
 {

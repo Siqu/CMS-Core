@@ -1,14 +1,14 @@
 <?php
 
-namespace DependencyInjection;
+namespace Siqu\CMS\Core\Tests\DependencyInjection;
 
 use PHPUnit\Framework\TestCase;
-use Siqu\CMSCore\DependencyInjection\Configuration;
+use Siqu\CMS\Core\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 /**
  * Class ConfigurationTest
- * @package DependencyInjection
+ * @package Siqu\CMS\Core\Tests\DependencyInjection
  */
 class ConfigurationTest extends TestCase
 {

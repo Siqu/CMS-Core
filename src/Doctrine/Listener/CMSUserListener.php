@@ -1,17 +1,16 @@
 <?php
 
-namespace Siqu\CMSCore\Doctrine\Listener;
+namespace Siqu\CMS\Core\Doctrine\Listener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Siqu\CMSCore\Entity\CMSUser;
-use Siqu\CMSCore\Util\PasswordUpdater;
+use Siqu\CMS\Core\Entity\CMSUser;
+use Siqu\CMS\Core\Util\PasswordUpdater;
 
 /**
  * Class CMSUserListener
- * @package Siqu\CMSCore\Doctrine\Listener
+ * @package Siqu\CMS\Core\Doctrine\Listener
  */
 class CMSUserListener implements EventSubscriber
 {

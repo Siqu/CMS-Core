@@ -1,20 +1,18 @@
 <?php
 
-namespace DependencyInjection;
+namespace Siqu\CMS\Core\Tests\DependencyInjection;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
-use Siqu\CMSCore\DependencyInjection\CMSCoreExtension;
-use Siqu\CMSCore\DependencyInjection\Configuration;
-use Siqu\CMSCore\Doctrine\Listener\CMSUserListener;
-use Siqu\CMSCore\Util\PasswordUpdater;
+use Siqu\CMS\Core\DependencyInjection\CMSCoreExtension;
+use Siqu\CMS\Core\Doctrine\Listener\CMSUserListener;
+use Siqu\CMS\Core\Util\PasswordUpdater;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Class CMSCoreExtensionTest
- * @package DependencyInjection
+ * @package Siqu\CMS\Core\Tests\DependencyInjection
  */
 class CMSCoreExtensionTest extends TestCase
 {

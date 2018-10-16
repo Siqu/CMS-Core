@@ -1,12 +1,12 @@
 <?php
 
-namespace Siqu\CMSCore\Entity\Traits;
+namespace Siqu\CMS\Core\Entity\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class IdentifiableTrait
- * @package Siqu\CMSCore\Entity\Traits
+ * @package Siqu\CMS\Core\Entity\Traits
  */
 trait IdentifiableTrait
 {

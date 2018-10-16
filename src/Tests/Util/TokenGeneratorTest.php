@@ -1,13 +1,13 @@
 <?php
 
-namespace Siqu\CMSCore\Tests\Util;
+namespace Siqu\CMS\Core\Tests\Util;
 
 use PHPUnit\Framework\TestCase;
-use Siqu\CMSCore\Util\TokenGenerator;
+use Siqu\CMS\Core\Util\TokenGenerator;
 
 /**
  * Class TokenGeneratorTest
- * @package Siqu\CMSCore\Tests\Util
+ * @package Siqu\CMS\Core\Tests\Util
  */
 class TokenGeneratorTest extends TestCase
 {

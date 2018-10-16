@@ -1,21 +1,20 @@
 <?php
 
-namespace Siqu\CMSCore\Tests\Doctrine\Listener;
+namespace Siqu\CMS\Core\Tests\Doctrine\Listener;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\UnitOfWork;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Siqu\CMSCore\Doctrine\Listener\CMSUserListener;
-use Siqu\CMSCore\Entity\CMSUser;
-use Siqu\CMSCore\Util\PasswordUpdater;
+use Siqu\CMS\Core\Doctrine\Listener\CMSUserListener;
+use Siqu\CMS\Core\Entity\CMSUser;
+use Siqu\CMS\Core\Util\PasswordUpdater;
 
 /**
  * Class CMSUserListenerTest
- * @package Siqu\CMSCore\Tests\Doctrine\Listener
+ * @package Siqu\CMS\Core\Tests\Doctrine\Listener
  */
 class CMSUserListenerTest extends TestCase
 {

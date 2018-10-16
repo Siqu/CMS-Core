@@ -1,13 +1,13 @@
 <?php
 
-namespace Siqu\CMSCore\Entity;
+namespace Siqu\CMS\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Siqu\CMSCore\Entity\Traits\IdentifiableTrait;
+use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
 
 /**
  * Class Group
- * @package Siqu\CMSCore\Entity
+ * @package Siqu\CMS\Core\Entity
  */
 class Group
 {

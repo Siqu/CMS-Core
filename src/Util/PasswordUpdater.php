@@ -1,14 +1,13 @@
 <?php
 
-namespace Siqu\CMSCore\Util;
+namespace Siqu\CMS\Core\Util;
 
-use Siqu\CMSCore\Entity\CMSUser;
-use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
+use Siqu\CMS\Core\Entity\CMSUser;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 /**
  * Class PasswordUpdater
- * @package Siqu\CMSCore\Util
+ * @package Siqu\CMS\Core\Util
  */
 class PasswordUpdater
 {

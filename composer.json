@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Siqu\\CMSCore\\": "src/"
+            "Siqu\\CMS\\Core\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Siqu\\CMSCore\\Tests\\": "tests/"
+            "Siqu\\CMS\\Core\\Tests\\": "tests/"
         }
     },
     "replace": {

@@ -1,17 +1,17 @@
 <?php
 
-namespace Siqu\CMSCore\Tests\Util;
+namespace Siqu\CMS\Core\Tests\Util;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Siqu\CMSCore\Entity\CMSUser;
-use Siqu\CMSCore\Util\PasswordUpdater;
+use Siqu\CMS\Core\Entity\CMSUser;
+use Siqu\CMS\Core\Util\PasswordUpdater;
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 /**
  * Class PasswordUpdaterTest
- * @package Siqu\CMSCore\Tests\Util
+ * @package Siqu\CMS\Core\Tests\Util
  */
 class PasswordUpdaterTest extends TestCase
 {

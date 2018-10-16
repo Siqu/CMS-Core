@@ -1,14 +1,14 @@
 <?php
 
-namespace Siqu\CMSCore\Entity;
+namespace Siqu\CMS\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Siqu\CMSCore\Entity\Traits\IdentifiableTrait;
-use Siqu\CMSCore\Entity\Traits\NameableTrait;
+use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
+use Siqu\CMS\Core\Entity\Traits\NameableTrait;
 
 /**
  * Class Page
- * @package Siqu\CMSCore\Entity
+ * @package Siqu\CMS\Core\Entity
  * @ORM\Entity()
  * @ORM\Table(name="cms_page")
  */

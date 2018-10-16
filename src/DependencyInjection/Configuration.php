@@ -1,13 +1,13 @@
 <?php
 
-namespace Siqu\CMSCore\DependencyInjection;
+namespace Siqu\CMS\Core\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * Class Configuration
- * @package Siqu\CMSCore\DependencyInjection
+ * @package Siqu\CMS\Core\DependencyInjection
  */
 class Configuration implements ConfigurationInterface
 {
