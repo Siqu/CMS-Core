@@ -5,7 +5,7 @@ services:
     arguments:
       - '@siqu.cms_core.util.password_updater'
     tags:
-      - { name: 'doctrine.event_listener' }
+      - { name: 'doctrine.event_subscriber' }
   siqu.cms_core.util.password_updater:
     class: Siqu\CMS\Core\Util\PasswordUpdater
     public: false
