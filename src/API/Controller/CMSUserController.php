@@ -2,8 +2,9 @@
 
 namespace Siqu\CMS\API\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Siqu\CMS\Core\Entity\CMSUser;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -11,13 +12,18 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package Siqu\CMS\API\Controller
  * @Route("/user", name="api_user")
  */
-class CMSUserController extends Controller
+class CMSUserController extends APIController
 {
     /**
-     * @return JsonResponse
+     * Read all CMSUser.
+     *
+     * @param Request $request
+     * @return Response
      * @Route("", name="_index")
      */
-    public function index(): JsonResponse {
-        return new JsonResponse(['test']);
+    public function index(Request $request): Response {
+        $user = new CMSUser();
+
+        return $this->createResponse([$user], $request);
     }
 }

@@ -1,1 +1,2 @@
-services:
+imports:
+  - { resource: services/event_listener.yaml }

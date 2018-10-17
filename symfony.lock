@@ -74,6 +74,15 @@
     "ocramius/proxy-manager": {
         "version": "2.0.4"
     },
+    "phpdocumentor/reflection-common": {
+        "version": "1.0.1"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "4.3.0"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "0.4.0"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -188,6 +197,9 @@
     "symfony/property-access": {
         "version": "v3.4.17"
     },
+    "symfony/property-info": {
+        "version": "v3.4.17"
+    },
     "symfony/routing": {
         "version": "3.3",
         "recipe": {
@@ -208,6 +220,12 @@
             "version": "3.3",
             "ref": "f8a63faa0d9521526499c0a8f403c9964ecb0527"
         }
+    },
+    "symfony/serializer": {
+        "version": "v3.4.17"
+    },
+    "symfony/serializer-pack": {
+        "version": "v1.0.1"
     },
     "symfony/stopwatch": {
         "version": "v3.4.17"
@@ -253,6 +271,9 @@
     },
     "twig/twig": {
         "version": "v2.5.0"
+    },
+    "webmozart/assert": {
+        "version": "1.3.0"
     },
     "zendframework/zend-code": {
         "version": "3.1.0"
