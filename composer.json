@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Siqu\\CMS\\Core\\": "src/"
+            "Siqu\\CMS\\": "src/"
         }
     },
     "autoload-dev": {

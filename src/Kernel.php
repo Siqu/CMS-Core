@@ -1,6 +1,6 @@
 <?php
 
-namespace Siqu\CMS\Core;
+namespace Siqu\CMS;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;

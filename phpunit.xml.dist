@@ -9,7 +9,7 @@
 >
     <php>
         <ini name="error_reporting" value="-1" />
-        <env name="KERNEL_CLASS" value="Siqu\CMSCore\Tests\Kernel" />
+        <env name="KERNEL_CLASS" value="Siqu\CMS\Kernel" />
         <env name="APP_ENV" value="test" />
         <env name="APP_DEBUG" value="1" />
         <env name="APP_SECRET" value="s$cretf0rt3st" />
@@ -18,8 +18,8 @@
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>src/Tests</directory>
+        <testsuite name="Siqu CMS Core Test Suite">
+            <directory>src/Core/Tests</directory>
         </testsuite>
     </testsuites>
 
@@ -27,7 +27,7 @@
         <whitelist>
             <directory>src</directory>
             <exclude>
-                <directory>src/Tests</directory>
+                <directory>src/Core/Tests</directory>
             </exclude>
         </whitelist>
     </filter>

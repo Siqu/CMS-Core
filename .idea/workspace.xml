@@ -2,43 +2,55 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90b40abe-01be-47d6-9414-76087cb73bee" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Doctrine/Listener/AbstractListener.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Doctrine/Listener/BlameableListener.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Doctrine/Listener/TimestampableListener.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Traits/BlameableTrait.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Traits/TimestampableTrait.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/Doctrine/Listener/AbstractBaseListenerTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/Doctrine/Listener/AbstractListenerTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/Doctrine/Listener/BlameableListenerTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/Doctrine/Listener/TimestampableListenerTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/Dummy/BlameableObject.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/Dummy/DummyListener.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/Dummy/TimestampableObject.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/Entity/CMSUserTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/Entity/GroupTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/Entity/Traits/BlameableTraitTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/Entity/Traits/IdentifiableTraitTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/Entity/Traits/NameableTraitTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/Entity/Traits/TimestampableTraitTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/CMSCore.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CMSCore.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DependencyInjection/CMSCoreExtension.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DependencyInjection/CMSCoreExtension.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DependencyInjection/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DependencyInjection/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Doctrine/Listener/CMSUserListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Doctrine/Listener/CMSUserListener.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/CMSUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/CMSUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Group.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Group.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Page.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Traits/IdentifiableTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Traits/IdentifiableTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Traits/NameableTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Traits/NameableTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/console" beforeDir="false" afterPath="$PROJECT_DIR$/bin/console" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/doctrine.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/doctrine.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes/annotations.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes/annotations.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phpunit.xml.dist" beforeDir="false" afterPath="$PROJECT_DIR$/phpunit.xml.dist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMSCoreBundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/CMSCoreBundle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Repository/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DependencyInjection/CMSCoreExtension.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/DependencyInjection/CMSCoreExtension.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DependencyInjection/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/DependencyInjection/Configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Doctrine/Listener/AbstractListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Doctrine/Listener/AbstractListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Doctrine/Listener/BlameableListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Doctrine/Listener/BlameableListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Doctrine/Listener/CMSUserListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Doctrine/Listener/CMSUserListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Doctrine/Listener/TimestampableListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Doctrine/Listener/TimestampableListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Migrations/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/CMSUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Entity/CMSUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Group.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Entity/Group.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Page.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Entity/Page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Traits/BlameableTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Entity/Traits/BlameableTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Traits/IdentifiableTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Entity/Traits/IdentifiableTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Traits/NameableTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Entity/Traits/NameableTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Traits/TimestampableTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Entity/Traits/TimestampableTrait.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/DependencyInjection/CMSCoreExtensionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/DependencyInjection/CMSCoreExtensionTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/DependencyInjection/ConfigurationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/DependencyInjection/ConfigurationTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/Doctrine/Listener/CMSUserListenerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/Doctrine/Listener/CMSUserListenerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/Util/PasswordUpdaterTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/Util/PasswordUpdaterTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/Util/TokenGeneratorTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/Util/TokenGeneratorTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/PasswordUpdater.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/PasswordUpdater.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/TokenGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/TokenGenerator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Entity/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Controller/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Resources/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/DependencyInjection/CMSCoreExtensionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/DependencyInjection/CMSCoreExtensionTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/DependencyInjection/ConfigurationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/DependencyInjection/ConfigurationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Doctrine/Listener/AbstractBaseListenerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Doctrine/Listener/AbstractBaseListenerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Doctrine/Listener/AbstractListenerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Doctrine/Listener/AbstractListenerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Doctrine/Listener/BlameableListenerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Doctrine/Listener/BlameableListenerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Doctrine/Listener/CMSUserListenerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Doctrine/Listener/CMSUserListenerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Doctrine/Listener/TimestampableListenerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Doctrine/Listener/TimestampableListenerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Dummy/BlameableObject.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Dummy/BlameableObject.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Dummy/DummyListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Dummy/DummyListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Dummy/TimestampableObject.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Dummy/TimestampableObject.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Entity/CMSUserTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Entity/CMSUserTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Entity/GroupTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Entity/GroupTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Entity/Traits/BlameableTraitTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Entity/Traits/BlameableTraitTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Entity/Traits/IdentifiableTraitTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Entity/Traits/IdentifiableTraitTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Entity/Traits/NameableTraitTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Entity/Traits/NameableTraitTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Entity/Traits/TimestampableTraitTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Entity/Traits/TimestampableTraitTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Util/PasswordUpdaterTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Util/PasswordUpdaterTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Util/TokenGeneratorTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Tests/Util/TokenGeneratorTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util/PasswordUpdater.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Util/PasswordUpdater.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util/TokenGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Util/TokenGenerator.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,46 +67,47 @@
         <counts>
           <entry key="project.closed" value="1" />
           <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="console" value="1" />
-          <entry key="dist" value="2" />
-          <entry key="json" value="9" />
-          <entry key="php" value="202" />
+          <entry key="console" value="2" />
+          <entry key="dist" value="3" />
+          <entry key="json" value="11" />
+          <entry key="php" value="204" />
           <entry key="xml" value="1" />
-          <entry key="yaml" value="11" />
+          <entry key="yaml" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JSON" value="9" />
-          <entry key="PHP" value="202" />
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="XML" value="3" />
-          <entry key="YAML" value="11" />
+          <entry key="JSON" value="11" />
+          <entry key="PHP" value="204" />
+          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="XML" value="4" />
+          <entry key="YAML" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="console" value="16" />
-          <entry key="dist" value="186" />
-          <entry key="json" value="146" />
+          <entry key="dist" value="253" />
+          <entry key="json" value="155" />
           <entry key="php" value="18281" />
           <entry key="txt" value="76" />
-          <entry key="yaml" value="331" />
+          <entry key="yaml" value="378" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JSON" value="146" />
+          <entry key="JSON" value="155" />
           <entry key="PHP" value="18281" />
           <entry key="PLAIN_TEXT" value="92" />
-          <entry key="XML" value="186" />
-          <entry key="YAML" value="331" />
+          <entry key="XML" value="253" />
+          <entry key="YAML" value="378" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.php.new.class">
@@ -114,45 +127,44 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Tests/Entity/CMSUserTest.php">
+        <entry file="file://$PROJECT_DIR$/config/services.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="136" column="42" lean-forward="true" selection-start-line="136" selection-start-column="42" selection-end-line="136" selection-end-column="42" />
-              <folding>
-                <element signature="e#46#94#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="289">
+              <caret line="17" column="76" selection-start-line="17" selection-start-column="76" selection-end-line="17" selection-end-column="76" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/routes/annotations.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="1" selection-start-column="1" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Tests/Entity/GroupTest.php">
+        <entry file="file://$PROJECT_DIR$/phpunit.xml.dist">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="56" column="38" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
-              <folding>
-                <element signature="e#46#77#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="391">
+              <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Group.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="114" column="34" selection-start-line="114" selection-start-column="34" selection-end-line="114" selection-end-column="34" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/config/routes.yaml">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/CMSUser.php">
+        <entry file="file://$PROJECT_DIR$/config/packages/doctrine.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="430" column="26" lean-forward="true" selection-start-line="430" selection-start-column="26" selection-end-line="430" selection-end-column="26" />
+            <state relative-caret-position="442">
+              <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -189,15 +201,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/Entity/Manager/UserManager.php" />
-        <option value="$PROJECT_DIR$/config/services.yaml" />
         <option value="$PROJECT_DIR$/src/Eventlistener/FlashListener.php" />
-        <option value="$PROJECT_DIR$/phpunit.xml.dist" />
         <option value="$PROJECT_DIR$/src/Tests/Kernel.php" />
         <option value="$PROJECT_DIR$/src/CMSCoreBundle.php" />
-        <option value="$PROJECT_DIR$/public/index.php" />
-        <option value="$PROJECT_DIR$/bin/console" />
         <option value="$PROJECT_DIR$/src/Resources/config/services.yaml" />
-        <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/src/Entity/Traits/TimestampableTrait.php" />
         <option value="$PROJECT_DIR$/src/Entity/Page.php" />
         <option value="$PROJECT_DIR$/src/Doctrine/Listener/AbstractListener.php" />
@@ -222,7 +229,6 @@
         <option value="$PROJECT_DIR$/src/Tests/Dummy/BlameableObject.php" />
         <option value="$PROJECT_DIR$/src/Doctrine/Listener/BlameableListener.php" />
         <option value="$PROJECT_DIR$/src/Tests/Doctrine/Listener/BlameableListenerTest.php" />
-        <option value="$PROJECT_DIR$/src/Kernel.php" />
         <option value="$PROJECT_DIR$/src/Tests/Doctrine/Listener/TimestampableListenerTest.php" />
         <option value="$PROJECT_DIR$/src/Tests/Entity/Traits/IdentifiableTraitTest.php" />
         <option value="$PROJECT_DIR$/src/Tests/Entity/Traits/NameableTraitTest.php" />
@@ -232,6 +238,14 @@
         <option value="$PROJECT_DIR$/src/Tests/Entity/CMSUserTest.php" />
         <option value="$PROJECT_DIR$/src/Entity/Group.php" />
         <option value="$PROJECT_DIR$/src/Tests/Entity/GroupTest.php" />
+        <option value="$PROJECT_DIR$/src/Kernel.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/public/index.php" />
+        <option value="$PROJECT_DIR$/bin/console" />
+        <option value="$PROJECT_DIR$/config/packages/doctrine.yaml" />
+        <option value="$PROJECT_DIR$/config/services.yaml" />
+        <option value="$PROJECT_DIR$/config/routes/annotations.yaml" />
+        <option value="$PROJECT_DIR$/phpunit.xml.dist" />
       </list>
     </option>
   </component>
@@ -331,102 +345,62 @@
             <path>
               <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
               <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
+              <item name="bin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="packages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
               <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="DependencyInjection" type="462c0819:PsiDirectoryNode" />
+              <item name="Core" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
               <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Doctrine" type="462c0819:PsiDirectoryNode" />
+              <item name="Core" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
               <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Doctrine" type="462c0819:PsiDirectoryNode" />
-              <item name="Listener" type="462c0819:PsiDirectoryNode" />
+              <item name="Core" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
               <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Entity" type="462c0819:PsiDirectoryNode" />
-              <item name="Traits" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Core" type="462c0819:PsiDirectoryNode" />
               <item name="Tests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Tests" type="462c0819:PsiDirectoryNode" />
-              <item name="DependencyInjection" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Tests" type="462c0819:PsiDirectoryNode" />
-              <item name="Doctrine" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Tests" type="462c0819:PsiDirectoryNode" />
-              <item name="Doctrine" type="462c0819:PsiDirectoryNode" />
-              <item name="Listener" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Tests" type="462c0819:PsiDirectoryNode" />
-              <item name="Dummy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Tests" type="462c0819:PsiDirectoryNode" />
-              <item name="Entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Tests" type="462c0819:PsiDirectoryNode" />
-              <item name="Entity" type="462c0819:PsiDirectoryNode" />
-              <item name="Traits" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Tests" type="462c0819:PsiDirectoryNode" />
-              <item name="Util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CMSCore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CMSCore" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Util" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -444,14 +418,15 @@
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Core" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/Tests" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/Tests/Entity/Traits" />
       <recent name="$PROJECT_DIR$/src/Tests/Doctrine/Listener" />
       <recent name="$PROJECT_DIR$/src/Doctrine/Listener" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/src/Tests" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -483,18 +458,19 @@
       <option name="presentableId" value="Default" />
       <updated>1539604270350</updated>
       <workItem from="1539604273463" duration="14325000" />
-      <workItem from="1539685765373" duration="10589000" />
+      <workItem from="1539685765373" duration="10987000" />
+      <workItem from="1539774074162" duration="485000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24914000" />
+    <option name="totallyTimeSpent" value="25797000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1917" y="0" width="1926" height="1083" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25239617" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2550586" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -507,8 +483,8 @@
       <window_info anchor="bottom" id="Docker" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3294979" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49946752" visible="true" weight="0.30125523" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5005325" side_tool="true" weight="0.30125523" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -562,86 +538,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/dependency-injection/Loader/FileLoader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="99" column="43" selection-start-line="99" selection-start-column="30" selection-end-line="99" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bin/.phpunit/phpunit-6.5/vendor/composer/ClassLoader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="323" selection-start-line="323" selection-end-line="323" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bin/.phpunit/phpunit-6.5/vendor/phpunit/phpunit-mock-objects/src/Builder/InvocationMocker.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="226" column="20" selection-start-line="226" selection-start-column="20" selection-end-line="226" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/dependency-injection/Loader/YamlFileLoader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="335" selection-start-line="335" selection-end-line="335" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/dependency-injection/Reference.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-119">
-          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
-          <folding>
-            <element signature="e#7#31#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bin/console">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/dependency-injection/Definition.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="179" selection-start-line="179" selection-end-line="179" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resources/config/services.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="708">
-          <caret line="61" column="30" selection-start-line="61" selection-start-column="30" selection-end-line="61" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/security/Core/Authentication/Token/TokenInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="54" column="20" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/framework-bundle/Controller/ControllerTrait.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="521">
@@ -656,100 +552,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/DependencyInjection/CMSCoreExtensionTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/DependencyInjection/CMSCoreExtensionTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="353">
           <caret line="63" column="36" selection-start-line="63" selection-start-column="36" selection-end-line="63" selection-end-column="36" />
-          <folding>
-            <element signature="e#59#103#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/DependencyInjection/ConfigurationTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/DependencyInjection/ConfigurationTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="370">
           <caret line="42" column="36" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Util/TokenGeneratorTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Util/TokenGeneratorTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="370">
           <caret line="37" column="36" selection-start-line="37" selection-start-column="36" selection-end-line="37" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Util/PasswordUpdaterTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Util/PasswordUpdaterTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="e#44#88#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Dummy/DummyListener.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Dummy/DummyListener.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="29" column="81" selection-start-line="29" selection-start-column="81" selection-end-line="29" selection-end-column="81" />
-          <folding>
-            <element signature="e#45#87#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Util/PasswordUpdater.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Util/PasswordUpdater.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Util/TokenGenerator.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Util/TokenGenerator.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CMSCoreBundle.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/CMSCoreBundle.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Page.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Entity/Page.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Traits/TimestampableTrait.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Entity/Traits/TimestampableTrait.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="472">
           <caret line="54" column="5" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Traits/NameableTrait.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Entity/Traits/NameableTrait.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
           <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Traits/IdentifiableTrait.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Entity/Traits/IdentifiableTrait.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
           <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Traits/BlameableTrait.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Entity/Traits/BlameableTrait.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="46" column="60" selection-start-line="46" selection-start-column="60" selection-end-line="46" selection-end-column="60" />
@@ -759,7 +646,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Doctrine/Listener/CMSUserListener.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Doctrine/Listener/CMSUserListener.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
@@ -769,34 +656,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Doctrine/Listener/AbstractListener.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Doctrine/Listener/AbstractListener.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="23" column="60" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="60" />
-          <folding>
-            <element signature="e#51#87#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DependencyInjection/CMSCoreExtension.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/DependencyInjection/CMSCoreExtension.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding>
-            <element signature="e#53#94#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DependencyInjection/Configuration.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/DependencyInjection/Configuration.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Dummy/TimestampableObject.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Dummy/TimestampableObject.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
@@ -824,161 +705,190 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Dummy/BlameableObject.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Dummy/BlameableObject.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Doctrine/Listener/TimestampableListener.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Doctrine/Listener/TimestampableListener.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
           <caret line="51" column="5" lean-forward="true" selection-start-line="51" selection-start-column="5" selection-end-line="52" selection-end-column="35" />
-          <folding>
-            <element signature="e#51#93#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Doctrine/Listener/BlameableListener.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Doctrine/Listener/BlameableListener.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="438">
           <caret line="100" column="33" selection-start-line="100" selection-start-column="33" selection-end-line="100" selection-end-column="33" />
-          <folding>
-            <element signature="e#51#93#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Kernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Doctrine/Listener/BlameableListenerTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Doctrine/Listener/BlameableListenerTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="13">
           <caret line="166" column="59" selection-start-line="166" selection-start-column="59" selection-end-line="166" selection-end-column="59" />
-          <folding>
-            <element signature="e#57#99#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Doctrine/Listener/CMSUserListenerTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Doctrine/Listener/CMSUserListenerTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="326">
           <caret line="99" column="36" selection-start-line="99" selection-start-column="36" selection-end-line="99" selection-end-column="36" />
-          <folding>
-            <element signature="e#57#99#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Doctrine/Listener/AbstractBaseListenerTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Doctrine/Listener/AbstractBaseListenerTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="761">
           <caret line="45" column="51" selection-start-line="45" selection-start-column="51" selection-end-line="45" selection-end-column="51" />
-          <folding>
-            <element signature="e#57#88#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Doctrine/Listener/AbstractListenerTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Doctrine/Listener/AbstractListenerTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1649">
           <caret line="97" column="24" selection-start-line="97" selection-start-column="24" selection-end-line="97" selection-end-column="24" />
-          <folding>
-            <element signature="e#57#88#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Doctrine/Listener/TimestampableListenerTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Doctrine/Listener/TimestampableListenerTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-803">
           <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-          <folding>
-            <element signature="e#57#99#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Entity/Traits/IdentifiableTraitTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Entity/Traits/IdentifiableTraitTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="404">
           <caret line="39" column="48" selection-start-line="39" selection-start-column="48" selection-end-line="39" selection-end-column="48" />
-          <folding>
-            <element signature="e#53#84#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Entity/Traits/NameableTraitTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Entity/Traits/NameableTraitTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="404">
           <caret line="39" column="54" selection-start-line="39" selection-start-column="54" selection-end-line="39" selection-end-column="54" />
-          <folding>
-            <element signature="e#53#84#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Entity/Traits/TimestampableTraitTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Entity/Traits/TimestampableTraitTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="387">
           <caret line="39" column="53" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
-          <folding>
-            <element signature="e#53#84#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Entity/Traits/BlameableTraitTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Entity/Traits/BlameableTraitTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-          <folding>
-            <element signature="e#53#84#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/CMSUser.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Entity/CMSUser.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="430" column="26" lean-forward="true" selection-start-line="430" selection-start-column="26" selection-end-line="430" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Entity/CMSUserTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Entity/CMSUserTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="319">
           <caret line="136" column="42" lean-forward="true" selection-start-line="136" selection-start-column="42" selection-end-line="136" selection-end-column="42" />
-          <folding>
-            <element signature="e#46#94#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Group.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Entity/Group.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
           <caret line="114" column="34" selection-start-line="114" selection-start-column="34" selection-end-line="114" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/Entity/GroupTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Tests/Entity/GroupTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
           <caret line="56" column="38" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
           <folding>
-            <element signature="e#46#77#0#PHP" expanded="true" />
+            <element signature="e#33#92#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/console">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="28" column="33" lean-forward="true" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/doctrine.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Core/Resources/config/services.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/dev/routing.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/routing.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/services.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="76" selection-start-line="17" selection-start-column="76" selection-end-line="17" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes/annotations.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1" selection-start-column="1" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phpunit.xml.dist">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
         </state>
       </provider>
     </entry>
