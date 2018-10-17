@@ -28,10 +28,11 @@ class PasswordUpdater
      *
      * @param CMSUser $user
      */
-    public function hashPassword(CMSUser $user) {
+    public function hashPassword(CMSUser $user): void
+    {
         $plainPassword = $user->getPlainPassword();
 
-        if(strlen($plainPassword) === 0) {
+        if (strlen($plainPassword) === 0) {
             return;
         }
 

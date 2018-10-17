@@ -25,14 +25,15 @@ class CMSCoreExtensionTest extends TestCase
     /**
      * Should create instance.
      */
-    public function testConstruct() {
+    public function testConstruct(): void
+    {
         $this->assertInstanceOf(CMSCoreExtension::class, $this->extension);
     }
 
     /**
      * Should load service definition.
      */
-    public function testLoad()
+    public function testLoad(): void
     {
         $this->extension->load([
             'siqu_cms_core' => []
@@ -60,7 +61,7 @@ class CMSCoreExtensionTest extends TestCase
     /**
      * Setup tests.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->container = new ContainerBuilder();

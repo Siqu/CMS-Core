@@ -27,7 +27,8 @@ trait NameableTrait
      *
      * @param string $title
      */
-    public function setTitle(string $title) {
+    public function setTitle(string $title): void
+    {
         $this->title = $title;
     }
 
@@ -36,7 +37,8 @@ trait NameableTrait
      *
      * @return null|string
      */
-    public function getTitle(): ?string {
+    public function getTitle(): ?string
+    {
         return $this->title;
     }
 
@@ -45,7 +47,8 @@ trait NameableTrait
      *
      * @param string $titleShown
      */
-    public function setTitleShown(string $titleShown) {
+    public function setTitleShown(string $titleShown): void
+    {
         $this->titleShown = $titleShown;
     }
 
@@ -54,7 +57,8 @@ trait NameableTrait
      *
      * @return null|string
      */
-    public function getTitleShown(): ?string {
+    public function getTitleShown(): ?string
+    {
         return $this->titleShown;
     }
 }

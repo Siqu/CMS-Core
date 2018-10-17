@@ -28,12 +28,11 @@ class Group
     /**
      * Group constructor.
      * @param string $name
-     * @param array $roles
      */
-    public function __construct(string $name, array $roles = [])
+    public function __construct(string $name)
     {
         $this->name = $name;
-        $this->roles = $roles;
+        $this->roles = [];
     }
 
     /**
@@ -41,7 +40,8 @@ class Group
      *
      * @param string $name
      */
-    public function setName(string $name) {
+    public function setName(string $name): void
+    {
         $this->name = $name;
     }
 
@@ -50,7 +50,8 @@ class Group
      *
      * @return string
      */
-    public function getName(): string {
+    public function getName(): string
+    {
         return $this->name;
     }
 
@@ -59,8 +60,9 @@ class Group
      *
      * @param string $role
      */
-    public function addRole(string $role) {
-        if(!$this->hasRole($role)) {
+    public function addRole(string $role): void
+    {
+        if (!$this->hasRole($role)) {
             $this->roles[] = strtoupper($role);
         }
     }
@@ -71,7 +73,8 @@ class Group
      * @param string $role
      * @return bool
      */
-    public function hasRole(string $role): bool {
+    public function hasRole(string $role): bool
+    {
         return in_array(strtoupper($role), $this->roles, true);
     }
 
@@ -80,7 +83,8 @@ class Group
      *
      * @return array
      */
-    public function getRoles(): array {
+    public function getRoles(): array
+    {
         return $this->roles;
     }
 
@@ -89,8 +93,9 @@ class Group
      *
      * @param string $role
      */
-    public function removeRole(string $role) {
-        if($this->hasRole($role)) {
+    public function removeRole(string $role): void
+    {
+        if ($this->hasRole($role)) {
             $key = array_search(strtoupper($role), $this->roles, true);
             unset($this->roles[$key]);
             $this->roles = array_values($this->roles);
@@ -102,7 +107,12 @@ class Group
      *
      * @param array $roles
      */
-    public function setRoles(array $roles) {
-        $this->roles = $roles;
+    public function setRoles(array $roles): void
+    {
+        $this->roles = [];
+
+        foreach($roles as $role) {
+            $this->addRole($role);
+        }
     }
 }

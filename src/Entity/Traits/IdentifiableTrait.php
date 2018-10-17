@@ -30,7 +30,8 @@ trait IdentifiableTrait
      *
      * @param int $id
      */
-    public function setId(int $id) {
+    public function setId(int $id): void
+    {
         $this->id = $id;
     }
 
@@ -39,7 +40,8 @@ trait IdentifiableTrait
      *
      * @return int|null
      */
-    public function getId(): ?int {
+    public function getId(): ?int
+    {
         return $this->id;
     }
 
@@ -48,7 +50,8 @@ trait IdentifiableTrait
      *
      * @param string $uuid
      */
-    public function setUuid(string $uuid) {
+    public function setUuid(string $uuid): void
+    {
         $this->uuid = $uuid;
     }
 
@@ -57,7 +60,8 @@ trait IdentifiableTrait
      *
      * @return null|string
      */
-    public function getUuid(): ?string {
+    public function getUuid(): ?string
+    {
         return $this->uuid;
     }
 }

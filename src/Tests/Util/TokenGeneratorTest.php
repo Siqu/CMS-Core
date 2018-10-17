@@ -17,14 +17,15 @@ class TokenGeneratorTest extends TestCase
     /**
      * Should create instance
      */
-    public function testConstruct() {
+    public function testConstruct(): void
+    {
         $this->assertInstanceOf(TokenGenerator::class, $this->generator);
     }
 
     /**
      * Should create token
      */
-    public function testGenerateToken()
+    public function testGenerateToken(): void
     {
         $token = $this->generator->generateToken();
 
@@ -34,7 +35,7 @@ class TokenGeneratorTest extends TestCase
     /**
      * Setup tests.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

@@ -18,14 +18,15 @@ class ConfigurationTest extends TestCase
     /**
      * Should create instance
      */
-    public function testConstruct() {
+    public function testConstruct(): void
+    {
         $this->assertInstanceOf(Configuration::class, $this->configuration);
     }
 
     /**
      * Should return tree builder for bundle.
      */
-    public function testGetConfigTreeBuilder()
+    public function testGetConfigTreeBuilder(): void
     {
         $builder = $this->configuration->getConfigTreeBuilder();
 
@@ -39,7 +40,7 @@ class ConfigurationTest extends TestCase
     /**
      * Setup tests.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

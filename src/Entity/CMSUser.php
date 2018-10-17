@@ -84,9 +84,7 @@ class CMSUser implements UserInterface, \Serializable
     public function __construct()
     {
         $this->enabled = false;
-        $this->roles = [
-            'ROLE_DEFAULT'
-        ];
+        $this->roles = [];
         $this->groups = new ArrayCollection();
     }
 
@@ -95,7 +93,8 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param string $username
      */
-    public function setUsername(string $username) {
+    public function setUsername(string $username): void
+    {
         $this->username = $username;
     }
 
@@ -115,7 +114,8 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param string $password
      */
-    public function setPassword(string $password) {
+    public function setPassword(string $password): void
+    {
         $this->password = $password;
     }
 
@@ -134,7 +134,8 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param string $plainPassword
      */
-    public function setPlainPassword(string $plainPassword) {
+    public function setPlainPassword(string $plainPassword): void
+    {
         $this->plainPassword = $plainPassword;
     }
 
@@ -143,8 +144,29 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @return null|string
      */
-    public function getPlainPassword(): ?string {
+    public function getPlainPassword(): ?string
+    {
         return $this->plainPassword;
+    }
+
+    /**
+     * Set the email.
+     *
+     * @param string $email
+     */
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * Retrieve the email.
+     *
+     * @return null|string
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
     }
 
     /**
@@ -152,7 +174,8 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param bool $enabled
      */
-    public function setEnabled(bool $enabled) {
+    public function setEnabled(bool $enabled): void
+    {
         $this->enabled = $enabled;
     }
 
@@ -161,7 +184,8 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @return bool
      */
-    public function isEnabled(): bool {
+    public function isEnabled(): bool
+    {
         return $this->enabled;
     }
 
@@ -170,16 +194,18 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param string $confirmationToken
      */
-    public function setConfirmationToken(string $confirmationToken) {
+    public function setConfirmationToken(string $confirmationToken): void
+    {
         $this->confirmationToken = $confirmationToken;
     }
 
     /**
      * Retrieve the confirmation token.
-     * 
+     *
      * @return null|string
      */
-    public function getConfirmationToken(): ?string {
+    public function getConfirmationToken(): ?string
+    {
         return $this->confirmationToken;
     }
 
@@ -188,7 +214,8 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param \DateTime $lastLogin
      */
-    public function setLastLogin(\DateTime $lastLogin) {
+    public function setLastLogin(\DateTime $lastLogin): void
+    {
         $this->lastLogin = $lastLogin;
     }
 
@@ -197,7 +224,8 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @return \DateTime|null
      */
-    public function getLastLogin(): ?\DateTime {
+    public function getLastLogin(): ?\DateTime
+    {
         return $this->lastLogin;
     }
 
@@ -216,7 +244,8 @@ class CMSUser implements UserInterface, \Serializable
      * Set the groups
      * @param Collection $groups
      */
-    public function setGroups(Collection $groups) {
+    public function setGroups(Collection $groups): void
+    {
         $this->groups = $groups;
     }
 
@@ -225,8 +254,9 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param Group $group
      */
-    public function addGroup(Group $group) {
-        if(!$this->groups->contains($group)) {
+    public function addGroup(Group $group): void
+    {
+        if (!$this->groups->contains($group)) {
             $this->groups->add($group);
         }
     }
@@ -236,8 +266,9 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param Group $group
      */
-    public function removeGroup(Group $group) {
-        if($this->groups->contains($group)) {
+    public function removeGroup(Group $group): void
+    {
+        if ($this->groups->contains($group)) {
             $this->groups->removeElement($group);
         }
     }
@@ -247,7 +278,8 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @return Collection|Group[]
      */
-    public function getGroups(): Collection {
+    public function getGroups(): Collection
+    {
         return $this->groups;
     }
 
@@ -256,10 +288,11 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @return array
      */
-    public function getGroupNames(): array {
+    public function getGroupNames(): array
+    {
         $names = [];
 
-        foreach($this->groups as $group) {
+        foreach ($this->groups as $group) {
             $names[] = $group->getName();
         }
 
@@ -272,7 +305,8 @@ class CMSUser implements UserInterface, \Serializable
      * @param string $name
      * @return bool
      */
-    public function hasGroup(string $name): bool {
+    public function hasGroup(string $name): bool
+    {
         return in_array($name, $this->getGroupNames());
     }
 
@@ -281,14 +315,15 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param string $role
      */
-    public function addRole(string $role) {
+    public function addRole(string $role): void
+    {
         $role = strtoupper($role);
 
-        if($role === static::ROLE_DEFAULT) {
+        if ($role === static::ROLE_DEFAULT) {
             return;
         }
 
-        if(!in_array($role, $this->roles, true)) {
+        if (!in_array($role, $this->roles, true)) {
             $this->roles[] = $role;
         }
     }
@@ -298,8 +333,9 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param string $role
      */
-    public function removeRole(string $role) {
-        if($this->hasRole($role)) {
+    public function removeRole(string $role): void
+    {
+        if ($this->hasRole($role)) {
             $key = array_search(strtoupper($role), $this->roles, true);
             unset($this->roles[$key]);
             $this->roles = array_values($this->roles);
@@ -316,13 +352,13 @@ class CMSUser implements UserInterface, \Serializable
     {
         $roles = $this->roles;
 
-        foreach($this->getGroups() as $group) {
+        foreach ($this->getGroups() as $group) {
             $roles = array_merge($roles, $group->getRoles());
         }
 
         $roles[] = static::ROLE_DEFAULT;
 
-        return array_unique($roles);
+        return array_values(array_unique($roles));
     }
 
     /**
@@ -331,7 +367,8 @@ class CMSUser implements UserInterface, \Serializable
      * @param string $role
      * @return bool
      */
-    public function hasRole(string $role) {
+    public function hasRole(string $role): bool
+    {
         return in_array(strtoupper($role), $this->getRoles(), true);
     }
 
@@ -340,10 +377,11 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param array $roles
      */
-    public function setRoles(array $roles) {
+    public function setRoles(array $roles): void
+    {
         $this->roles = [];
 
-        foreach($roles as $role) {
+        foreach ($roles as $role) {
             $this->addRole($role);
         }
     }
@@ -353,8 +391,9 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param bool $active
      */
-    public function setSuperAdmin(bool $active) {
-        if($active === true) {
+    public function setSuperAdmin(bool $active): void
+    {
+        if ($active === true) {
             $this->addRole(static::ROLE_SUPER_ADMIN);
         } else {
             $this->removeRole(static::ROLE_SUPER_ADMIN);
@@ -366,7 +405,8 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @return bool
      */
-    public function isSuperAdmin(): bool {
+    public function isSuperAdmin(): bool
+    {
         return $this->hasRole(static::ROLE_SUPER_ADMIN);
     }
 
@@ -375,7 +415,8 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @see UserInterface::eraseCredentials()
      */
-    public function eraseCredentials(){
+    public function eraseCredentials(): void
+    {
         $this->plainPassword = null;
     }
 
@@ -403,7 +444,7 @@ class CMSUser implements UserInterface, \Serializable
      * @param string $serialized
      * @see \Serializable::unserialize()
      */
-    public function unserialize($serialized)
+    public function unserialize($serialized): void
     {
         list(
             $this->id,
@@ -420,8 +461,8 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return (string) $this->getUsername();
+        return (string)$this->getUsername();
     }
 }

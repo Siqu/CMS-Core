@@ -27,7 +27,7 @@ class PasswordUpdaterTest extends TestCase
     /**
      * Should create instance
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $this->assertInstanceOf(PasswordUpdater::class, $this->updater);
     }
@@ -35,7 +35,8 @@ class PasswordUpdaterTest extends TestCase
     /**
      * Should not change password
      */
-    public function testHashPasswordEmpty() {
+    public function testHashPasswordEmpty(): void
+    {
         $user = new CMSUser();
 
         $this->encoder
@@ -48,7 +49,7 @@ class PasswordUpdaterTest extends TestCase
     /**
      * Should hash password via encoder.
      */
-    public function testHashPassword()
+    public function testHashPassword(): void
     {
         $plainPassword = 'test.1234';
         $encodedPassword = 'encoded';
@@ -71,7 +72,7 @@ class PasswordUpdaterTest extends TestCase
     /**
      * Setup tests.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
