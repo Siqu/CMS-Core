@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * Class CMSUser
  * @package Siqu\CMS\Core\Entity
  * @ORM\Entity()
- * @ORM\Table(name="cms_page")
+ * @ORM\Table(name="cms_user")
  */
 class CMSUser implements UserInterface, \Serializable
 {
@@ -64,7 +64,7 @@ class CMSUser implements UserInterface, \Serializable
 
     /**
      * @var Collection|Group[]
-     * @ORM\ManyToMany(targetEntity="Siqu\CMSCore\Entity\Group")
+     * @ORM\ManyToMany(targetEntity="Siqu\CMS\Core\Entity\Group")
      * @ORM\JoinTable(name="siqu_user_user_group",
      *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}

@@ -11,3 +11,6 @@
 ###< symfony/phpunit-bridge ###
 
 .idea/
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###

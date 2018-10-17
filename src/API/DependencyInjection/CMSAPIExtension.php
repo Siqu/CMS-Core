@@ -1,6 +1,6 @@
 <?php
 
-namespace Siqu\CMS\Core\DependencyInjection;
+namespace Siqu\CMS\API\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -8,10 +8,10 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 /**
- * Class CMSCoreExtension
+ * Class CMSAPIExtension
  * @package Siqu\CMS\Core\DependencyInjection
  */
-class CMSCoreExtension extends Extension
+class CMSAPIExtension extends Extension
 {
 
     /**

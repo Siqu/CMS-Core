@@ -8,6 +8,8 @@ use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
 /**
  * Class Group
  * @package Siqu\CMS\Core\Entity
+ * @ORM\Entity()
+ * @ORM\Table(name="cms_group")
  */
 class Group
 {
