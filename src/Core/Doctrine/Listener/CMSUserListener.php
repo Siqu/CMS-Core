@@ -5,6 +5,7 @@ namespace Siqu\CMS\Core\Doctrine\Listener;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Siqu\CMS\Core\Entity\CMSUser;
 use Siqu\CMS\Core\Util\PasswordUpdater;
+use Siqu\CMS\Core\Util\UuidGenerator;
 
 /**
  * Class CMSUserListener
@@ -15,13 +16,18 @@ class CMSUserListener extends AbstractListener
     /** @var PasswordUpdater */
     private $passwordUpdater;
 
+    /** @var UuidGenerator */
+    private $uuidGenerator;
+
     /**
      * CMSUserListener constructor.
      * @param PasswordUpdater $passwordUpdater
+     * @param UuidGenerator $uuidGenerator
      */
-    public function __construct(PasswordUpdater $passwordUpdater)
+    public function __construct(PasswordUpdater $passwordUpdater, UuidGenerator $uuidGenerator)
     {
         $this->passwordUpdater = $passwordUpdater;
+        $this->uuidGenerator = $uuidGenerator;
     }
 
     /**
@@ -35,6 +41,7 @@ class CMSUserListener extends AbstractListener
 
         if ($object instanceof CMSUser) {
             $this->updateUserFields($object);
+            $object->setUuid($this->uuidGenerator->generate());
         }
     }
 

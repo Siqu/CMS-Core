@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Siqu\CMS\Core\DependencyInjection\CMSCoreExtension;
 use Siqu\CMS\Core\Doctrine\Listener\CMSUserListener;
 use Siqu\CMS\Core\Util\PasswordUpdater;
+use Siqu\CMS\Core\Util\UuidGenerator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -43,11 +44,14 @@ class CMSCoreExtensionTest extends TestCase
         $this->assertEquals(CMSUserListener::class, $definition->getClass());
         $this->assertFalse($definition->isPublic());
         $tags = $definition->getTags();
-        $this->assertArrayHasKey('doctrine.event_listener', $tags);
+        $this->assertArrayHasKey('doctrine.event_subscriber', $tags);
         $arguments = $definition->getArguments();
         /** @var Reference $ref */
         $ref = $arguments[0];
         $this->assertEquals('siqu.cms_core.util.password_updater', $ref);
+        /** @var Reference $ref */
+        $ref = $arguments[1];
+        $this->assertEquals('siqu.cms_core.util.uuid_generator', $ref);
 
         $definition = $this->container->getDefinition('siqu.cms_core.util.password_updater');
         $this->assertEquals(PasswordUpdater::class, $definition->getClass());
@@ -56,6 +60,10 @@ class CMSCoreExtensionTest extends TestCase
         /** @var Reference $ref */
         $ref = $arguments[0];
         $this->assertEquals('security.encoder_factory', $ref);
+
+        $definition = $this->container->getDefinition('siqu.cms_core.util.uuid_generator');
+        $this->assertEquals(UuidGenerator::class, $definition->getClass());
+        $this->assertFalse($definition->isPublic());
     }
 
     /**

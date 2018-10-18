@@ -4,6 +4,7 @@ services:
     public: false
     arguments:
       - '@siqu.cms_core.util.password_updater'
+      - '@siqu.cms_core.util.uuid_generator'
     tags:
       - { name: 'doctrine.event_subscriber' }
   siqu.cms_core.util.password_updater:
@@ -11,3 +12,6 @@ services:
     public: false
     arguments:
       - '@security.encoder_factory'
+  siqu.cms_core.util.uuid_generator:
+    class: Siqu\CMS\Core\Util\UuidGenerator
+    public: false

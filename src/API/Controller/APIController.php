@@ -16,15 +16,16 @@ class APIController extends Controller
      * Create a proper api response for the given data.
      *
      * @param mixed $data
+     * @param int $statusCode
      * @param Request $request
      * @return Response
      */
-    protected function createResponse($data, Request $request): Response
+    protected function createResponse($data, int $statusCode, Request $request): Response
     {
         $serializer = $this->get('serializer');
         $serialized = $serializer->serialize($data, $request->getFormat($request->getRequestFormat()));
 
-        $response = new Response($serialized, Response::HTTP_OK, [
+        $response = new Response($serialized, $statusCode, [
             'Content-Type' => $request->getRequestFormat()
         ]);
 

@@ -52,13 +52,13 @@ class CMSUser implements UserInterface, \Serializable
 
     /**
      * @var string|null
-     * @ORM\Column(name="confirmation_token", type="string")
+     * @ORM\Column(name="confirmation_token", type="string", nullable=true)
      */
     private $confirmationToken;
 
     /**
      * @var \DateTime|null
-     * @ORM\Column(name="last_login", type="datetime")
+     * @ORM\Column(name="last_login", type="datetime", nullable=true)
      */
     private $lastLogin;
 

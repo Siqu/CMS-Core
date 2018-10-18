@@ -7,6 +7,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Siqu\CMS\Core\Doctrine\Listener\CMSUserListener;
 use Siqu\CMS\Core\Entity\CMSUser;
 use Siqu\CMS\Core\Util\PasswordUpdater;
+use Siqu\CMS\Core\Util\UuidGenerator;
 
 /**
  * Class CMSUserListenerTest
@@ -19,6 +20,9 @@ class CMSUserListenerTest extends AbstractBaseListenerTest
 
     /** @var PasswordUpdater|MockObject */
     private $passwordUpdater;
+
+    /** @var UuidGenerator|MockObject */
+    private $uuidGenerator;
 
     /**
      * Should construct proper object.
@@ -36,6 +40,10 @@ class CMSUserListenerTest extends AbstractBaseListenerTest
         $this->passwordUpdater
             ->expects($this->never())
             ->method('hashPassword');
+
+        $this->uuidGenerator
+            ->expects($this->never())
+            ->method('generate');
 
         $object = new \stdClass();
 
@@ -55,6 +63,11 @@ class CMSUserListenerTest extends AbstractBaseListenerTest
             ->expects($this->once())
             ->method('hashPassword')
             ->with($object);
+
+        $this->uuidGenerator
+            ->expects($this->once())
+            ->method('generate')
+            ->willReturn('1');
 
         $event = new LifecycleEventArgs($object, $this->entityManager);
 
@@ -105,6 +118,10 @@ class CMSUserListenerTest extends AbstractBaseListenerTest
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->listener = new CMSUserListener($this->passwordUpdater);
+        $this->uuidGenerator = $this->getMockBuilder(UuidGenerator::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->listener = new CMSUserListener($this->passwordUpdater, $this->uuidGenerator);
     }
 }
