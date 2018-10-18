@@ -3,13 +3,18 @@ security:
         Siqu\CMS\Core\Entity\CMSUser: sha512
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
+        api:
+            id: siqu.cms_api.security.provider.user
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
-            anonymous: true
+        api:
+            pattern: ^/api
+            stateless: false
+            simple_preauth:
+                authenticator: siqu.cms_api.security.authenticator
+            provider: api
 
             # activate different ways to authenticate
 
@@ -22,5 +27,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/api, roles: ROLE_USER }
         # - { path: ^/profile, roles: ROLE_USER }

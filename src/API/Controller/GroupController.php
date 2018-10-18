@@ -2,18 +2,18 @@
 
 namespace Siqu\CMS\API\Controller;
 
-use Siqu\CMS\API\Form\Type\CMSUserType;
-use Siqu\CMS\Core\Entity\CMSUser;
+use Siqu\CMS\API\Form\Type\GroupType;
+use Siqu\CMS\Core\Entity\Group;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class CMSUserController
+ * Class GroupController
  * @package Siqu\CMS\API\Controller
- * @Route("/user", name="api_user")
+ * @Route("/group", name="api_group")
  */
-class CMSUserController extends APIController
+class GroupController extends APIController
 {
     /**
      * Read all groups.
@@ -85,7 +85,7 @@ class CMSUserController extends APIController
      */
     protected function getEntityClass(): string
     {
-        return CMSUser::class;
+        return Group::class;
     }
 
     /**
@@ -95,6 +95,6 @@ class CMSUserController extends APIController
      */
     protected function getFormType(): string
     {
-        return CMSUserType::class;
+        return GroupType::class;
     }
 }

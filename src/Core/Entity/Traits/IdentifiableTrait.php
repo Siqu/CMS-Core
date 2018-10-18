@@ -3,6 +3,7 @@
 namespace Siqu\CMS\Core\Entity\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class IdentifiableTrait
@@ -14,7 +15,7 @@ trait IdentifiableTrait
      * @var int|null
      * @ORM\Column(name="id", type="integer", options={"unsigned": true})
      * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
 
@@ -22,6 +23,7 @@ trait IdentifiableTrait
      * @var string|null
      * @ORM\Column(name="uuid", type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
+     * @Groups({"api"})
      */
     protected $uuid;
 
@@ -30,7 +32,7 @@ trait IdentifiableTrait
      *
      * @param int $id
      */
-    public function setId(int $id): void
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -50,7 +52,7 @@ trait IdentifiableTrait
      *
      * @param string $uuid
      */
-    public function setUuid(string $uuid): void
+    public function setUuid($uuid): void
     {
         $this->uuid = $uuid;
     }

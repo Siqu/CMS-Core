@@ -6,15 +6,21 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class CMSUser
  * @package Siqu\CMS\Core\Entity
  * @ORM\Entity()
  * @ORM\Table(name="cms_user")
+ * @UniqueEntity("username", groups={"new", "update"})
+ * @UniqueEntity("email", groups={"new", "update"})
  */
-class CMSUser implements UserInterface, \Serializable
+class CMSUser implements AdvancedUserInterface, \Serializable
 {
     const ROLE_DEFAULT = 'ROLE_USER';
     const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
@@ -24,43 +30,73 @@ class CMSUser implements UserInterface, \Serializable
     /**
      * @var string|null
      * @ORM\Column(name="username", type="string", length=25, unique=true)
+     * @Groups({"api"})
+     * @Assert\NotBlank(groups={"new", "update"})
      */
     private $username;
 
     /**
      * @var string|null
-     * @ORM\Column(name="password", type="string", length=64)
+     * @ORM\Column(name="password", type="string")
      */
     private $password;
 
     /**
      * @var string|null
+     * @Assert\NotBlank(groups={"new"})
      */
     private $plainPassword;
 
     /**
      * @var string|null
      * @ORM\Column(name="email", type="string", length=254, unique=true)
+     * @Groups({"api"})
+     * @Assert\NotBlank(groups={"new", "update"})
+     * @Assert\Email(groups={"new", "update"})
      */
     private $email;
 
     /**
      * @var bool
      * @ORM\Column(name="is_active", type="boolean")
+     * @Groups({"api"})
      */
     private $enabled;
 
     /**
      * @var string|null
      * @ORM\Column(name="confirmation_token", type="string", nullable=true)
+     * @Groups({"api"})
      */
     private $confirmationToken;
 
     /**
      * @var \DateTime|null
      * @ORM\Column(name="last_login", type="datetime", nullable=true)
+     * @Groups({"api"})
      */
     private $lastLogin;
+
+    /**
+     * @var bool
+     * @ORM\Column(name="account_non_expired", type="boolean")
+     * @Groups({"api"})
+     */
+    private $accountNonExpired;
+
+    /**
+     * @var bool
+     * @ORM\Column(name="credentials_non_expired", type="boolean")
+     * @Groups({"api"})
+     */
+    private $credentialsNonExpired;
+
+    /**
+     * @var bool
+     * @ORM\Column(name="account_non_locked", type="boolean")
+     * @Groups({"api"})
+     */
+    private $accountNonLocked;
 
     /**
      * @var Collection|Group[]
@@ -69,12 +105,14 @@ class CMSUser implements UserInterface, \Serializable
      *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
      * )
+     * @Groups({"api"})
      */
     private $groups;
 
     /**
      * @var array
      * @ORM\Column(name="roles", type="array")
+     * @Groups({"api"})
      */
     private $roles;
 
@@ -84,6 +122,9 @@ class CMSUser implements UserInterface, \Serializable
     public function __construct()
     {
         $this->enabled = false;
+        $this->accountNonExpired = true;
+        $this->credentialsNonExpired = true;
+        $this->accountNonLocked = true;
         $this->roles = [];
         $this->groups = new ArrayCollection();
     }
@@ -93,7 +134,7 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param string $username
      */
-    public function setUsername(string $username): void
+    public function setUsername($username): void
     {
         $this->username = $username;
     }
@@ -114,7 +155,7 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param string $password
      */
-    public function setPassword(string $password): void
+    public function setPassword($password): void
     {
         $this->password = $password;
     }
@@ -134,7 +175,7 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param string $plainPassword
      */
-    public function setPlainPassword(string $plainPassword): void
+    public function setPlainPassword($plainPassword): void
     {
         $this->plainPassword = $plainPassword;
     }
@@ -154,7 +195,7 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param string $email
      */
-    public function setEmail(string $email): void
+    public function setEmail($email): void
     {
         $this->email = $email;
     }
@@ -174,7 +215,7 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param bool $enabled
      */
-    public function setEnabled(bool $enabled): void
+    public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
     }
@@ -194,7 +235,7 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param string $confirmationToken
      */
-    public function setConfirmationToken(string $confirmationToken): void
+    public function setConfirmationToken($confirmationToken): void
     {
         $this->confirmationToken = $confirmationToken;
     }
@@ -214,7 +255,7 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param \DateTime $lastLogin
      */
-    public function setLastLogin(\DateTime $lastLogin): void
+    public function setLastLogin($lastLogin): void
     {
         $this->lastLogin = $lastLogin;
     }
@@ -244,7 +285,7 @@ class CMSUser implements UserInterface, \Serializable
      * Set the groups
      * @param Collection $groups
      */
-    public function setGroups(Collection $groups): void
+    public function setGroups($groups): void
     {
         $this->groups = $groups;
     }
@@ -254,7 +295,7 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param Group $group
      */
-    public function addGroup(Group $group): void
+    public function addGroup($group): void
     {
         if (!$this->groups->contains($group)) {
             $this->groups->add($group);
@@ -266,7 +307,7 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param Group $group
      */
-    public function removeGroup(Group $group): void
+    public function removeGroup($group): void
     {
         if ($this->groups->contains($group)) {
             $this->groups->removeElement($group);
@@ -305,7 +346,7 @@ class CMSUser implements UserInterface, \Serializable
      * @param string $name
      * @return bool
      */
-    public function hasGroup(string $name): bool
+    public function hasGroup($name): bool
     {
         return in_array($name, $this->getGroupNames());
     }
@@ -315,7 +356,7 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param string $role
      */
-    public function addRole(string $role): void
+    public function addRole($role): void
     {
         $role = strtoupper($role);
 
@@ -333,7 +374,7 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param string $role
      */
-    public function removeRole(string $role): void
+    public function removeRole($role): void
     {
         if ($this->hasRole($role)) {
             $key = array_search(strtoupper($role), $this->roles, true);
@@ -367,7 +408,7 @@ class CMSUser implements UserInterface, \Serializable
      * @param string $role
      * @return bool
      */
-    public function hasRole(string $role): bool
+    public function hasRole($role): bool
     {
         return in_array(strtoupper($role), $this->getRoles(), true);
     }
@@ -377,7 +418,7 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param array $roles
      */
-    public function setRoles(array $roles): void
+    public function setRoles($roles): void
     {
         $this->roles = [];
 
@@ -391,7 +432,7 @@ class CMSUser implements UserInterface, \Serializable
      *
      * @param bool $active
      */
-    public function setSuperAdmin(bool $active): void
+    public function setSuperAdmin($active): void
     {
         if ($active === true) {
             $this->addRole(static::ROLE_SUPER_ADMIN);
@@ -464,5 +505,50 @@ class CMSUser implements UserInterface, \Serializable
     public function __toString(): string
     {
         return (string)$this->getUsername();
+    }
+
+    /**
+     * Checks whether the user's account has expired.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw an AccountExpiredException and prevent login.
+     *
+     * @return bool true if the user's account is non expired, false otherwise
+     *
+     * @see AccountExpiredException
+     */
+    public function isAccountNonExpired(): bool
+    {
+        return $this->accountNonExpired;
+    }
+
+    /**
+     * Checks whether the user is locked.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw a LockedException and prevent login.
+     *
+     * @return bool true if the user is not locked, false otherwise
+     *
+     * @see LockedException
+     */
+    public function isAccountNonLocked(): bool
+    {
+        return $this->accountNonLocked;
+    }
+
+    /**
+     * Checks whether the user's credentials (password) has expired.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw a CredentialsExpiredException and prevent login.
+     *
+     * @return bool true if the user's credentials are non expired, false otherwise
+     *
+     * @see CredentialsExpiredException
+     */
+    public function isCredentialsNonExpired(): bool
+    {
+        return $this->credentialsNonExpired;
     }
 }

@@ -52,6 +52,6 @@ class AcceptListener
             }
         }
 
-        throw new NotAcceptableHttpException('No proper content type found.');
+        $request->setRequestFormat('json');
     }
 }

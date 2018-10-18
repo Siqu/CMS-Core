@@ -4,6 +4,7 @@ namespace Siqu\CMS\Core\Entity\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 use Siqu\CMS\Core\Entity\CMSUser;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class BlameableTrait
@@ -15,6 +16,7 @@ trait BlameableTrait
      * @var CMSUser|null
      * @ORM\ManyToOne(targetEntity="Siqu\CMS\Core\Entity\CMSUser")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @Groups({"api"})
      */
     private $user;
 
@@ -22,6 +24,7 @@ trait BlameableTrait
      * @var CMSUser|null
      * @ORM\ManyToOne(targetEntity="Siqu\CMS\Core\Entity\CMSUser")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @Groups({"api"})
      */
     private $changeUser;
 
@@ -42,11 +45,11 @@ trait BlameableTrait
     }
 
     /**
-     * @param CMSUser $changeuser
+     * @param CMSUser $changeUser
      */
-    public function setChangeUser(CMSUser $changeuser): void
+    public function setChangeUser(CMSUser $changeUser): void
     {
-        $this->changeUser = $changeuser;
+        $this->changeUser = $changeUser;
     }
 
     /**
