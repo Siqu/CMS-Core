@@ -16,26 +16,16 @@ trait NameableTrait
      * @var string|null
      * @ORM\Column(name="title", type="string")
      * @Groups({"api"})
-     * @Assert\NotBlank(groups={"new", "update"})
+     * @Assert\NotBlank(groups={"new"})
      */
     protected $title;
 
     /**
      * @var string|null
-     * @ORM\Column(name="title_shown", type="string")
+     * @ORM\Column(name="title_shown", type="string", nullable=true)
      * @Groups({"api"})
      */
     protected $titleShown;
-
-    /**
-     * Set the title.
-     *
-     * @param string $title
-     */
-    public function setTitle($title): void
-    {
-        $this->title = $title;
-    }
 
     /**
      * Retrieve the title.
@@ -48,16 +38,6 @@ trait NameableTrait
     }
 
     /**
-     * Set the title shown.
-     *
-     * @param string $titleShown
-     */
-    public function setTitleShown($titleShown): void
-    {
-        $this->titleShown = $titleShown;
-    }
-
-    /**
      * Retrieve the title shown.
      *
      * @return null|string
@@ -65,5 +45,25 @@ trait NameableTrait
     public function getTitleShown(): ?string
     {
         return $this->titleShown;
+    }
+
+    /**
+     * Set the title.
+     *
+     * @param string $title
+     */
+    public function setTitle($title): void
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * Set the title shown.
+     *
+     * @param string $titleShown
+     */
+    public function setTitleShown($titleShown): void
+    {
+        $this->titleShown = $titleShown;
     }
 }

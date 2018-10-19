@@ -15,26 +15,6 @@ class GroupTest extends TestCase
     private $object;
 
     /**
-     * Setup tests.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->object = new Group('name');
-    }
-
-    /**
-     * Should set and get name
-     */
-    public function testSetGetName(): void
-    {
-        $this->assertEquals('name', $this->object->getName());
-        $this->object->setName('name1');
-        $this->assertEquals('name1', $this->object->getName());
-    }
-
-    /**
      * Should add, set, get and remove roles
      */
     public function testAddSetGetRemoveRoles(): void
@@ -55,5 +35,25 @@ class GroupTest extends TestCase
         $this->assertEquals([
             'ROLE1'
         ], $this->object->getRoles());
+    }
+
+    /**
+     * Should set and get name
+     */
+    public function testSetGetName(): void
+    {
+        $this->assertNull($this->object->getName());
+        $this->object->setName('name');
+        $this->assertEquals('name', $this->object->getName());
+    }
+
+    /**
+     * Setup tests.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->object = new Group();
     }
 }

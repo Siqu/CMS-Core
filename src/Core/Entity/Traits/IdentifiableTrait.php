@@ -15,7 +15,7 @@ trait IdentifiableTrait
      * @var int|null
      * @ORM\Column(name="id", type="integer", options={"unsigned": true})
      * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
@@ -28,16 +28,6 @@ trait IdentifiableTrait
     protected $uuid;
 
     /**
-     * Set the id.
-     *
-     * @param int $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
      * Retrieve the Id.
      *
      * @return int|null
@@ -48,16 +38,6 @@ trait IdentifiableTrait
     }
 
     /**
-     * Set the uuid.
-     *
-     * @param string $uuid
-     */
-    public function setUuid($uuid): void
-    {
-        $this->uuid = $uuid;
-    }
-
-    /**
      * Retrieve the uuid.
      *
      * @return null|string
@@ -65,5 +45,25 @@ trait IdentifiableTrait
     public function getUuid(): ?string
     {
         return $this->uuid;
+    }
+
+    /**
+     * Set the id.
+     *
+     * @param int $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * Set the uuid.
+     *
+     * @param string $uuid
+     */
+    public function setUuid($uuid): void
+    {
+        $this->uuid = $uuid;
     }
 }

@@ -16,37 +16,14 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 class BlameableListenerTest extends AbstractBaseListenerTest
 {
-    /** @var CMSUser */
-    private $user;
-
     /** @var BlameableListener */
     private $listener;
-
-    /** @var TokenStorage|MockObject */
-    private $tokenStorage;
-
     /** @var TokenInterface|MockObject */
     private $token;
-
-    /**
-     * Setup tests.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->user = new CMSUser();
-
-        $this->token = $this->getMockBuilder(TokenInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->tokenStorage = $this->getMockBuilder(TokenStorage::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->listener = new BlameableListener($this->tokenStorage);
-    }
+    /** @var TokenStorage|MockObject */
+    private $tokenStorage;
+    /** @var CMSUser */
+    private $user;
 
     /**
      * Should create proper object
@@ -54,6 +31,31 @@ class BlameableListenerTest extends AbstractBaseListenerTest
     public function testConstruct(): void
     {
         $this->assertInstanceOf(BlameableListener::class, $this->listener);
+    }
+
+    /**
+     * Test persist with correct object
+     */
+    public function testPrePersist(): void
+    {
+        $object = new BlameableObject();
+        $args = new LifecycleEventArgs($object, $this->entityManager);
+
+        $this->listener->preUpdate($args);
+
+        $this->assertNull($object->getChangeUser());
+
+        $this->token
+            ->method('getUser')
+            ->willReturn($this->user);
+
+        $this->tokenStorage
+            ->method('getToken')
+            ->willReturn($this->token);
+
+        $this->listener->prePersist($args);
+
+        $this->assertEquals($this->user, $object->getUser());
     }
 
     /**
@@ -100,6 +102,31 @@ class BlameableListenerTest extends AbstractBaseListenerTest
     }
 
     /**
+     * Test update with correct object.
+     */
+    public function testPreUpdate(): void
+    {
+        $object = new BlameableObject();
+        $args = new LifecycleEventArgs($object, $this->entityManager);
+
+        $this->listener->preUpdate($args);
+
+        $this->assertNull($object->getChangeUser());
+
+        $this->token
+            ->method('getUser')
+            ->willReturn($this->user);
+
+        $this->tokenStorage
+            ->method('getToken')
+            ->willReturn($this->token);
+
+        $this->listener->preUpdate($args);
+
+        $this->assertEquals($this->user, $object->getChangeUser());
+    }
+
+    /**
      * Test update with incorrect objects
      */
     public function testPreUpdateIncorrectObject(): void
@@ -143,52 +170,22 @@ class BlameableListenerTest extends AbstractBaseListenerTest
     }
 
     /**
-     * Test persist with correct object
+     * Setup tests.
      */
-    public function testPrePersist(): void
+    protected function setUp(): void
     {
-        $object = new BlameableObject();
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        parent::setUp();
 
-        $this->listener->preUpdate($args);
+        $this->user = new CMSUser();
 
-        $this->assertNull($object->getChangeUser());
+        $this->token = $this->getMockBuilder(TokenInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        $this->token
-            ->method('getUser')
-            ->willReturn($this->user);
+        $this->tokenStorage = $this->getMockBuilder(TokenStorage::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        $this->tokenStorage
-            ->method('getToken')
-            ->willReturn($this->token);
-
-        $this->listener->prePersist($args);
-
-        $this->assertEquals($this->user, $object->getUser());
-    }
-
-    /**
-     * Test update with correct object.
-     */
-    public function testPreUpdate(): void
-    {
-        $object = new BlameableObject();
-        $args = new LifecycleEventArgs($object, $this->entityManager);
-
-        $this->listener->preUpdate($args);
-
-        $this->assertNull($object->getChangeUser());
-
-        $this->token
-            ->method('getUser')
-            ->willReturn($this->user);
-
-        $this->tokenStorage
-            ->method('getToken')
-            ->willReturn($this->token);
-
-        $this->listener->preUpdate($args);
-
-        $this->assertEquals($this->user, $object->getChangeUser());
+        $this->listener = new BlameableListener($this->tokenStorage);
     }
 }

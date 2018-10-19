@@ -17,18 +17,14 @@ use Siqu\CMS\Core\Tests\Dummy\DummyListener;
  */
 class AbstractListenerTest extends TestCase
 {
-    /** @var \stdClass */
-    private $object;
-
-    /** @var ClassMetadata|MockObject */
-    private $metadata;
-
-    /** @var AbstractListener */
-    private $listener;
-
     /** @var EntityManager|MockObject */
     private $entityManager;
-
+    /** @var AbstractListener */
+    private $listener;
+    /** @var ClassMetadata|MockObject */
+    private $metadata;
+    /** @var \stdClass */
+    private $object;
     /** @var UnitOfWork|MockObject */
     private $unitOfWork;
 
@@ -46,7 +42,7 @@ class AbstractListenerTest extends TestCase
     /**
      * Should recompute change set
      */
-    public function testPreUpdate(): void
+    public function testPrePersist(): void
     {
         $this->mockMethods();
         $args = new LifecycleEventArgs($this->object, $this->entityManager);
@@ -57,33 +53,12 @@ class AbstractListenerTest extends TestCase
     /**
      * Should recompute change set
      */
-    public function testPrePersist(): void
+    public function testPreUpdate(): void
     {
         $this->mockMethods();
         $args = new LifecycleEventArgs($this->object, $this->entityManager);
 
         $this->listener->prePersist($args);
-    }
-
-    /**
-     * Mock method calls
-     */
-    private function mockMethods(): void
-    {
-        $this->unitOfWork
-            ->expects($this->once())
-            ->method('recomputeSingleEntityChangeSet')
-            ->with($this->metadata, $this->object);
-
-        $this->entityManager
-            ->expects($this->once())
-            ->method('getClassMetadata')
-            ->willReturn($this->metadata);
-
-        $this->entityManager
-            ->expects($this->once())
-            ->method('getUnitOfWork')
-            ->willReturn($this->unitOfWork);
     }
 
     /**
@@ -108,5 +83,26 @@ class AbstractListenerTest extends TestCase
         $this->object = new \stdClass();
 
         $this->listener = new DummyListener();
+    }
+
+    /**
+     * Mock method calls
+     */
+    private function mockMethods(): void
+    {
+        $this->unitOfWork
+            ->expects($this->once())
+            ->method('recomputeSingleEntityChangeSet')
+            ->with($this->metadata, $this->object);
+
+        $this->entityManager
+            ->expects($this->once())
+            ->method('getClassMetadata')
+            ->willReturn($this->metadata);
+
+        $this->entityManager
+            ->expects($this->once())
+            ->method('getUnitOfWork')
+            ->willReturn($this->unitOfWork);
     }
 }

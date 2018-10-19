@@ -15,13 +15,13 @@ class IdentifiableTraitTest extends TestCase
     private $object;
 
     /**
-     * Setup tests.
+     * Should set and return uuid.
      */
-    protected function setUp(): void
+    public function testSetGetChangeUuid(): void
     {
-        parent::setUp();
-
-        $this->object = $this->getMockForTrait(IdentifiableTrait::class);
+        $this->assertNull($this->object->getUuid());
+        $this->object->setUuid('1');
+        $this->assertEquals('1', $this->object->getUuid());
     }
 
     /**
@@ -35,12 +35,12 @@ class IdentifiableTraitTest extends TestCase
     }
 
     /**
-     * Should set and return uuid.
+     * Setup tests.
      */
-    public function testSetGetChangeUuid(): void
+    protected function setUp(): void
     {
-        $this->assertNull($this->object->getUuid());
-        $this->object->setUuid('1');
-        $this->assertEquals('1', $this->object->getUuid());
+        parent::setUp();
+
+        $this->object = $this->getMockForTrait(IdentifiableTrait::class);
     }
 }

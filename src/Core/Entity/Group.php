@@ -34,32 +34,10 @@ class Group
 
     /**
      * Group constructor.
-     * @param string $name
      */
-    public function __construct(string $name)
+    public function __construct()
     {
-        $this->name = $name;
         $this->roles = [];
-    }
-
-    /**
-     * Set the name.
-     *
-     * @param string $name
-     */
-    public function setName($name): void
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * Retrieve the name.
-     *
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
     }
 
     /**
@@ -75,14 +53,13 @@ class Group
     }
 
     /**
-     * Check if the group has a specific role.
+     * Retrieve the name.
      *
-     * @param string $role
-     * @return bool
+     * @return string|null
      */
-    public function hasRole(string $role): bool
+    public function getName(): ?string
     {
-        return in_array(strtoupper($role), $this->roles, true);
+        return $this->name;
     }
 
     /**
@@ -93,6 +70,17 @@ class Group
     public function getRoles(): array
     {
         return $this->roles;
+    }
+
+    /**
+     * Check if the group has a specific role.
+     *
+     * @param string $role
+     * @return bool
+     */
+    public function hasRole(string $role): bool
+    {
+        return in_array(strtoupper($role), $this->roles, true);
     }
 
     /**
@@ -110,6 +98,16 @@ class Group
     }
 
     /**
+     * Set the name.
+     *
+     * @param string $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
      * Set roles.
      *
      * @param array $roles
@@ -118,7 +116,7 @@ class Group
     {
         $this->roles = [];
 
-        foreach($roles as $role) {
+        foreach ($roles as $role) {
             $this->addRole($role);
         }
     }

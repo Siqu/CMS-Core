@@ -2,20 +2,20 @@
 
 namespace Siqu\CMS\API\Controller;
 
-use Siqu\CMS\Core\Entity\CMSUser;
+use Siqu\CMS\Core\Entity\Page;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class CMSUserController
+ * Class PageController
  * @package Siqu\CMS\API\Controller
- * @Route("/user", name="api_user")
+ * @Route("/page", name="api_page")
  */
-class CMSUserController extends APIController
+class PageController extends APIController
 {
     /**
-     * Create a new user.
+     * Create a new page.
      *
      * @param Request $request
      * @return Response
@@ -27,7 +27,7 @@ class CMSUserController extends APIController
     }
 
     /**
-     * Delete a user.
+     * Delete a page.
      *
      * @param string $uuid
      * @param Request $request
@@ -40,7 +40,7 @@ class CMSUserController extends APIController
     }
 
     /**
-     * Read all user.
+     * Read all pages.
      *
      * @param Request $request
      * @return Response
@@ -52,7 +52,7 @@ class CMSUserController extends APIController
     }
 
     /**
-     * Read a specific user
+     * Read a specific page
      *
      * @param string $uuid
      * @param Request $request
@@ -65,7 +65,7 @@ class CMSUserController extends APIController
     }
 
     /**
-     * Update a user.
+     * Update a page.
      *
      * @param string $uuid
      * @param Request $request
@@ -84,6 +84,6 @@ class CMSUserController extends APIController
      */
     protected function getEntityClass(): string
     {
-        return CMSUser::class;
+        return Page::class;
     }
 }

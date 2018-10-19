@@ -33,26 +33,6 @@ class CMSUserListenerTest extends AbstractBaseListenerTest
     }
 
     /**
-     * Should not call password updater
-     */
-    public function testPrePersistIncorrectObject(): void
-    {
-        $this->passwordUpdater
-            ->expects($this->never())
-            ->method('hashPassword');
-
-        $this->uuidGenerator
-            ->expects($this->never())
-            ->method('generate');
-
-        $object = new \stdClass();
-
-        $event = new LifecycleEventArgs($object, $this->entityManager);
-
-        $this->listener->prePersist($event);
-    }
-
-    /**
      * Should call password updater
      */
     public function testPrePersist(): void
@@ -75,19 +55,23 @@ class CMSUserListenerTest extends AbstractBaseListenerTest
     }
 
     /**
-     * Should not call password updater or entity manager
+     * Should not call password updater
      */
-    public function testPreUpdateIncorrectObject(): void
+    public function testPrePersistIncorrectObject(): void
     {
         $this->passwordUpdater
             ->expects($this->never())
             ->method('hashPassword');
 
+        $this->uuidGenerator
+            ->expects($this->never())
+            ->method('generate');
+
         $object = new \stdClass();
 
         $event = new LifecycleEventArgs($object, $this->entityManager);
 
-        $this->listener->preUpdate($event);
+        $this->listener->prePersist($event);
     }
 
     /**
@@ -101,6 +85,22 @@ class CMSUserListenerTest extends AbstractBaseListenerTest
             ->expects($this->once())
             ->method('hashPassword')
             ->with($object);
+
+        $event = new LifecycleEventArgs($object, $this->entityManager);
+
+        $this->listener->preUpdate($event);
+    }
+
+    /**
+     * Should not call password updater or entity manager
+     */
+    public function testPreUpdateIncorrectObject(): void
+    {
+        $this->passwordUpdater
+            ->expects($this->never())
+            ->method('hashPassword');
+
+        $object = new \stdClass();
 
         $event = new LifecycleEventArgs($object, $this->entityManager);
 

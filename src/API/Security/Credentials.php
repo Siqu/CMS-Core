@@ -9,10 +9,9 @@ namespace Siqu\CMS\API\Security;
 class Credentials
 {
     /** @var string */
-    private $username;
-
-    /** @var string */
     private $password;
+    /** @var string */
+    private $username;
 
     /**
      * Credentials constructor.
@@ -29,16 +28,6 @@ class Credentials
     }
 
     /**
-     * Retrieve username.
-     *
-     * @return string
-     */
-    public function getUsername(): string
-    {
-        return $this->username;
-    }
-
-    /**
      * Retrieve password.
      *
      * @return string
@@ -46,5 +35,15 @@ class Credentials
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    /**
+     * Retrieve username.
+     *
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return $this->username;
     }
 }

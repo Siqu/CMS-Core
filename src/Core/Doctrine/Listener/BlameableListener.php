@@ -34,7 +34,7 @@ class BlameableListener extends AbstractListener
     {
         $object = $args->getObject();
 
-        if ($this->shouldObjectBeHandled($object)) {
+        if ($this->shouldTraitObjectBeHandled($object, BlameableTrait::class)) {
             /** @var BlameableTrait $object */
             $user = $this->getUser();
 
@@ -53,7 +53,7 @@ class BlameableListener extends AbstractListener
     {
         $object = $args->getObject();
 
-        if ($this->shouldObjectBeHandled($object)) {
+        if ($this->shouldTraitObjectBeHandled($object, BlameableTrait::class)) {
             /** @var BlameableTrait $object */
             $user = $this->getUser();
 
@@ -82,26 +82,5 @@ class BlameableListener extends AbstractListener
         }
 
         return $user;
-    }
-
-    /**
-     * Check if the object should be handled.
-     *
-     * @param $object
-     * @return bool
-     */
-    private function shouldObjectBeHandled($object): bool
-    {
-        // @codeCoverageIgnoreStart
-        try {
-            $reflection = new \ReflectionClass($object);
-        } catch (\ReflectionException $e) {
-            return false;
-        }
-        // @codeCoverageIgnoreEnd
-
-        $traits = $reflection->getTraitNames();
-
-        return in_array(BlameableTrait::class, $traits);
     }
 }

@@ -13,16 +13,16 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 abstract class AbstractListener implements EventSubscriber
 {
     /**
-     * Recomputes change set for doctrine.
-     *
-     * @param ObjectManager $om
-     * @param $object
+     * Pre persist listener
+     * @param LifecycleEventArgs $args
      */
-    protected function recomputeChangeSet(ObjectManager $om, $object): void {
-        $meta = $om->getClassMetadata(get_class($object));
+    abstract public function prePersist(LifecycleEventArgs $args): void;
 
-        $om->getUnitOfWork()->recomputeSingleEntityChangeSet($meta, $object);
-    }
+    /**
+     * Pre update listener
+     * @param LifecycleEventArgs $args
+     */
+    abstract public function preUpdate(LifecycleEventArgs $args): void;
 
     /**
      * Returns an array of events this subscriber wants to listen to.
@@ -38,14 +38,37 @@ abstract class AbstractListener implements EventSubscriber
     }
 
     /**
-     * Pre persist listener
-     * @param LifecycleEventArgs $args
+     * Recomputes change set for doctrine.
+     *
+     * @param ObjectManager $om
+     * @param $object
      */
-    abstract public function prePersist(LifecycleEventArgs $args): void;
+    protected function recomputeChangeSet(ObjectManager $om, $object): void
+    {
+        $meta = $om->getClassMetadata(get_class($object));
+
+        $om->getUnitOfWork()->recomputeSingleEntityChangeSet($meta, $object);
+    }
 
     /**
-     * Pre update listener
-     * @param LifecycleEventArgs $args
+     * Check if the object should be handled.
+     *
+     * @param $object
+     * @param string $trait
+     * @return bool
      */
-    abstract public function preUpdate(LifecycleEventArgs $args): void;
+    protected function shouldTraitObjectBeHandled($object, string $trait): bool
+    {
+        // @codeCoverageIgnoreStart
+        try {
+            $reflection = new \ReflectionClass($object);
+        } catch (\ReflectionException $e) {
+            return false;
+        }
+        // @codeCoverageIgnoreEnd
+
+        $traits = $reflection->getTraitNames();
+
+        return in_array($trait, $traits);
+    }
 }

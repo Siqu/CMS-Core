@@ -15,14 +15,12 @@ use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
  */
 class PasswordUpdaterTest extends TestCase
 {
-    /** @var PasswordUpdater */
-    private $updater;
-
-    /** @var EncoderFactory|MockObject */
-    private $encoderFactory;
-
     /** @var PasswordEncoderInterface|MockObject */
     private $encoder;
+    /** @var EncoderFactory|MockObject */
+    private $encoderFactory;
+    /** @var PasswordUpdater */
+    private $updater;
 
     /**
      * Should create instance
@@ -30,20 +28,6 @@ class PasswordUpdaterTest extends TestCase
     public function testConstruct(): void
     {
         $this->assertInstanceOf(PasswordUpdater::class, $this->updater);
-    }
-
-    /**
-     * Should not change password
-     */
-    public function testHashPasswordEmpty(): void
-    {
-        $user = new CMSUser();
-
-        $this->encoder
-            ->expects($this->never())
-            ->method('encodePassword');
-
-        $this->updater->hashPassword($user);
     }
 
     /**
@@ -67,6 +51,20 @@ class PasswordUpdaterTest extends TestCase
 
         $this->assertNull($user->getPlainPassword());
         $this->assertEquals($encodedPassword, $user->getPassword());
+    }
+
+    /**
+     * Should not change password
+     */
+    public function testHashPasswordEmpty(): void
+    {
+        $user = new CMSUser();
+
+        $this->encoder
+            ->expects($this->never())
+            ->method('encodePassword');
+
+        $this->updater->hashPassword($user);
     }
 
     /**

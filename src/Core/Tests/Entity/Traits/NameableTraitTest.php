@@ -15,13 +15,13 @@ class NameableTraitTest extends TestCase
     private $object;
 
     /**
-     * Setup tests.
+     * Should set and return title shown.
      */
-    protected function setUp(): void
+    public function testSetGetChangeTitleShown(): void
     {
-        parent::setUp();
-
-        $this->object = $this->getMockForTrait(NameableTrait::class);
+        $this->assertNull($this->object->getTitleShown());
+        $this->object->setTitleShown('titleShown');
+        $this->assertEquals('titleShown', $this->object->getTitleShown());
     }
 
     /**
@@ -35,12 +35,12 @@ class NameableTraitTest extends TestCase
     }
 
     /**
-     * Should set and return title shown.
+     * Setup tests.
      */
-    public function testSetGetChangeTitleShown(): void
+    protected function setUp(): void
     {
-        $this->assertNull($this->object->getTitleShown());
-        $this->object->setTitleShown('titleShown');
-        $this->assertEquals('titleShown', $this->object->getTitleShown());
+        parent::setUp();
+
+        $this->object = $this->getMockForTrait(NameableTrait::class);
     }
 }

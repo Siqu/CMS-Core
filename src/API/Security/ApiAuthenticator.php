@@ -30,7 +30,7 @@ class ApiAuthenticator implements SimplePreAuthenticatorInterface
         $credentials = $token->getCredentials();
         $username = $userProvider->getUsernameForCredentials($credentials);
 
-        if(!$username) {
+        if (!$username) {
             throw new CustomUserMessageAuthenticationException(
                 sprintf('Could not authenticate user "%s"', $username)
             );
@@ -39,23 +39,11 @@ class ApiAuthenticator implements SimplePreAuthenticatorInterface
         $user = $userProvider->loadUserByUsername($username);
 
         return new PreAuthenticatedToken(
-            $username,
+            $user,
             $credentials,
             $providerKey,
             $user->getRoles()
         );
-    }
-
-    /**
-     * Check if authenticator supports the given token.
-     *
-     * @param TokenInterface $token
-     * @param string $providerKey
-     * @return bool
-     */
-    public function supportsToken(TokenInterface $token, $providerKey)
-    {
-        return $token instanceof PreAuthenticatedToken && $token->getProviderKey() === $providerKey;
     }
 
     /**
@@ -81,5 +69,17 @@ class ApiAuthenticator implements SimplePreAuthenticatorInterface
             $credentials,
             $providerKey
         );
+    }
+
+    /**
+     * Check if authenticator supports the given token.
+     *
+     * @param TokenInterface $token
+     * @param string $providerKey
+     * @return bool
+     */
+    public function supportsToken(TokenInterface $token, $providerKey)
+    {
+        return $token instanceof PreAuthenticatedToken && $token->getProviderKey() === $providerKey;
     }
 }

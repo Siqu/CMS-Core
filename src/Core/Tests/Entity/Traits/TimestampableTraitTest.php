@@ -15,19 +15,21 @@ class TimestampableTraitTest extends TestCase
     private $object;
 
     /**
-     * Setup tests.
+     * Should set and return updated at.
      */
-    protected function setUp(): void
+    public function testSetGetChangeUpdatedAt(): void
     {
-        parent::setUp();
-
-        $this->object = $this->getMockForTrait(TimestampableTrait::class);
+        $date = new \DateTime();
+        $this->assertNull($this->object->getUpdatedAt());
+        $this->object->setUpdatedAt($date);
+        $this->assertEquals($date, $this->object->getUpdatedAt());
     }
 
     /**
      * Should set and return created at.
      */
-    public function testSetGetCreatedAt(): void {
+    public function testSetGetCreatedAt(): void
+    {
         $date = new \DateTime();
         $this->assertNull($this->object->getCreatedAt());
         $this->object->setCreatedAt($date);
@@ -35,12 +37,12 @@ class TimestampableTraitTest extends TestCase
     }
 
     /**
-     * Should set and return updated at.
+     * Setup tests.
      */
-    public function testSetGetChangeUpdatedAt(): void {
-        $date = new \DateTime();
-        $this->assertNull($this->object->getUpdatedAt());
-        $this->object->setUpdatedAt($date);
-        $this->assertEquals($date, $this->object->getUpdatedAt());
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->object = $this->getMockForTrait(TimestampableTrait::class);
     }
 }

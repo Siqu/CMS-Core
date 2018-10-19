@@ -15,25 +15,24 @@ trait BlameableTrait
     /**
      * @var CMSUser|null
      * @ORM\ManyToOne(targetEntity="Siqu\CMS\Core\Entity\CMSUser")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="change_user_id", referencedColumnName="id")
      * @Groups({"api"})
      */
-    private $user;
-
+    private $changeUser;
     /**
      * @var CMSUser|null
      * @ORM\ManyToOne(targetEntity="Siqu\CMS\Core\Entity\CMSUser")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @Groups({"api"})
      */
-    private $changeUser;
+    private $user;
 
     /**
-     * @param CMSUser $user
+     * @return null|CMSUser
      */
-    public function setUser(CMSUser $user): void
+    public function getChangeUser(): ?CMSUser
     {
-        $this->user = $user;
+        return $this->changeUser;
     }
 
     /**
@@ -53,10 +52,10 @@ trait BlameableTrait
     }
 
     /**
-     * @return null|CMSUser
+     * @param CMSUser $user
      */
-    public function getChangeUser(): ?CMSUser
+    public function setUser(CMSUser $user): void
     {
-        return $this->changeUser;
+        $this->user = $user;
     }
 }

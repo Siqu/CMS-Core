@@ -11,7 +11,7 @@ security:
             security: false
         api:
             pattern: ^/api
-            stateless: false
+            stateless: true
             simple_preauth:
                 authenticator: siqu.cms_api.security.authenticator
             provider: api

@@ -16,13 +16,15 @@ class BlameableTraitTest extends TestCase
     private $object;
 
     /**
-     * Setup tests.
+     * Should set and return change user.
      */
-    protected function setUp(): void
+    public function testSetGetChangeUser(): void
     {
-        parent::setUp();
+        $user = new CMSUser();
 
-        $this->object = $this->getMockForTrait(BlameableTrait::class);
+        $this->assertNull($this->object->getChangeUser());
+        $this->object->setChangeUser($user);
+        $this->assertEquals($user, $this->object->getChangeUser());
     }
 
     /**
@@ -38,14 +40,12 @@ class BlameableTraitTest extends TestCase
     }
 
     /**
-     * Should set and return change user.
+     * Setup tests.
      */
-    public function testSetGetChangeUser(): void
+    protected function setUp(): void
     {
-        $user = new CMSUser();
+        parent::setUp();
 
-        $this->assertNull($this->object->getChangeUser());
-        $this->object->setChangeUser($user);
-        $this->assertEquals($user, $this->object->getChangeUser());
+        $this->object = $this->getMockForTrait(BlameableTrait::class);
     }
 }

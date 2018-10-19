@@ -3,11 +3,11 @@
 namespace Siqu\CMS\API\Controller;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Siqu\CMS\API\Exception\APIValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
  * Class APIController
@@ -15,6 +15,60 @@ use Symfony\Component\Validator\ConstraintViolation;
  */
 abstract class APIController extends Controller
 {
+    /**
+     * Retrieve the class of the managed entity.
+     *
+     * @return string
+     */
+    abstract protected function getEntityClass(): string;
+
+    /**
+     * Create a new entry.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function create(Request $request): Response
+    {
+        try {
+            $entry = $this->deserializeData($request, 'new');
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($entry);
+            $manager->flush();
+
+            return $this->createResponse($entry, Response::HTTP_CREATED, $request);
+        } catch (APIValidationException $e) {
+            return $this->createResponse($e->getViolations(), Response::HTTP_BAD_REQUEST, $request);
+        }
+    }
+
+    /**
+     * Delete a entry.
+     *
+     * @param string $uuid
+     * @param Request $request
+     * @return Response
+     */
+    public function delete(string $uuid, Request $request): Response
+    {
+        $entry = $this->loadEntry($uuid);
+
+        if (!$entry) {
+            return $this->createResponse([
+                'message' => 'No entry found with uuid ' . $uuid
+            ], Response::HTTP_NOT_FOUND, $request);
+        }
+
+        $manager = $this->getDoctrine()->getManager();
+        $manager->remove($entry);
+        $manager->flush();
+
+        return $this->createResponse([
+            'message' => 'Delete success.'
+        ], Response::HTTP_NO_CONTENT, $request);
+    }
+
     /**
      * Read all entries.
      *
@@ -39,68 +93,13 @@ abstract class APIController extends Controller
     {
         $entry = $this->loadEntry($uuid);
 
-        if(!$entry) {
+        if (!$entry) {
             return $this->createResponse([
                 'message' => 'No entry found with uuid ' . $uuid
             ], Response::HTTP_NOT_FOUND, $request);
         }
 
         return $this->createResponse($entry, Response::HTTP_OK, $request);
-    }
-
-    /**
-     * Create a new entry.
-     *
-     * @param Request $request
-     * @return Response
-     */
-    public function create(Request $request): Response
-    {
-        $data = json_decode($request->getContent(), true);
-        $class = $this->getEntityClass();
-        $entry = new $class();
-
-        $form = $this->createForm($this->getFormType(), $entry);
-
-        $form->submit($data);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            $entry = $form->getData();
-
-            $manager = $this->getDoctrine()->getManager();
-            $manager->persist($entry);
-            $manager->flush();
-
-            return $this->createResponse($entry, Response::HTTP_CREATED, $request);
-        }
-
-        return $this->createResponse($form->getErrors(true), Response::HTTP_BAD_REQUEST, $request);
-    }
-
-    /**
-     * Delete a entry.
-     *
-     * @param string $uuid
-     * @param Request $request
-     * @return Response
-     */
-    public function delete(string $uuid, Request $request): Response
-    {
-        $entry = $this->loadEntry($uuid);
-
-        if(!$entry) {
-            return $this->createResponse([
-                'message' => 'No entry found with uuid ' . $uuid
-            ], Response::HTTP_NOT_FOUND, $request);
-        }
-
-        $manager = $this->getDoctrine()->getManager();
-        $manager->remove($entry);
-        $manager->flush();
-
-        return $this->createResponse([
-            'message' => 'Delete success.'
-        ], Response::HTTP_NO_CONTENT, $request);
     }
 
     /**
@@ -114,29 +113,23 @@ abstract class APIController extends Controller
     {
         $entry = $this->loadEntry($uuid);
 
-        if(!$entry) {
+        if (!$entry) {
             return $this->createResponse([
                 'message' => 'No entry found with uuid ' . $uuid
             ], Response::HTTP_NOT_FOUND, $request);
         }
 
-        $data = json_decode($request->getContent(), true);
-
-        $form = $this->createForm($this->getFormType(), $entry);
-
-        $form->submit($data);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            $entry = $form->getData();
+        try {
+            $entry = $this->deserializeData($request, 'update', $entry);
 
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($entry);
             $manager->flush();
 
             return $this->createResponse($entry, Response::HTTP_CREATED, $request);
+        } catch (APIValidationException $e) {
+            return $this->createResponse($e->getViolations(), Response::HTTP_BAD_REQUEST, $request);
         }
-
-        return $this->createResponse($form->getErrors(true), Response::HTTP_BAD_REQUEST, $request);
     }
 
     /**
@@ -151,18 +144,16 @@ abstract class APIController extends Controller
     {
         $serializer = $this->get('serializer');
 
-        if($data instanceof FormErrorIterator) {
+        if ($data instanceof ConstraintViolationListInterface) {
             $errors = [];
-            foreach($data as $error) {
-                /** @var ConstraintViolation $cause */
-                $cause = $error->getCause();
+            foreach ($data as $error) {
                 $errors[] = [
                     'message' => $error->getMessage(),
-                    'path' => $cause->getPropertyPath(),
-                    'data' => $cause->getInvalidValue()
+                    'path' => $error->getPropertyPath(),
+                    'data' => $error->getInvalidValue()
                 ];
             }
-            $serialized = $serializer->serialize($errors, $request->getFormat($request->getRequestFormat()));
+            $serialized = $serializer->serialize($errors, $this->getSerializerFormat($request));
         } else {
             $serialized = $serializer->serialize(
                 $data,
@@ -183,7 +174,8 @@ abstract class APIController extends Controller
      *
      * @return \Doctrine\Common\Persistence\ObjectRepository
      */
-    protected function getRepository(): ObjectRepository {
+    protected function getRepository(): ObjectRepository
+    {
         return $this->getDoctrine()->getRepository($this->getEntityClass());
     }
 
@@ -203,16 +195,45 @@ abstract class APIController extends Controller
     }
 
     /**
-     * Retrieve the class of the managed entity.
+     * Deserialize the request data into a object.
      *
-     * @return string
+     * @param Request $request
+     * @param string $validationGroup
+     * @param null|object $entry
+     * @return object
+     * @throws APIValidationException
      */
-    abstract protected function getEntityClass(): string;
+    private function deserializeData(Request $request, string $validationGroup, $entry = null): object
+    {
+        $serializer = $this->get('serializer');
+        $validator = $this->get('validator');
+
+        if (!$entry) {
+            $class = $this->getEntityClass();
+            $entry = new $class();
+        }
+
+        $entry = $serializer->deserialize($request->getContent(), $this->getEntityClass(), $this->getSerializerFormat($request), [
+            'object_to_populate' => $entry
+        ]);
+
+        $errors = $validator->validate($entry, null, $validationGroup);
+
+        if (count($errors) > 0) {
+            throw new APIValidationException($errors);
+        }
+
+        return $entry;
+    }
 
     /**
-     * Retrieve the class of the form of the managed entity.
+     * Retrieve the format for the serializer.
      *
-     * @return string
+     * @param Request $request
+     * @return null|string
      */
-    abstract protected function getFormType(): string;
+    private function getSerializerFormat(Request $request): ?string
+    {
+        return $request->getFormat($request->getRequestFormat());
+    }
 }

@@ -20,7 +20,7 @@ class TimestampableListener extends AbstractListener
     {
         $object = $args->getObject();
 
-        if ($this->shouldObjectBeHandled($object)) {
+        if ($this->shouldTraitObjectBeHandled($object, TimestampableTrait::class)) {
             /** @var TimestampableTrait $object */
             $object->setCreatedAt(new \DateTime());
         }
@@ -35,31 +35,10 @@ class TimestampableListener extends AbstractListener
     {
         $object = $args->getObject();
 
-        if ($this->shouldObjectBeHandled($object)) {
+        if ($this->shouldTraitObjectBeHandled($object, TimestampableTrait::class)) {
             /** @var TimestampableTrait $object */
             $object->setUpdatedAt(new \DateTime());
             $this->recomputeChangeSet($args->getObjectManager(), $object);
         }
-    }
-
-    /**
-     * Check if the object should be handled.
-     *
-     * @param $object
-     * @return bool
-     */
-    private function shouldObjectBeHandled($object): bool
-    {
-        // @codeCoverageIgnoreStart
-        try {
-            $reflection = new \ReflectionClass($object);
-        } catch (\ReflectionException $e) {
-            return false;
-        }
-        // @codeCoverageIgnoreEnd
-
-        $traits = $reflection->getTraitNames();
-
-        return in_array(TimestampableTrait::class, $traits);
     }
 }

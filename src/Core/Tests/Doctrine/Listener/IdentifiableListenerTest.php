@@ -3,24 +3,29 @@
 namespace Siqu\CMS\Core\Tests\Doctrine\Listener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Siqu\CMS\Core\Doctrine\Listener\TimestampableListener;
-use Siqu\CMS\Core\Tests\Dummy\TimestampableObject;
+use PHPUnit\Framework\MockObject\MockObject;
+use Siqu\CMS\Core\Doctrine\Listener\IdentifiableListener;
+use Siqu\CMS\Core\Tests\Dummy\IdentifiableObject;
+use Siqu\CMS\Core\Util\UuidGenerator;
 
 /**
- * Class TimestampableListenerTest
+ * Class IdentifiableListenerTest
  * @package Siqu\CMS\Core\Tests\Doctrine\Listener
  */
-class TimestampableListenerTest extends AbstractBaseListenerTest
+class IdentifiableListenerTest extends AbstractBaseListenerTest
 {
-    /** @var TimestampableListener */
+    /** @var IdentifiableListener */
     private $listener;
+
+    /** @var UuidGenerator|MockObject */
+    private $uuidGenerator;
 
     /**
      * Should create proper object
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(TimestampableListener::class, $this->listener);
+        $this->assertInstanceOf(IdentifiableListener::class, $this->listener);
     }
 
     /**
@@ -28,12 +33,12 @@ class TimestampableListenerTest extends AbstractBaseListenerTest
      */
     public function testPrePersist(): void
     {
-        $object = new TimestampableObject();
+        $object = new IdentifiableObject();
         $args = new LifecycleEventArgs($object, $this->entityManager);
 
         $this->listener->prePersist($args);
 
-        $this->assertNotNull($object->getCreatedAt());
+        $this->assertEquals('uuid', $object->getUuid());
     }
 
     /**
@@ -43,11 +48,11 @@ class TimestampableListenerTest extends AbstractBaseListenerTest
     {
         $object = $this->getMockBuilder(\stdClass::class)
             ->disableOriginalConstructor()
-            ->setMethods(['setCreatedAt'])
+            ->setMethods(['setUuid'])
             ->getMock();
         $object
             ->expects($this->never())
-            ->method('setCreatedAt');
+            ->method('setUuid');
 
         $args = new LifecycleEventArgs($object, $this->entityManager);
 
@@ -55,30 +60,34 @@ class TimestampableListenerTest extends AbstractBaseListenerTest
     }
 
     /**
-     * Test update with correct object.
+     * Test should not change uuid
      */
     public function testPreUpdate(): void
     {
-        $object = new TimestampableObject();
+        $object = $this->getMockBuilder(IdentifiableObject::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $object
+            ->expects($this->never())
+            ->method('setUuid');
+
         $args = new LifecycleEventArgs($object, $this->entityManager);
 
         $this->listener->preUpdate($args);
-
-        $this->assertNotNull($object->getUpdatedAt());
     }
 
     /**
-     * Test update with incorrect objects
+     * Test should not change uuid
      */
     public function testPreUpdateIncorrectObject(): void
     {
         $object = $this->getMockBuilder(\stdClass::class)
             ->disableOriginalConstructor()
-            ->setMethods(['setUpdatedAt'])
+            ->setMethods(['setUuid'])
             ->getMock();
         $object
             ->expects($this->never())
-            ->method('setUpdatedAt');
+            ->method('setUuid');
 
         $args = new LifecycleEventArgs($object, $this->entityManager);
 
@@ -92,6 +101,14 @@ class TimestampableListenerTest extends AbstractBaseListenerTest
     {
         parent::setUp();
 
-        $this->listener = new TimestampableListener();
+        $this->uuidGenerator = $this->getMockBuilder(UuidGenerator::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->uuidGenerator
+            ->method('generate')
+            ->willReturn('uuid');
+
+        $this->listener = new IdentifiableListener($this->uuidGenerator);
     }
 }

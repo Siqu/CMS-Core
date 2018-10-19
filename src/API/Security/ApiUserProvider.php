@@ -19,14 +19,13 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class ApiUserProvider implements UserProviderInterface
 {
     /**
-     * @var EntityManager
-     */
-    private $entityManager;
-
-    /**
      * @var UserPasswordEncoderInterface
      */
     private $encoder;
+    /**
+     * @var EntityManager
+     */
+    private $entityManager;
 
     /**
      * ApiUserProvider constructor.
@@ -51,7 +50,7 @@ class ApiUserProvider implements UserProviderInterface
     {
         $user = $this->fetchUser($credentials->getUsername());
 
-        if(!$this->encoder->isPasswordValid($user, $credentials->getPassword())) {
+        if (!$this->encoder->isPasswordValid($user, $credentials->getPassword())) {
             return null;
         }
 
@@ -72,7 +71,7 @@ class ApiUserProvider implements UserProviderInterface
      * @param string $username
      * @return null|CMSUser
      */
-    public function loadUserByUsername($username)
+    public function loadUserByUsername($username): ?CMSUser
     {
         return $this->fetchUser($username);
     }
@@ -83,9 +82,9 @@ class ApiUserProvider implements UserProviderInterface
      * @param UserInterface $user
      * @return null|CMSUser|UserInterface
      */
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $user): ?CMSUser
     {
-        if(!$user instanceof CMSUser) {
+        if (!$user instanceof CMSUser) {
             throw new UnsupportedUserException(
                 sprintf('Instances of "%s" are not supported.', get_class($user))
             );
@@ -112,7 +111,8 @@ class ApiUserProvider implements UserProviderInterface
      * @return null|CMSUser
      * @throws UsernameNotFoundException
      */
-    private function fetchUser(string $username): ?CMSUser {
+    private function fetchUser(string $username): ?CMSUser
+    {
         $repository = $this->entityManager->getRepository(CMSUser::class);
 
         /** @var CMSUser $user */
@@ -120,7 +120,7 @@ class ApiUserProvider implements UserProviderInterface
             'username' => $username
         ]);
 
-        if(!$user) {
+        if (!$user) {
             throw new UsernameNotFoundException(
                 sprintf('Username "%s" does not exist.' . $username)
             );

@@ -21,7 +21,7 @@ class ValidationGroupResolver
         /** @var IdentifiableTrait $data */
         $data = $form->getData();
 
-        if(!$data || $data->getUuid() === null) {
+        if (!$data || $data->getUuid() === null) {
             return ['new'];
         }
 

@@ -26,24 +26,24 @@ abstract class AbstractBaseListenerTest extends TestCase
     abstract public function testConstruct(): void;
 
     /**
-     * Test persist with incorrect object
-     */
-    abstract public function testPrePersistIncorrectObject(): void;
-
-    /**
      * Test persist with correct object
      */
     abstract public function testPrePersist(): void;
 
     /**
-     * Test update with incorrect objects
+     * Test persist with incorrect object
      */
-    abstract public function testPreUpdateIncorrectObject(): void;
+    abstract public function testPrePersistIncorrectObject(): void;
 
     /**
      * Test update with correct object.
      */
     abstract public function testPreUpdate(): void;
+
+    /**
+     * Test update with incorrect objects
+     */
+    abstract public function testPreUpdateIncorrectObject(): void;
 
     /**
      * Setup methods

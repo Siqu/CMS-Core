@@ -3,7 +3,6 @@
 namespace Siqu\CMS\API\EventListener;
 
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 
 /**
  * Class AcceptListener
@@ -44,14 +43,14 @@ class AcceptListener
         }
         $acceptableContentTypes = $request->getAcceptableContentTypes();
 
-        foreach($acceptableContentTypes as $acceptableContentType) {
-            if(in_array($acceptableContentType, $this->contentTypes)) {
+        foreach ($acceptableContentTypes as $acceptableContentType) {
+            if (in_array($acceptableContentType, $this->contentTypes)) {
                 $request->setRequestFormat($acceptableContentType);
 
                 return;
             }
         }
 
-        $request->setRequestFormat('json');
+        $request->setRequestFormat('application/json');
     }
 }

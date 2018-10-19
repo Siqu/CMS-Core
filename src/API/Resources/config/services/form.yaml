@@ -2,12 +2,18 @@ services:
   siqu.cms_api.form.type.cms_user_type:
     class: Siqu\CMS\API\Form\Type\CMSUserType
     arguments:
-      - '@siqu.cms_api.validation.form.group'
+    - '@siqu.cms_api.validation.form.group'
     tags:
-      - { name: 'form.type' }
+    - { name: 'form.type' }
   siqu.cms_api.form.type.group:
     class: Siqu\CMS\API\Form\Type\GroupType
     arguments:
-      - '@siqu.cms_api.validation.form.group'
+    - '@siqu.cms_api.validation.form.group'
     tags:
-      - { name: 'form.type' }
+    - { name: 'form.type' }
+  siqu.cms_api.form.type.page:
+    class: Siqu\CMS\API\Form\Type\PageType
+    arguments:
+    - '@siqu.cms_api.validation.form.group'
+    tags:
+    - { name: 'form.type' }
