@@ -1,3 +1,0 @@
-services:
-  siqu.cms_api.validation.form.group:
-    class: Siqu\CMS\API\Validation\ValidationGroupResolver

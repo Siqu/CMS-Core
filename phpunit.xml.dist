@@ -21,6 +21,9 @@
         <testsuite name="Siqu CMS Core Test Suite">
             <directory>src/Core/Tests</directory>
         </testsuite>
+        <testsuite name="Siqu CMS API Test Suite">
+            <directory>src/API/Tests</directory>
+        </testsuite>
     </testsuites>
 
     <filter>
@@ -28,6 +31,7 @@
             <directory>src</directory>
             <exclude>
                 <directory>src/Core/Tests</directory>
+                <directory>src/API/Tests</directory>
             </exclude>
         </whitelist>
     </filter>
@@ -38,7 +42,6 @@
 
     <logging>
         <log type="coverage-html" target="/tmp/report"/>
-        <log type="coverage-php" target="/tmp/coverage.serialized"/>
         <log type="coverage-text" target="php://stdout"/>
     </logging>
 </phpunit>

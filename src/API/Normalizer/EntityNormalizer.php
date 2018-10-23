@@ -3,6 +3,7 @@
 namespace Siqu\CMS\API\Normalizer;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface;
@@ -37,6 +38,13 @@ class EntityNormalizer extends ObjectNormalizer
         parent::__construct($classMetadataFactory, $nameConverter, $propertyAccessor, $propertyTypeExtractor);
 
         $this->entityManager = $entityManager;
+
+        $this->setCircularReferenceHandler(function ($object) {
+            /** @var $object IdentifiableTrait */
+            return [
+                'uuid' => $object->getUuid()
+            ];
+        });
     }
 
     /**
@@ -59,7 +67,6 @@ class EntityNormalizer extends ObjectNormalizer
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        $a = 1;
         return
             (strpos($type, 'Siqu\\CMS\\Core\\Entity') === 0) &&
             (is_numeric($data) || is_string($data) || (isset($data['id'])));

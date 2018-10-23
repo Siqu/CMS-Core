@@ -122,7 +122,7 @@ class ApiUserProvider implements UserProviderInterface
 
         if (!$user) {
             throw new UsernameNotFoundException(
-                sprintf('Username "%s" does not exist.' . $username)
+                sprintf('Username "%s" does not exist.', $username)
             );
         }
 

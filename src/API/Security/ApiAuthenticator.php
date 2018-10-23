@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterface;
 
 /**
- * Class ApikeyAuthenticator
+ * Class ApiAuthenticator
  * @package Siqu\CMS\API\Security
  */
 class ApiAuthenticator implements SimplePreAuthenticatorInterface

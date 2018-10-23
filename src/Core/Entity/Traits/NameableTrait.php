@@ -14,7 +14,7 @@ trait NameableTrait
 {
     /**
      * @var string|null
-     * @ORM\Column(name="title", type="string")
+     * @ORM\Column(name="title", type="string", unique=true)
      * @Groups({"api"})
      * @Assert\NotBlank(groups={"new"})
      */

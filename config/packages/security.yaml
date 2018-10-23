@@ -9,12 +9,6 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        api:
-            pattern: ^/api
-            stateless: true
-            simple_preauth:
-                authenticator: siqu.cms_api.security.authenticator
-            provider: api
 
             # activate different ways to authenticate
 

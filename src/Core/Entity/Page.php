@@ -9,14 +9,15 @@ use Siqu\CMS\Core\Entity\Traits\BlameableTrait;
 use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
 use Siqu\CMS\Core\Entity\Traits\NameableTrait;
 use Siqu\CMS\Core\Entity\Traits\TimestampableTrait;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Page
  * @package Siqu\CMS\Core\Entity
  * @ORM\Entity()
  * @ORM\Table(name="cms_page")
+ * @UniqueEntity("title", groups={"new", "update"})
  */
 class Page
 {
@@ -27,7 +28,7 @@ class Page
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="Siqu\CMS\Core\Entity\Page", mappedBy="parent", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Siqu\CMS\Core\Entity\Page", mappedBy="parent", cascade={"persist"})
      * @Groups({"api"})
      */
     private $children;
@@ -42,7 +43,6 @@ class Page
      * @var string
      * @ORM\Column(type="text")
      * @Groups({"api"})
-     * @Assert\NotBlank(groups={"new"})
      */
     private $slug;
 
