@@ -19,8 +19,12 @@ class EntityNormalizer extends ObjectNormalizer
     /** @var EntityManagerInterface */
     private $entityManager;
 
+    /** @var CircularReferenceHandlerInterface */
+    protected $circularReferenceHandler;
+
     /**
      * EntityNormalizer constructor.
+     * @param CircularReferenceHandlerInterface $circularReferenceHandler
      * @param EntityManagerInterface $entityManager
      * @param ClassMetadataFactoryInterface|null $classMetadataFactory
      * @param NameConverterInterface|null $nameConverter
@@ -28,6 +32,7 @@ class EntityNormalizer extends ObjectNormalizer
      * @param PropertyTypeExtractorInterface|null $propertyTypeExtractor
      */
     public function __construct(
+        CircularReferenceHandlerInterface $circularReferenceHandler,
         EntityManagerInterface $entityManager,
         ClassMetadataFactoryInterface $classMetadataFactory = null,
         NameConverterInterface $nameConverter = null,
@@ -38,13 +43,7 @@ class EntityNormalizer extends ObjectNormalizer
         parent::__construct($classMetadataFactory, $nameConverter, $propertyAccessor, $propertyTypeExtractor);
 
         $this->entityManager = $entityManager;
-
-        $this->setCircularReferenceHandler(function ($object) {
-            /** @var $object IdentifiableTrait */
-            return [
-                'uuid' => $object->getUuid()
-            ];
-        });
+        $this->circularReferenceHandler = $circularReferenceHandler;
     }
 
     /**
@@ -60,8 +59,10 @@ class EntityNormalizer extends ObjectNormalizer
     }
 
     /**
-     * @param $data
-     * @param $type
+     * Denormalization is supported for Siqu/CMS/Core/Entity namespace and if data is in the correct format.
+     *
+     * @param mixed $data
+     * @param string $type
      * @param null $format
      * @return bool|mixed
      */
@@ -72,6 +73,14 @@ class EntityNormalizer extends ObjectNormalizer
             (is_numeric($data) || is_string($data) || (isset($data['id'])));
     }
 
+    /**
+     * Normalization is supported for Siqu/CMS/Core/Entity namespace.
+     *
+     * @param mixed $data
+     * @param null $format
+     * @return bool
+     * @throws \ReflectionException
+     */
     public function supportsNormalization($data, $format = null)
     {
         if (!is_object($data)) {

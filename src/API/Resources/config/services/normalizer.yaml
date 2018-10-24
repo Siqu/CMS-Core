@@ -3,6 +3,7 @@ services:
     class: Siqu\CMS\API\Normalizer\EntityNormalizer
     public: false
     arguments:
+    - '@siqu.cms_api.normalizer.circular_reference_handler.identifiable_trait'
     - '@doctrine.orm.entity_manager'
     - '@serializer.mapping.class_metadata_factory'
     - null
@@ -10,3 +11,6 @@ services:
     - '@property_info'
     tags:
     - { name: 'serializer.normalizer' }
+  siqu.cms_api.normalizer.circular_reference_handler.identifiable_trait:
+    class: Siqu\CMS\API\Normalizer\EntityCircularReferenceHandler
+    public: false

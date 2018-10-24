@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Siqu\CMS\API\DependencyInjection\CMSAPIExtension;
 use Siqu\CMS\API\EventListener\AcceptLanguageListener;
 use Siqu\CMS\API\EventListener\AcceptListener;
+use Siqu\CMS\API\Normalizer\EntityCircularReferenceHandler;
 use Siqu\CMS\API\Normalizer\EntityNormalizer;
 use Siqu\CMS\API\Security\ApiAuthenticator;
 use Siqu\CMS\API\Security\ApiUserProvider;
@@ -68,19 +69,27 @@ class CMSAPIExtensionTest extends TestCase
         $arguments = $definition->getArguments();
         /** @var Reference $ref */
         $ref = $arguments[0];
-        $this->assertEquals('doctrine.orm.entity_manager', $ref);
+        $this->assertEquals('siqu.cms_api.normalizer.circular_reference_handler.identifiable_trait', $ref);
+        $arguments = $definition->getArguments();
         /** @var Reference $ref */
         $ref = $arguments[1];
-        $this->assertEquals('serializer.mapping.class_metadata_factory', $ref);
+        $this->assertEquals('doctrine.orm.entity_manager', $ref);
         /** @var Reference $ref */
         $ref = $arguments[2];
-        $this->assertNull($ref);
+        $this->assertEquals('serializer.mapping.class_metadata_factory', $ref);
         /** @var Reference $ref */
         $ref = $arguments[3];
-        $this->assertEquals('serializer.property_accessor', $ref);
+        $this->assertNull($ref);
         /** @var Reference $ref */
         $ref = $arguments[4];
+        $this->assertEquals('serializer.property_accessor', $ref);
+        /** @var Reference $ref */
+        $ref = $arguments[5];
         $this->assertEquals('property_info', $ref);
+
+        $definition = $this->container->getDefinition('siqu.cms_api.normalizer.circular_reference_handler.identifiable_trait');
+        $this->assertEquals(EntityCircularReferenceHandler::class, $definition->getClass());
+        $this->assertFalse($definition->isPublic());
 
         $definition = $this->container->getDefinition('siqu.cms_api.security.provider.user');
         $this->assertEquals(ApiUserProvider::class, $definition->getClass());
