@@ -1,8 +1,10 @@
 services:
   siqu.cms_api.security.provider.user:
     class: Siqu\CMS\API\Security\ApiUserProvider
+    public: false
     arguments:
     - '@doctrine.orm.entity_manager'
     - '@security.password_encoder'
   siqu.cms_api.security.authenticator:
     class: Siqu\CMS\API\Security\ApiAuthenticator
+    public: false

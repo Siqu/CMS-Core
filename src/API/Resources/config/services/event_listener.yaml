@@ -1,9 +1,11 @@
 services:
   siqu.cms_api.event_listener.request.accept_language:
     class: Siqu\CMS\API\EventListener\AcceptLanguageListener
+    public: false
     tags:
     - { name: 'kernel.event_listener', event: 'kernel.request', priority: 15 }
   siqu.cms_api.event_listener.request.accept:
     class: Siqu\CMS\API\EventListener\AcceptListener
+    public: false
     tags:
     - { name: 'kernel.event_listener', event: 'kernel.request', priority: 17 }
