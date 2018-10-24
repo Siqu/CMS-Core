@@ -10,5 +10,14 @@ use Behat\Transliterator\Transliterator;
  */
 class Urlizer extends Transliterator
 {
-
+    /**
+     * Generate a slug.
+     *
+     * @param string $slug
+     * @return string
+     */
+    public function generateSlug(string $slug): string
+    {
+        return self::urlize($slug);
+    }
 }

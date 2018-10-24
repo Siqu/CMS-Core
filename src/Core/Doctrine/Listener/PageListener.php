@@ -27,7 +27,7 @@ class PageListener extends AbstractListener
     }
 
     /**
-     * Pre persist listener for CMSUser
+     * Pre persist listener for Page
      *
      * @param LifecycleEventArgs $args
      */
@@ -41,7 +41,7 @@ class PageListener extends AbstractListener
     }
 
     /**
-     * Pre update listener for CMSUser.
+     * Pre update listener for Page.
      *
      * @param LifecycleEventArgs $args
      */
@@ -62,7 +62,7 @@ class PageListener extends AbstractListener
      */
     private function updateSlug(Page $object): void
     {
-        $slug = $this->urlizer->urlize($object->getTitle());
+        $slug = $this->urlizer->generateSlug($object->getTitle());
 
         if($object->getParent()) {
             $slug = $object->getParent()->getSlug() . '/' . $slug;
