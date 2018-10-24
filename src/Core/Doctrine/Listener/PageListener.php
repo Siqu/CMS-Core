@@ -64,7 +64,7 @@ class PageListener extends AbstractListener
     {
         $slug = $this->urlizer->generateSlug($object->getTitle());
 
-        if($object->getParent()) {
+        if ($object->getParent()) {
             $slug = $object->getParent()->getSlug() . '/' . $slug;
         }
 

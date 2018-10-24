@@ -41,22 +41,6 @@ class PageListenerTest extends AbstractBaseListenerTest
 
         $this->assertEquals('title', $object->getSlug());
     }
-    /**
-     * Test persist with correct object and parent
-     */
-    public function testPrePersistWithParent(): void
-    {
-        $object = new Page();
-        $object->setTitle('title');
-        $parent = new Page();
-        $parent->setSlug('parent');
-        $object->setParent($parent);
-        $args = new LifecycleEventArgs($object, $this->entityManager);
-
-        $this->listener->prePersist($args);
-
-        $this->assertEquals('parent/title', $object->getSlug());
-    }
 
     /**
      * Test persist with incorrect object
@@ -74,6 +58,23 @@ class PageListenerTest extends AbstractBaseListenerTest
         $args = new LifecycleEventArgs($object, $this->entityManager);
 
         $this->listener->prePersist($args);
+    }
+
+    /**
+     * Test persist with correct object and parent
+     */
+    public function testPrePersistWithParent(): void
+    {
+        $object = new Page();
+        $object->setTitle('title');
+        $parent = new Page();
+        $parent->setSlug('parent');
+        $object->setParent($parent);
+        $args = new LifecycleEventArgs($object, $this->entityManager);
+
+        $this->listener->prePersist($args);
+
+        $this->assertEquals('parent/title', $object->getSlug());
     }
 
     /**

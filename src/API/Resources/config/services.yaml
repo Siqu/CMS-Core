@@ -1,4 +1,4 @@
 imports:
-  - { resource: services/event_listener.yaml }
-  - { resource: services/security.yaml }
-  - { resource: services/normalizer.yaml }
+- { resource: services/event_listener.yaml }
+- { resource: services/security.yaml }
+- { resource: services/normalizer.yaml }

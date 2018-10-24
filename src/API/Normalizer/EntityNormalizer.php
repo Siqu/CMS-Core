@@ -59,15 +59,6 @@ class EntityNormalizer extends ObjectNormalizer
         return $this->entityManager->find($class, $data);
     }
 
-    public function supportsNormalization($data, $format = null)
-    {
-        if(!is_object($data)) {
-            return false;
-        }
-        $class = new \ReflectionClass($data);
-        return $class->getNamespaceName() === 'Siqu\\CMS\\Core\\Entity';
-    }
-
     /**
      * @param $data
      * @param $type
@@ -79,5 +70,14 @@ class EntityNormalizer extends ObjectNormalizer
         return
             (strpos($type, 'Siqu\\CMS\\Core\\Entity') === 0) &&
             (is_numeric($data) || is_string($data) || (isset($data['id'])));
+    }
+
+    public function supportsNormalization($data, $format = null)
+    {
+        if (!is_object($data)) {
+            return false;
+        }
+        $class = new \ReflectionClass($data);
+        return $class->getNamespaceName() === 'Siqu\\CMS\\Core\\Entity';
     }
 }

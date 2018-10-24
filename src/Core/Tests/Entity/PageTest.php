@@ -16,14 +16,6 @@ class PageTest extends TestCase
     private $object;
 
     /**
-     * Should create proper instance.
-     */
-    public function testConstruct(): void
-    {
-        $this->assertInstanceOf(Page::class, $this->object);
-    }
-
-    /**
      * Should add, get, remove and set children.
      */
     public function testAddGetSetRemoveChild(): void
@@ -42,6 +34,14 @@ class PageTest extends TestCase
         ]);
         $this->object->setChildren($collection);
         $this->assertEquals($collection, $this->object->getChildren());
+    }
+
+    /**
+     * Should create proper instance.
+     */
+    public function testConstruct(): void
+    {
+        $this->assertInstanceOf(Page::class, $this->object);
     }
 
     /**
