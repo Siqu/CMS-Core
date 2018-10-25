@@ -1,0 +1,5 @@
+services:
+  siqu.cms_api.fixtures.cms_user:
+    class: Siqu\CMS\API\Tests\DataFixtures\CMSUserFixture
+    tags:
+      - { name: 'doctrine.fixture.orm' }

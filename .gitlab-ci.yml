@@ -14,6 +14,10 @@ before_script:
 - docker-php-ext-enable zip
 - curl -sS https://getcomposer.org/installer | php
 - php composer.phar install
+- echo "Setting up test database"
+- bin/console doctrine:database:create --env=test
+- bin/console doctrine:schema:update --force --env=test --complete
+- bin/console doctrine:fixtures:load --env=test --no-interaction
 
 test:project:
   script:
