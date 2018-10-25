@@ -9,3 +9,8 @@ services:
     public: false
     tags:
     - { name: 'kernel.event_listener', event: 'kernel.request', priority: 17 }
+  siqu.cms_api.event_listener.request.listener_attributes:
+    class: Siqu\CMS\API\EventListener\RequestAttributeListener
+    public: false
+    tags:
+    - { name: 'kernel.event_listener', event: 'kernel.request', priority: 18 }

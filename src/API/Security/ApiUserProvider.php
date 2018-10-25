@@ -2,7 +2,7 @@
 
 namespace Siqu\CMS\API\Security;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Siqu\CMS\Core\Entity\CMSUser;
@@ -23,17 +23,17 @@ class ApiUserProvider implements UserProviderInterface
      */
     private $encoder;
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     private $entityManager;
 
     /**
      * ApiUserProvider constructor.
-     * @param EntityManager $entityManager
+     * @param EntityManagerInterface $entityManager
      * @param UserPasswordEncoderInterface $encoder
      */
     public function __construct(
-        EntityManager $entityManager,
+        EntityManagerInterface $entityManager,
         UserPasswordEncoderInterface $encoder
     )
     {
@@ -58,8 +58,8 @@ class ApiUserProvider implements UserProviderInterface
 
         try {
             $this->entityManager->flush();
-        } catch (OptimisticLockException $e) {
-        } catch (ORMException $e) {
+        } catch (\Exception $e) {
+            $user->setLastLogin(null);
         }
 
         return $user->getUsername();

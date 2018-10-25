@@ -20,11 +20,11 @@ class EntityNormalizer extends ObjectNormalizer
     private $entityManager;
 
     /** @var CircularReferenceHandlerInterface */
-    protected $circularReferenceHandler;
+    protected $uuidCircularReferenceHandler;
 
     /**
      * EntityNormalizer constructor.
-     * @param CircularReferenceHandlerInterface $circularReferenceHandler
+     * @param CircularReferenceHandlerInterface $uuidCircularReferenceHandler
      * @param EntityManagerInterface $entityManager
      * @param ClassMetadataFactoryInterface|null $classMetadataFactory
      * @param NameConverterInterface|null $nameConverter
@@ -32,7 +32,7 @@ class EntityNormalizer extends ObjectNormalizer
      * @param PropertyTypeExtractorInterface|null $propertyTypeExtractor
      */
     public function __construct(
-        CircularReferenceHandlerInterface $circularReferenceHandler,
+        CircularReferenceHandlerInterface $uuidCircularReferenceHandler,
         EntityManagerInterface $entityManager,
         ClassMetadataFactoryInterface $classMetadataFactory = null,
         NameConverterInterface $nameConverter = null,
@@ -43,7 +43,9 @@ class EntityNormalizer extends ObjectNormalizer
         parent::__construct($classMetadataFactory, $nameConverter, $propertyAccessor, $propertyTypeExtractor);
 
         $this->entityManager = $entityManager;
-        $this->circularReferenceHandler = $circularReferenceHandler;
+        $this->uuidCircularReferenceHandler = $uuidCircularReferenceHandler;
+
+        $this->setCircularReferenceHandler([$this->uuidCircularReferenceHandler, 'handle']);
     }
 
     /**

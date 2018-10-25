@@ -16,6 +16,14 @@ use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterfa
  */
 class ApiAuthenticator implements SimplePreAuthenticatorInterface
 {
+    /**
+     * Authenticate the token.
+     *
+     * @param TokenInterface $token
+     * @param UserProviderInterface $userProvider
+     * @param $providerKey
+     * @return PreAuthenticatedToken
+     */
     public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
     {
         if (!$userProvider instanceof ApiUserProvider) {

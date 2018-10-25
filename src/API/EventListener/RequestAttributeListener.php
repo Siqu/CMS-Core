@@ -6,13 +6,13 @@ use Siqu\CMS\API\Request\ListenerAttributes;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
- * Class AcceptLanguageListener
+ * Class RequestAttributeListener
  * @package Siqu\CMS\API\EventListener
  */
-class AcceptLanguageListener
+class RequestAttributeListener
 {
     /**
-     * Retrieve locale from accept locale header and set current locale.
+     * Extract request attributes.
      *
      * @param GetResponseEvent $event
      */
@@ -20,15 +20,12 @@ class AcceptLanguageListener
     {
         $request = $event->getRequest();
 
-        /** @var ListenerAttributes $listener */
         $listener = $request->attributes->get('listener');
-        if (
-            !$listener->isAcceptLanguageActive()
-        ) {
+        if(!$listener || !array_key_exists('request', $listener)) {
+            $request->attributes->set('listener', new ListenerAttributes());
             return;
         }
-        $preferredLocale = $request->getPreferredLanguage(['en', 'de']);
 
-        $request->setLocale($preferredLocale);
+        $request->attributes->set('listener', new ListenerAttributes($listener['request']));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Siqu\CMS\API\EventListener;
 
+use Siqu\CMS\API\Request\ListenerAttributes;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
@@ -33,11 +34,10 @@ class AcceptListener
     {
         $request = $event->getRequest();
 
+        /** @var ListenerAttributes $listener */
         $listener = $request->attributes->get('listener');
         if (
-            !$listener ||
-            !array_key_exists('request', $listener) ||
-            !array_key_exists('accept', $listener['request'])
+            !$listener->isAcceptActive()
         ) {
             return;
         }
