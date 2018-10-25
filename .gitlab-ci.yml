@@ -17,4 +17,4 @@ before_script:
 
 test:project:
   script:
-    - bin/phpunit
+    - bin/phpunit --colors=never
