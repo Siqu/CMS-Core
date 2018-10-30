@@ -126,7 +126,7 @@ abstract class APIController extends Controller
             $manager->persist($entry);
             $manager->flush();
 
-            return $this->createResponse($entry, Response::HTTP_CREATED, $request);
+            return $this->createResponse($entry, Response::HTTP_OK, $request);
         } catch (APIValidationException $e) {
             return $this->createResponse($e->getViolations(), Response::HTTP_BAD_REQUEST, $request);
         }

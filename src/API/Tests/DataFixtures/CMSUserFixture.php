@@ -14,7 +14,7 @@ class CMSUserFixture extends Fixture
 {
     const USERNAME = 'username';
     const PASSWORD = 'password';
-    const EMAIL = 'email';
+    const EMAIL = 'mail@mail.test';
 
     /**
      * Load data fixtures with the passed EntityManager
