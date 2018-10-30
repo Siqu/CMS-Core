@@ -3,16 +3,17 @@
 namespace Siqu\CMS\API\Tests\Controller;
 
 use Siqu\CMS\API\Tests\DataFixtures\CMSUserFixture;
+use Siqu\CMS\API\Tests\DataFixtures\GroupFixture;
 use Siqu\CMS\API\Tests\FixtureAwareTestCase;
 
 /**
- * Class CMSUserControllerTest
+ * Class GroupControllerTest
  * @package Siqu\CMS\API\Tests\Controller
  */
-class CMSUserControllerTest extends FixtureAwareTestCase
+class GroupControllerTest extends FixtureAwareTestCase
 {
     /**
-     * Should list all user.
+     * Should list all groups.
      */
     public function testIndex(): void
     {
@@ -24,9 +25,9 @@ class CMSUserControllerTest extends FixtureAwareTestCase
 
         $this->assertCount(1, $data);
 
-        $user = $data[0];
-        $this->assertEquals(CMSUserFixture::USERNAME, $user->username);
-        $this->assertEquals(CMSUserFixture::EMAIL, $user->email);
+        $group = $data[0];
+        $this->assertEquals(GroupFixture::NAME, $group->name);
+        $this->assertEquals(GroupFixture::ROLES, $group->roles);
     }
 
     /**
@@ -40,7 +41,7 @@ class CMSUserControllerTest extends FixtureAwareTestCase
     }
 
     /**
-     * Should return 200 and user
+     * Should return 200 and group
      */
     public function testShow(): void
     {
@@ -50,10 +51,10 @@ class CMSUserControllerTest extends FixtureAwareTestCase
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $data = $this->client->getResponse()->getContent();
-        $user = json_decode($data, false);
-        $this->assertEquals(CMSUserFixture::USERNAME, $user->username);
-        $this->assertEquals(CMSUserFixture::EMAIL, $user->email);
-        $this->assertEquals($uuid, $user->uuid);
+        $group = json_decode($data, false);
+        $this->assertEquals(GroupFixture::NAME, $group->name);
+        $this->assertEquals(GroupFixture::ROLES, $group->roles);
+        $this->assertEquals($uuid, $group->uuid);
     }
 
     /**
@@ -67,53 +68,31 @@ class CMSUserControllerTest extends FixtureAwareTestCase
         $data = $this->client->getResponse()->getContent();
         $errors = json_decode($data, false);
 
-        $this->assertCount(3, $errors);
-        $this->assertEquals('email', $errors[0]->path);
-        $this->assertEquals('plainPassword', $errors[1]->path);
-        $this->assertEquals('username', $errors[2]->path);
-
-        $this->callPost([
-            'email' => 'invalid',
-            'username' => CMSUserFixture::USERNAME,
-            'plainpassword' => 'password'
-        ]);
-        $data = $this->client->getResponse()->getContent();
-        $errors = json_decode($data, false);
-
-        $this->assertCount(2, $errors);
-        $this->assertEquals('username', $errors[0]->path);
-        $this->assertEquals('email', $errors[1]->path);
-
-        $this->callPost([
-            'email' => CMSUserFixture::EMAIL,
-            'username' => 'username2',
-            'plainpassword' => 'password'
-        ]);
-        $data = $this->client->getResponse()->getContent();
-        $errors = json_decode($data, false);
-
         $this->assertCount(1, $errors);
-        $this->assertEquals('email', $errors[0]->path);
+        $this->assertEquals('name', $errors[0]->path);
     }
 
     /**
-     * Should return 201 and user
+     * Should return 201 and group
      */
     public function testCreate(): void
     {
         $this->callPost([
-            'email' => 'mail2@mail2.test',
-            'username' => 'username2',
-            'plainpassword' => 'password'
+            'name' => 'name2',
+            'roles' => [
+                'ROLE_TEST'
+            ]
         ]);
 
         $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
         $data = $this->client->getResponse()->getContent();
-        $user = json_decode($data, false);
+        $group = json_decode($data, false);
 
-        $this->assertEquals('username2', $user->username);
-        $this->assertEquals('mail2@mail2.test', $user->email);
-        $this->assertNotNull($user->uuid);
+        $this->assertEquals('name2', $group->name);
+        $this->assertEquals([
+            'ROLE_TEST'
+        ], $group->roles);
+        $this->assertNotNull($group->uuid);
     }
 
     /**
@@ -145,35 +124,23 @@ class CMSUserControllerTest extends FixtureAwareTestCase
         $this->callPatch('invalid', []);
 
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
-
-        $uuid = $this->getExistingUuid();
-        $this->callPatch($uuid, [
-            'email' => 'invalid'
-        ]);
-
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $data = $this->client->getResponse()->getContent();
-        $errors = json_decode($data, false);
-
-        $this->assertCount(1, $errors);
-        $this->assertEquals('email', $errors[0]->path);
     }
 
     /**
-     * Should return 200 and updated user
+     * Should return 200 and updated $group
      */
     public function testUpdate(): void
     {
         $uuid = $this->getExistingUuid();
         $this->callPatch($uuid, [
-            'email' => 'mail2@mail2.test'
+            'name' => 'name2'
         ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $data = $this->client->getResponse()->getContent();
-        $user = json_decode($data, false);
+        $group = json_decode($data, false);
 
-        $this->assertEquals('mail2@mail2.test', $user->email);
+        $this->assertEquals('name2', $group->name);
     }
 
     /**
@@ -183,7 +150,7 @@ class CMSUserControllerTest extends FixtureAwareTestCase
      */
     protected function getEndpoint(): string
     {
-        return 'user';
+        return 'group';
     }
 
     /**

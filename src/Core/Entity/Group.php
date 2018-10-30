@@ -21,7 +21,7 @@ class Group
      * @var string
      * @ORM\Column(name="name", type="string")
      * @Groups({"api"})
-     * @Assert\NotBlank(groups={"new", "update"})
+     * @Assert\NotBlank(groups={"new"})
      */
     protected $name;
 
