@@ -42,7 +42,8 @@
     </listeners>
 
     <logging>
-        <log type="coverage-html" target="./coverage"/>
+        <log type="coverage-html" target="./doc/coverage"/>
+        <log type="junit" target="./doc/coverage/logs/junit.xml" logIncompleteSkipped="false"/>
         <log type="coverage-text" target="php://stdout"/>
     </logging>
 </phpunit>

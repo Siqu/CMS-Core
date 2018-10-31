@@ -80,8 +80,14 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "facebook/webdriver": {
+        "version": "1.6.0"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "nikic/php-parser": {
+        "version": "v4.1.0"
     },
     "ocramius/package-versions": {
         "version": "1.2.0"
@@ -97,6 +103,9 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "0.4.0"
+    },
+    "phpmetrics/phpmetrics": {
+        "version": "v2.4.1"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -114,9 +123,6 @@
         "version": "v3.4.17"
     },
     "symfony/cache": {
-        "version": "v3.4.17"
-    },
-    "symfony/class-loader": {
         "version": "v3.4.17"
     },
     "symfony/config": {
@@ -188,6 +194,9 @@
     "symfony/orm-pack": {
         "version": "v1.0.5"
     },
+    "symfony/panther": {
+        "version": "v0.2.0"
+    },
     "symfony/phpunit-bridge": {
         "version": "4.1",
         "recipe": {
@@ -197,10 +206,10 @@
             "ref": "b14c7f62fabeedf256d3211b0f704402b5530ba1"
         }
     },
-    "symfony/polyfill-apcu": {
+    "symfony/polyfill-mbstring": {
         "version": "v1.9.0"
     },
-    "symfony/polyfill-mbstring": {
+    "symfony/polyfill-php72": {
         "version": "v1.9.0"
     },
     "symfony/process": {

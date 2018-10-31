@@ -7,7 +7,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -20,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity("username", groups={"new", "update"})
  * @UniqueEntity("email", groups={"new", "update"})
  */
-class CMSUser implements AdvancedUserInterface, \Serializable
+class CMSUser implements UserInterface, \Serializable
 {
     const ROLE_DEFAULT = 'ROLE_USER';
     const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';

@@ -23,12 +23,19 @@ test:
     - bin/phpunit --colors=never
   artifacts:
     paths:
-    - coverage/
+    - doc/coverage
+
+quality:
+  script:
+    - vendor/phpmetrics/phpmetrics/bin/phpmetrics --report-html=doc/metrics --exclude=bin,vendor,var,Tests --junit=./doc/coverage/logs/junit.xml .
+  artifacts:
+    paths:
+    - doc/metrics
 
 pages:
   stage: deploy
   script:
-  - mv coverage/ public/coverage/
+  - mv doc/ public/
   artifacts:
     paths:
     - public
