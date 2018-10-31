@@ -19,6 +19,7 @@ before_script:
 - bin/console doctrine:schema:update --force --env=test --complete
 
 test:
+  stage: test
   script:
     - bin/phpunit --colors=never
   artifacts:
@@ -26,6 +27,7 @@ test:
     - doc/coverage
 
 quality:
+  stage: quality
   script:
     - vendor/phpmetrics/phpmetrics/bin/phpmetrics --report-html=doc/metrics --exclude=bin,vendor,var,Tests --junit=./doc/coverage/logs/junit.xml .
   artifacts:
