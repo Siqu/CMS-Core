@@ -1,5 +1,10 @@
 image: php:7.2
 
+stages:
+- test
+- quality
+- deploy
+
 cache:
   paths:
   - vendor/
