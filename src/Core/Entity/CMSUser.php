@@ -109,7 +109,7 @@ class CMSUser implements AdvancedUserInterface, \Serializable
      */
     public function __construct()
     {
-        $this->enabled = false;
+        $this->enabled = true;
         $this->accountNonExpired = true;
         $this->credentialsNonExpired = true;
         $this->accountNonLocked = true;

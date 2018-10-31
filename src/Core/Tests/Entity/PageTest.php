@@ -5,6 +5,11 @@ namespace Siqu\CMS\Core\Tests\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 use Siqu\CMS\Core\Entity\Page;
+use Siqu\CMS\Core\Entity\Traits\BlameableTrait;
+use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
+use Siqu\CMS\Core\Entity\Traits\LocateableTrait;
+use Siqu\CMS\Core\Entity\Traits\NameableTrait;
+use Siqu\CMS\Core\Entity\Traits\TimestampableTrait;
 
 /**
  * Class PageTest
@@ -38,10 +43,23 @@ class PageTest extends TestCase
 
     /**
      * Should create proper instance.
+     * @throws \ReflectionException
      */
     public function testConstruct(): void
     {
         $this->assertInstanceOf(Page::class, $this->object);
+        $this->assertEquals(Page::VISIBILITY_NAVIGATION_CONTENT, $this->object->getVisibility());
+
+        $reflection = new \ReflectionClass($this->object);
+        $traits = $reflection->getTraitNames();
+
+        $this->assertEquals([
+            IdentifiableTrait::class,
+            NameableTrait::class,
+            TimestampableTrait::class,
+            BlameableTrait::class,
+            LocateableTrait::class
+        ], $traits);
     }
 
     /**
@@ -64,6 +82,55 @@ class PageTest extends TestCase
         $this->assertNull($this->object->getSlug());
         $this->object->setSlug('slug');
         $this->assertEquals('slug', $this->object->getSlug());
+    }
+
+    /**
+     * Should not change visibility.
+     */
+    public function testSetVisibilityInvalid(): void
+    {
+        $this->object->setVisibility(-1);
+
+        $this->assertEquals(Page::VISIBILITY_NAVIGATION_CONTENT, $this->object->getVisibility());
+    }
+
+    /**
+     * Should get and set visibility
+     */
+    public function testGetSetVisibility(): void
+    {
+        $this->object->setVisibility(Page::VISIBILITY_NAVIGATION);
+        $this->assertEquals(Page::VISIBILITY_NAVIGATION, $this->object->getVisibility());
+    }
+
+    /**
+     * Should return title.
+     */
+    public function testGetMetaTitleEmpty(): void
+    {
+        $this->object->setTitle('title');
+
+        $this->assertEquals('title', $this->object->getMetaTitle());
+    }
+
+    /**
+     * Should get and set metaTitle.
+     */
+    public function testGetSetMetaTitle(): void
+    {
+        $this->assertNull($this->object->getMetaTitle());
+        $this->object->setMetaTitle('metaTitle');
+        $this->assertEquals('metaTitle', $this->object->getMetaTitle());
+    }
+
+    /**
+     * Should get and set metaDescription.
+     */
+    public function testGetSetMetaDescription(): void
+    {
+        $this->assertNull($this->object->getMetaDescription());
+        $this->object->setMetaDescription('metaDescription');
+        $this->assertEquals('metaDescription', $this->object->getMetaDescription());
     }
 
     /**

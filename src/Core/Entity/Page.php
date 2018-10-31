@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Siqu\CMS\Core\Entity\Traits\BlameableTrait;
 use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
+use Siqu\CMS\Core\Entity\Traits\LocateableTrait;
 use Siqu\CMS\Core\Entity\Traits\NameableTrait;
 use Siqu\CMS\Core\Entity\Traits\TimestampableTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -25,6 +26,40 @@ class Page
     use NameableTrait;
     use TimestampableTrait;
     use BlameableTrait;
+    use LocateableTrait;
+
+    /**
+     * Display in navigation and content
+     * @var int
+     */
+    const VISIBILITY_NAVIGATION_CONTENT = 0;
+    /**
+     * Display in navigation only.
+     * @var int
+     */
+    const VISIBILITY_NAVIGATION = 1;
+    /**
+     * Display in content only.
+     * @var int
+     */
+    const VISIBILITY_CONTENT = 2;
+    /**
+     * Display never.
+     * @var int
+     */
+    const VISIBILITY_HIDDEN = 3;
+
+    /**
+     * Available visibilities.
+     *
+     * @var array
+     */
+    const VISIBILITIES = [
+        self::VISIBILITY_NAVIGATION_CONTENT,
+        self::VISIBILITY_NAVIGATION,
+        self::VISIBILITY_CONTENT,
+        self::VISIBILITY_HIDDEN
+    ];
 
     /**
      * @var Collection
@@ -47,11 +82,33 @@ class Page
     private $slug;
 
     /**
+     * @var integer
+     * @ORM\Column(type="smallint")
+     * @Groups({"api"})
+     */
+    private $visibility;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"api"})
+     */
+    private $metaTitle;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"api"})
+     */
+    private $metaDescription;
+
+    /**
      * Page constructor.
      */
     public function __construct()
     {
         $this->children = new ArrayCollection();
+        $this->visibility = self::VISIBILITY_NAVIGATION_CONTENT;
     }
 
     /**
@@ -136,5 +193,67 @@ class Page
     public function setSlug($slug): void
     {
         $this->slug = $slug;
+    }
+
+    /**
+     * Set visibility.
+     *
+     * @param int $visibility
+     */
+    public function setVisibility(int $visibility): void
+    {
+        if (in_array($visibility, self::VISIBILITIES)) {
+            $this->visibility = $visibility;
+        }
+    }
+
+    /**
+     * Retrieve the visibility.
+     *
+     * @return int
+     */
+    public function getVisibility(): int
+    {
+        return $this->visibility;
+    }
+
+    /**
+     * Set the meta title.
+     * @param string $metaTitle
+     */
+    public function setMetaTitle($metaTitle): void
+    {
+        $this->metaTitle = $metaTitle;
+    }
+
+    /**
+     * Retrieve the meta title.
+     * Falls back to title
+     *
+     * @return string|null
+     */
+    public function getMetaTitle(): ?string
+    {
+        return $this->metaTitle ? $this->metaTitle : $this->title;
+    }
+
+    /**
+     * Set the metaDescription.
+     *
+     * @param string $metaDescription
+     */
+    public function setMetaDescription($metaDescription): void
+    {
+        $this->metaDescription = $metaDescription;
+    }
+
+    /**
+     * Retrieve the metaDescription.
+     *
+     * @return null|string
+     */
+    public function getMetaDescription(): ?string
+    {
+        return $this->metaDescription;
     }
 }

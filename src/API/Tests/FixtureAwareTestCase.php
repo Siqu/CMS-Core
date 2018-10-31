@@ -112,7 +112,10 @@ abstract class FixtureAwareTestCase extends WebTestCase
     {
         parent::setUp();
 
-        $this->client = static::createClient();
+        $this->client = static::createClient([], [
+            'PHP_AUTH_USER' => CMSUserFixture::USERNAME,
+            'PHP_AUTH_PW' => CMSUserFixture::PASSWORD
+        ]);
 
         $container = $this->client->getContainer();
         /** @var EntityManagerInterface $entityManager */

@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 use Siqu\CMS\Core\Entity\CMSUser;
 use Siqu\CMS\Core\Entity\Group;
+use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
 
 /**
  * Class CMSUserTest
@@ -60,14 +61,22 @@ class CMSUserTest extends TestCase
 
     /**
      * Should create instance
+     * @throws \ReflectionException
      */
     public function testConstruct(): void
     {
         $this->assertInstanceOf(CMSUser::class, $this->object);
-        $this->assertFalse($this->object->isEnabled());
+        $this->assertTrue($this->object->isEnabled());
         $this->assertEquals([CMSUser::ROLE_DEFAULT], $this->object->getRoles());
         $this->assertInstanceOf(ArrayCollection::class, $this->object->getGroups());
         $this->assertEmpty($this->object->getGroups());
+
+        $reflection = new \ReflectionClass($this->object);
+        $traits = $reflection->getTraitNames();
+
+        $this->assertEquals([
+            IdentifiableTrait::class
+        ], $traits);
     }
 
     /**
@@ -147,7 +156,6 @@ class CMSUserTest extends TestCase
         $user->setUsername('username');
         $user->setPassword('password');
         $user->setEmail('mail');
-        $user->setEnabled(true);
 
         $serialized = $user->serialize();
 
@@ -212,9 +220,9 @@ class CMSUserTest extends TestCase
      */
     public function testSetGetEnabled(): void
     {
-        $this->assertFalse($this->object->isEnabled());
-        $this->object->setEnabled(true);
         $this->assertTrue($this->object->isEnabled());
+        $this->object->setEnabled(false);
+        $this->assertFalse($this->object->isEnabled());
     }
 
     /**

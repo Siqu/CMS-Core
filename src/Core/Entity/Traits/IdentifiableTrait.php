@@ -22,7 +22,6 @@ trait IdentifiableTrait
     /**
      * @var string|null
      * @ORM\Column(name="uuid", type="guid")
-     * @ORM\GeneratedValue(strategy="UUID")
      * @Groups({"api"})
      */
     protected $uuid;

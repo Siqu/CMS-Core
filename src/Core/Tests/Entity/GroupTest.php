@@ -4,6 +4,7 @@ namespace Siqu\CMS\Core\Tests\Entity;
 
 use PHPUnit\Framework\TestCase;
 use Siqu\CMS\Core\Entity\Group;
+use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
 
 /**
  * Class GroupTest
@@ -13,6 +14,22 @@ class GroupTest extends TestCase
 {
     /** @var Group */
     private $object;
+
+    /**
+     * Should create proper instance.
+     * @throws \ReflectionException
+     */
+    public function testConstruct(): void
+    {
+        $this->assertInstanceOf(Group::class, $this->object);
+
+        $reflection = new \ReflectionClass($this->object);
+        $traits = $reflection->getTraitNames();
+
+        $this->assertEquals([
+            IdentifiableTrait::class
+        ], $traits);
+    }
 
     /**
      * Should add, set, get and remove roles
