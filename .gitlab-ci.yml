@@ -18,6 +18,20 @@ before_script:
 - bin/console doctrine:database:create --env=test
 - bin/console doctrine:schema:update --force --env=test --complete
 
-test:project:
+test:
   script:
     - bin/phpunit --colors=never
+  artifacts:
+    paths:
+    - coverage/
+
+pages:
+  stage: deploy
+  script:
+  - mv coverage/ public/coverage/
+  artifacts:
+    paths:
+    - public
+    expire_in:
+  only:
+  - master
