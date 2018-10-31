@@ -19,6 +19,7 @@
         "symfony/yaml": "*"
     },
     "require-dev": {
+        "dephpend/dephpend": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "phpmetrics/phpmetrics": "^2.4",
         "symfony/dotenv": "*",

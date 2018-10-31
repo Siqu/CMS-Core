@@ -3,7 +3,7 @@
 namespace Siqu\CMS\Core\Doctrine\Listener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Siqu\CMS\Core\Entity\Traits\TimestampableTrait;
+use Siqu\CMS\Core\Entity\TimestampableTrait;
 
 /**
  * Class TimestampableListener

@@ -5,11 +5,6 @@ namespace Siqu\CMS\Core\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Siqu\CMS\Core\Entity\Traits\BlameableTrait;
-use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
-use Siqu\CMS\Core\Entity\Traits\LocateableTrait;
-use Siqu\CMS\Core\Entity\Traits\NameableTrait;
-use Siqu\CMS\Core\Entity\Traits\TimestampableTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 

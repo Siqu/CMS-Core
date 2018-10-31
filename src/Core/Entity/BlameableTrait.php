@@ -1,14 +1,13 @@
 <?php
 
-namespace Siqu\CMS\Core\Entity\Traits;
+namespace Siqu\CMS\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Siqu\CMS\Core\Entity\CMSUser;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class BlameableTrait
- * @package Siqu\CMS\Core\Entity\Traits
+ * @package Siqu\CMS\Core\Entity
  */
 trait BlameableTrait
 {

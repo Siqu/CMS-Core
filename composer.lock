@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6db1b03f97da8d6c6f8bfdb1936c4164",
+    "content-hash": "9e00386cfa058dec2b15d86852db3188",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3606,6 +3606,64 @@
     ],
     "packages-dev": [
         {
+            "name": "dephpend/dephpend",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mihaeu/dephpend.git",
+                "reference": "5f3acbfcc6a5496a9296517d38aba8b36c1c564c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mihaeu/dephpend/zipball/5f3acbfcc6a5496a9296517d38aba8b36c1c564c",
+                "reference": "5f3acbfcc6a5496a9296517d38aba8b36c1c564c",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^4.0",
+                "php": "^7.0",
+                "symfony/console": "^2.0 || ^3.0 || ^4.0",
+                "symfony/event-dispatcher": "^2.0 || ^3.0 || ^4.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.12",
+                "mikey179/vfsstream": "^1.6",
+                "phpunit/phpunit": "^6.5 || ^7.0",
+                "squizlabs/php_codesniffer": "^3.3"
+            },
+            "bin": [
+                "bin/dephpend",
+                "bin/php-trace"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mihaeu\\PhpDependencies\\": [
+                        "src/",
+                        "tests/unit/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Haeuslmann",
+                    "email": "haeuslmann@gmail.com"
+                }
+            ],
+            "description": "Dependency analysis for PHP",
+            "homepage": "https://dephpend.com",
+            "keywords": [
+                "analysis",
+                "dependencies",
+                "dependency"
+            ],
+            "time": "2018-10-22T20:30:31+00:00"
+        },
+        {
             "name": "doctrine/data-fixtures",
             "version": "v1.3.1",
             "source": {
@@ -4902,7 +4960,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "dephpend/dephpend": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

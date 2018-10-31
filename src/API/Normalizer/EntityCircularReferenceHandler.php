@@ -2,7 +2,7 @@
 
 namespace Siqu\CMS\API\Normalizer;
 
-use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
+use Siqu\CMS\Core\Entity\IdentifiableTrait;
 
 /**
  * Class EntityCircularReferenceHandler

@@ -2,7 +2,7 @@
 
 namespace Siqu\CMS\Core\Tests\Dummy;
 
-use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
+use Siqu\CMS\Core\Entity\IdentifiableTrait;
 
 /**
  * Class IdentifiableObject

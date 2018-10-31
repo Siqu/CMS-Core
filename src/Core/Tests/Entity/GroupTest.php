@@ -4,7 +4,7 @@ namespace Siqu\CMS\Core\Tests\Entity;
 
 use PHPUnit\Framework\TestCase;
 use Siqu\CMS\Core\Entity\Group;
-use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
+use Siqu\CMS\Core\Entity\IdentifiableTrait;
 
 /**
  * Class GroupTest

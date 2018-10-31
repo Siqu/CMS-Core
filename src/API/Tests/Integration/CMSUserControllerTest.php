@@ -1,13 +1,13 @@
 <?php
 
-namespace Siqu\CMS\API\Tests\Controller;
+namespace Siqu\CMS\API\Tests\Integration;
 
 use Siqu\CMS\API\Tests\DataFixtures\CMSUserFixture;
 use Siqu\CMS\API\Tests\FixtureAwareTestCase;
 
 /**
  * Class CMSUserControllerTest
- * @package Siqu\CMS\API\Tests\Controller
+ * @package Siqu\CMS\API\Tests\Integration
  */
 class CMSUserControllerTest extends FixtureAwareTestCase
 {

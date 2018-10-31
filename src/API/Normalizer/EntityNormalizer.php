@@ -3,7 +3,7 @@
 namespace Siqu\CMS\API\Normalizer;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
+use Siqu\CMS\Core\Entity\IdentifiableTrait;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface;

@@ -2,7 +2,7 @@
 
 namespace Siqu\CMS\Core\Tests\Dummy;
 
-use Siqu\CMS\Core\Entity\Traits\TimestampableTrait;
+use Siqu\CMS\Core\Entity\TimestampableTrait;
 
 /**
  * Class TimestampableObject

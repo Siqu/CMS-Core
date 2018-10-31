@@ -1,15 +1,13 @@
 <?php
 
-namespace Siqu\CMS\API\Tests\Controller;
+namespace Siqu\CMS\API\Tests\Integration;
 
-use Siqu\CMS\API\Tests\DataFixtures\CMSUserFixture;
-use Siqu\CMS\API\Tests\DataFixtures\GroupFixture;
 use Siqu\CMS\API\Tests\DataFixtures\PageFixture;
 use Siqu\CMS\API\Tests\FixtureAwareTestCase;
 
 /**
  * Class PageControllerTest
- * @package Siqu\CMS\API\Tests\Controller
+ * @package Siqu\CMS\API\Tests\Integration
  */
 class PageControllerTest extends FixtureAwareTestCase
 {

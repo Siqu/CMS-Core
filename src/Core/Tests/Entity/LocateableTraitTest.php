@@ -1,13 +1,13 @@
 <?php
 
-namespace Siqu\CMS\Core\Tests\Entity\Traits;
+namespace Siqu\CMS\Core\Tests\Entity;
 
 use PHPUnit\Framework\TestCase;
-use Siqu\CMS\Core\Entity\Traits\LocateableTrait;
+use Siqu\CMS\Core\Entity\LocateableTrait;
 
 /**
  * Class LocateableTraitTest
- * @package Siqu\CMS\Core\Tests\Entity\Traits
+ * @package Siqu\CMS\Core\Tests\Entity
  */
 class LocateableTraitTest extends TestCase
 {

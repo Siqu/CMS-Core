@@ -5,11 +5,11 @@ namespace Siqu\CMS\Core\Tests\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 use Siqu\CMS\Core\Entity\Page;
-use Siqu\CMS\Core\Entity\Traits\BlameableTrait;
-use Siqu\CMS\Core\Entity\Traits\IdentifiableTrait;
-use Siqu\CMS\Core\Entity\Traits\LocateableTrait;
-use Siqu\CMS\Core\Entity\Traits\NameableTrait;
-use Siqu\CMS\Core\Entity\Traits\TimestampableTrait;
+use Siqu\CMS\Core\Entity\BlameableTrait;
+use Siqu\CMS\Core\Entity\IdentifiableTrait;
+use Siqu\CMS\Core\Entity\LocateableTrait;
+use Siqu\CMS\Core\Entity\NameableTrait;
+use Siqu\CMS\Core\Entity\TimestampableTrait;
 
 /**
  * Class PageTest

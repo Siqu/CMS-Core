@@ -1,13 +1,13 @@
 <?php
 
-namespace Siqu\CMS\Core\Entity\Traits;
+namespace Siqu\CMS\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class LocateableTrait
- * @package Siqu\CMS\Core\Entity\Traits
+ * @package Siqu\CMS\Core\Entity
  */
 trait LocateableTrait
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Siqu\CMS\Core\Entity\Traits;
+namespace Siqu\CMS\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class NameableTrait
- * @package Siqu\CMS\Core\Entity\Traits
+ * @package Siqu\CMS\Core\Entity
  */
 trait NameableTrait
 {

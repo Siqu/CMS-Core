@@ -4,7 +4,7 @@ namespace Siqu\CMS\Core\Util;
 
 /**
  * Class UuidGenerator
- * @package Siqu\CMS\Core\Tests\Util
+ * @package Siqu\CMS\Core\Util
  */
 class UuidGenerator
 {

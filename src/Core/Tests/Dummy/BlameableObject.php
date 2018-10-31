@@ -2,7 +2,7 @@
 
 namespace Siqu\CMS\Core\Tests\Dummy;
 
-use Siqu\CMS\Core\Entity\Traits\BlameableTrait;
+use Siqu\CMS\Core\Entity\BlameableTrait;
 
 /**
  * Class BlameableObject
