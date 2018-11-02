@@ -15,23 +15,27 @@ class NameableTraitTest extends TestCase
     private $object;
 
     /**
-     * Should set and return title shown.
-     */
-    public function testSetGetChangeTitleShown(): void
-    {
-        $this->assertNull($this->object->getTitleShown());
-        $this->object->setTitleShown('titleShown');
-        $this->assertEquals('titleShown', $this->object->getTitleShown());
-    }
-
-    /**
      * Should set and return title.
+     * @NameableTrait::setTitle
+     * @NameableTrait::getTitle
      */
     public function testSetGetTitle(): void
     {
         $this->assertNull($this->object->getTitle());
         $this->object->setTitle('title');
         $this->assertEquals('title', $this->object->getTitle());
+    }
+
+    /**
+     * Should set and return title shown.
+     * @NameableTrait::setTitleShown
+     * @NameableTrait::getTitleShown
+     */
+    public function testSetGetTitleShown(): void
+    {
+        $this->assertNull($this->object->getTitleShown());
+        $this->object->setTitleShown('titleShown');
+        $this->assertEquals('titleShown', $this->object->getTitleShown());
     }
 
     /**

@@ -16,6 +16,9 @@ class LocateableTraitTest extends TestCase
 
     /**
      * Should set and return latitude.
+     *
+     * @LocateableTrait::setLat
+     * @LocateableTrait::getLat
      */
     public function testSetGetLat(): void
     {
@@ -26,6 +29,9 @@ class LocateableTraitTest extends TestCase
 
     /**
      * Should set and return longitude.
+     *
+     * @LocateableTrait::setLng
+     * @LocateableTrait::getLng
      */
     public function testSetGetLng(): void
     {
@@ -36,6 +42,8 @@ class LocateableTraitTest extends TestCase
 
     /**
      * Should set and return location.
+     * @LocateableTrait::setLocation
+     * @LocateableTrait::getLocation
      */
     public function testSetGetLocation(): void
     {

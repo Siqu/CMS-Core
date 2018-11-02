@@ -23,7 +23,7 @@ class AcceptLanguageListener
         /** @var ListenerAttributes $listener */
         $listener = $request->attributes->get('listener');
         if (
-            !$listener->isAcceptLanguageActive()
+        !$listener->isAcceptLanguageActive()
         ) {
             return;
         }

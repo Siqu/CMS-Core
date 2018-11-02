@@ -28,22 +28,6 @@ abstract class FixtureAwareTestCase extends WebTestCase
     abstract protected function getEndpoint(): string;
 
     /**
-     * Call the endpoint with get and a optional uuid
-     * @param string|null $uuid
-     */
-    protected function callGet(string $uuid = null): void
-    {
-        $url = '/api/v1/' . $this->getEndpoint();
-        if($uuid) {
-            $url .= '/' . $uuid;
-        }
-
-        $this->client->request('GET', $url, [], [], [
-            'HTTP_Accept' => 'application/json'
-        ]);
-    }
-
-    /**
      * Call delete endpoint.
      *
      * @param string $uuid
@@ -51,7 +35,7 @@ abstract class FixtureAwareTestCase extends WebTestCase
     protected function callDelete(string $uuid): void
     {
         $url = '/api/v1/' . $this->getEndpoint();
-        if($uuid) {
+        if ($uuid) {
             $url .= '/' . $uuid;
         }
 
@@ -61,16 +45,19 @@ abstract class FixtureAwareTestCase extends WebTestCase
     }
 
     /**
-     * Call the post endpoint.
-     *
-     * @param array $data
+     * Call the endpoint with get and a optional uuid
+     * @param string|null $uuid
      */
-    protected function callPost(array $data): void
+    protected function callGet(string $uuid = null): void
     {
-        $this->client->request('POST', '/api/v1/' . $this->getEndpoint(), [], [], [
-            'HTTP_Accept' => 'application/json',
-            'CONTENT_TYPE' => 'application/json'
-        ], json_encode($data));
+        $url = '/api/v1/' . $this->getEndpoint();
+        if ($uuid) {
+            $url .= '/' . $uuid;
+        }
+
+        $this->client->request('GET', $url, [], [], [
+            'HTTP_Accept' => 'application/json'
+        ]);
     }
 
     /**
@@ -82,6 +69,19 @@ abstract class FixtureAwareTestCase extends WebTestCase
     protected function callPatch(string $uuid, array $data): void
     {
         $this->client->request('PATCH', '/api/v1/' . $this->getEndpoint() . '/' . $uuid, [], [], [
+            'HTTP_Accept' => 'application/json',
+            'CONTENT_TYPE' => 'application/json'
+        ], json_encode($data));
+    }
+
+    /**
+     * Call the post endpoint.
+     *
+     * @param array $data
+     */
+    protected function callPost(array $data): void
+    {
+        $this->client->request('POST', '/api/v1/' . $this->getEndpoint(), [], [], [
             'HTTP_Accept' => 'application/json',
             'CONTENT_TYPE' => 'application/json'
         ], json_encode($data));

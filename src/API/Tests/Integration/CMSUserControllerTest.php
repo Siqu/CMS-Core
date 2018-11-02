@@ -2,6 +2,8 @@
 
 namespace Siqu\CMS\API\Tests\Integration;
 
+use Siqu\CMS\API\Controller\APIController;
+use Siqu\CMS\API\Controller\CMSUserController;
 use Siqu\CMS\API\Tests\DataFixtures\CMSUserFixture;
 use Siqu\CMS\API\Tests\FixtureAwareTestCase;
 
@@ -12,52 +14,31 @@ use Siqu\CMS\API\Tests\FixtureAwareTestCase;
 class CMSUserControllerTest extends FixtureAwareTestCase
 {
     /**
-     * Should list all user.
+     * Should return 201 and user
+     * @APIController::create
+     * @CMSUserController::create
      */
-    public function testIndex(): void
+    public function testCreate(): void
     {
-        $this->callGet();
+        $this->callPost([
+            'email' => 'mail2@mail2.test',
+            'username' => 'username2',
+            'plainpassword' => 'password'
+        ]);
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $data = $this->client->getResponse()->getContent();
-        $data = json_decode($data, false);
-
-        $this->assertCount(1, $data);
-
-        $user = $data[0];
-        $this->assertEquals(CMSUserFixture::USERNAME, $user->username);
-        $this->assertEquals(CMSUserFixture::EMAIL, $user->email);
-    }
-
-    /**
-     * Should return 404
-     */
-    public function testShowNonExisting(): void
-    {
-        $this->callGet('1');
-
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
-    }
-
-    /**
-     * Should return 200 and user
-     */
-    public function testShow(): void
-    {
-        $uuid = $this->getExistingUuid();
-
-        $this->callGet($uuid);
-
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
         $data = $this->client->getResponse()->getContent();
         $user = json_decode($data, false);
-        $this->assertEquals(CMSUserFixture::USERNAME, $user->username);
-        $this->assertEquals(CMSUserFixture::EMAIL, $user->email);
-        $this->assertEquals($uuid, $user->uuid);
+
+        $this->assertEquals('username2', $user->username);
+        $this->assertEquals('mail2@mail2.test', $user->email);
+        $this->assertNotNull($user->uuid);
     }
 
     /**
      * Should return 400 and error messages.
+     * @APIController::create
+     * @CMSUserController::create
      */
     public function testCreateInvalid(): void
     {
@@ -97,37 +78,9 @@ class CMSUserControllerTest extends FixtureAwareTestCase
     }
 
     /**
-     * Should return 201 and user
-     */
-    public function testCreate(): void
-    {
-        $this->callPost([
-            'email' => 'mail2@mail2.test',
-            'username' => 'username2',
-            'plainpassword' => 'password'
-        ]);
-
-        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
-        $data = $this->client->getResponse()->getContent();
-        $user = json_decode($data, false);
-
-        $this->assertEquals('username2', $user->username);
-        $this->assertEquals('mail2@mail2.test', $user->email);
-        $this->assertNotNull($user->uuid);
-    }
-
-    /**
-     * Should return 404
-     */
-    public function testDeleteInvalid(): void
-    {
-        $this->callDelete('invalid');
-
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
-    }
-
-    /**
-     * Should return 404
+     * Should return 204
+     * @APIController::delete
+     * @CMSUserController::delete
      */
     public function testDelete(): void
     {
@@ -139,6 +92,92 @@ class CMSUserControllerTest extends FixtureAwareTestCase
 
     /**
      * Should return 404
+     * @APIController::delete
+     * @CMSUserController::delete
+     */
+    public function testDeleteInvalid(): void
+    {
+        $this->callDelete('invalid');
+
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Should list all user.
+     *
+     * @APIController::index
+     * @CMSUserController::index
+     */
+    public function testIndex(): void
+    {
+        $this->callGet();
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $data = $this->client->getResponse()->getContent();
+        $data = json_decode($data, false);
+
+        $this->assertCount(1, $data);
+
+        $user = $data[0];
+        $this->assertEquals(CMSUserFixture::USERNAME, $user->username);
+        $this->assertEquals(CMSUserFixture::EMAIL, $user->email);
+    }
+
+    /**
+     * Should return 200 and user
+     * @APIController::show
+     * @CMSUserController::show
+     */
+    public function testShow(): void
+    {
+        $uuid = $this->getExistingUuid();
+
+        $this->callGet($uuid);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $data = $this->client->getResponse()->getContent();
+        $user = json_decode($data, false);
+        $this->assertEquals(CMSUserFixture::USERNAME, $user->username);
+        $this->assertEquals(CMSUserFixture::EMAIL, $user->email);
+        $this->assertEquals($uuid, $user->uuid);
+    }
+
+    /**
+     * Should return 404
+     *
+     * @APIController::show
+     * @CMSUserController::show
+     */
+    public function testShowNonExisting(): void
+    {
+        $this->callGet('1');
+
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Should return 200 and updated user
+     * @APIController::update
+     * @CMSUserController::update
+     */
+    public function testUpdate(): void
+    {
+        $uuid = $this->getExistingUuid();
+        $this->callPatch($uuid, [
+            'email' => 'mail2@mail2.test'
+        ]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $data = $this->client->getResponse()->getContent();
+        $user = json_decode($data, false);
+
+        $this->assertEquals('mail2@mail2.test', $user->email);
+    }
+
+    /**
+     * Should return 404
+     * @APIController::update
+     * @CMSUserController::update
      */
     public function testUpdateInvalid(): void
     {
@@ -157,23 +196,6 @@ class CMSUserControllerTest extends FixtureAwareTestCase
 
         $this->assertCount(1, $errors);
         $this->assertEquals('email', $errors[0]->path);
-    }
-
-    /**
-     * Should return 200 and updated user
-     */
-    public function testUpdate(): void
-    {
-        $uuid = $this->getExistingUuid();
-        $this->callPatch($uuid, [
-            'email' => 'mail2@mail2.test'
-        ]);
-
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $data = $this->client->getResponse()->getContent();
-        $user = json_decode($data, false);
-
-        $this->assertEquals('mail2@mail2.test', $user->email);
     }
 
     /**

@@ -16,22 +16,6 @@ class GroupTest extends TestCase
     private $object;
 
     /**
-     * Should create proper instance.
-     * @throws \ReflectionException
-     */
-    public function testConstruct(): void
-    {
-        $this->assertInstanceOf(Group::class, $this->object);
-
-        $reflection = new \ReflectionClass($this->object);
-        $traits = $reflection->getTraitNames();
-
-        $this->assertEquals([
-            IdentifiableTrait::class
-        ], $traits);
-    }
-
-    /**
      * Should add, set, get and remove roles
      */
     public function testAddSetGetRemoveRoles(): void
@@ -52,6 +36,22 @@ class GroupTest extends TestCase
         $this->assertEquals([
             'ROLE1'
         ], $this->object->getRoles());
+    }
+
+    /**
+     * Should create proper instance.
+     * @throws \ReflectionException
+     */
+    public function testConstruct(): void
+    {
+        $this->assertInstanceOf(Group::class, $this->object);
+
+        $reflection = new \ReflectionClass($this->object);
+        $traits = $reflection->getTraitNames();
+
+        $this->assertEquals([
+            IdentifiableTrait::class
+        ], $traits);
     }
 
     /**

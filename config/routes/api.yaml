@@ -7,3 +7,5 @@ controllers:
       request:
         accept-language: true
         accept: true
+        response-formatter: true
+        api-exception: true

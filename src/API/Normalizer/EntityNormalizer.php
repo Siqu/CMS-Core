@@ -3,7 +3,6 @@
 namespace Siqu\CMS\API\Normalizer;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Siqu\CMS\Core\Entity\IdentifiableTrait;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface;
@@ -16,11 +15,10 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
  */
 class EntityNormalizer extends ObjectNormalizer
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
-
     /** @var CircularReferenceHandlerInterface */
     protected $uuidCircularReferenceHandler;
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
     /**
      * EntityNormalizer constructor.
@@ -55,7 +53,7 @@ class EntityNormalizer extends ObjectNormalizer
      * @param array $context
      * @return null|object
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         return $this->entityManager->find($class, $data);
     }

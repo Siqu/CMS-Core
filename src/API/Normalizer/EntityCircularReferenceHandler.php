@@ -19,14 +19,14 @@ class EntityCircularReferenceHandler implements CircularReferenceHandlerInterfac
      */
     public function handle($data)
     {
-        if(!is_object($data)) {
+        if (!is_object($data)) {
             return $data;
         }
 
         $reflection = new \ReflectionClass($data);
         $traits = $reflection->getTraitNames();
 
-        if(in_array(IdentifiableTrait::class, $traits)) {
+        if (in_array(IdentifiableTrait::class, $traits)) {
             /** @var IdentifiableTrait $data
              */
             return [

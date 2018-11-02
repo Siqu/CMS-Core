@@ -12,9 +12,9 @@ use Siqu\CMS\Core\Entity\CMSUser;
  */
 class CMSUserFixture extends Fixture
 {
-    const USERNAME = 'username';
-    const PASSWORD = 'password';
     const EMAIL = 'mail@mail.test';
+    const PASSWORD = 'password';
+    const USERNAME = 'username';
 
     /**
      * Load data fixtures with the passed EntityManager

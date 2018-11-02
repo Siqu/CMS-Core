@@ -24,27 +24,6 @@ class Page
     use LocateableTrait;
 
     /**
-     * Display in navigation and content
-     * @var int
-     */
-    const VISIBILITY_NAVIGATION_CONTENT = 0;
-    /**
-     * Display in navigation only.
-     * @var int
-     */
-    const VISIBILITY_NAVIGATION = 1;
-    /**
-     * Display in content only.
-     * @var int
-     */
-    const VISIBILITY_CONTENT = 2;
-    /**
-     * Display never.
-     * @var int
-     */
-    const VISIBILITY_HIDDEN = 3;
-
-    /**
      * Available visibilities.
      *
      * @var array
@@ -55,13 +34,44 @@ class Page
         self::VISIBILITY_CONTENT,
         self::VISIBILITY_HIDDEN
     ];
-
+    /**
+     * Display in content only.
+     * @var int
+     */
+    const VISIBILITY_CONTENT = 2;
+    /**
+     * Display never.
+     * @var int
+     */
+    const VISIBILITY_HIDDEN = 3;
+    /**
+     * Display in navigation only.
+     * @var int
+     */
+    const VISIBILITY_NAVIGATION = 1;
+    /**
+     * Display in navigation and content
+     * @var int
+     */
+    const VISIBILITY_NAVIGATION_CONTENT = 0;
     /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="Siqu\CMS\Core\Entity\Page", mappedBy="parent", cascade={"persist"})
      * @Groups({"api"})
      */
     private $children;
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"api"})
+     */
+    private $metaDescription;
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"api"})
+     */
+    private $metaTitle;
     /**
      * @var Page
      * @ORM\ManyToOne(targetEntity="Siqu\CMS\Core\Entity\Page", inversedBy="children")
@@ -75,27 +85,12 @@ class Page
      * @Groups({"api"})
      */
     private $slug;
-
     /**
      * @var integer
      * @ORM\Column(type="smallint")
      * @Groups({"api"})
      */
     private $visibility;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     * @Groups({"api"})
-     */
-    private $metaTitle;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     * @Groups({"api"})
-     */
-    private $metaDescription;
 
     /**
      * Page constructor.
@@ -129,6 +124,27 @@ class Page
     }
 
     /**
+     * Retrieve the metaDescription.
+     *
+     * @return null|string
+     */
+    public function getMetaDescription(): ?string
+    {
+        return $this->metaDescription;
+    }
+
+    /**
+     * Retrieve the meta title.
+     * Falls back to title
+     *
+     * @return string|null
+     */
+    public function getMetaTitle(): ?string
+    {
+        return $this->metaTitle ? $this->metaTitle : $this->title;
+    }
+
+    /**
      * Get the parent.
      *
      * @return null|Page
@@ -146,6 +162,16 @@ class Page
     public function getSlug(): ?string
     {
         return $this->slug;
+    }
+
+    /**
+     * Retrieve the visibility.
+     *
+     * @return int
+     */
+    public function getVisibility(): int
+    {
+        return $this->visibility;
     }
 
     /**
@@ -168,6 +194,25 @@ class Page
     public function setChildren(ArrayCollection $children): void
     {
         $this->children = $children;
+    }
+
+    /**
+     * Set the metaDescription.
+     *
+     * @param string $metaDescription
+     */
+    public function setMetaDescription($metaDescription): void
+    {
+        $this->metaDescription = $metaDescription;
+    }
+
+    /**
+     * Set the meta title.
+     * @param string $metaTitle
+     */
+    public function setMetaTitle($metaTitle): void
+    {
+        $this->metaTitle = $metaTitle;
     }
 
     /**
@@ -200,55 +245,5 @@ class Page
         if (in_array($visibility, self::VISIBILITIES)) {
             $this->visibility = $visibility;
         }
-    }
-
-    /**
-     * Retrieve the visibility.
-     *
-     * @return int
-     */
-    public function getVisibility(): int
-    {
-        return $this->visibility;
-    }
-
-    /**
-     * Set the meta title.
-     * @param string $metaTitle
-     */
-    public function setMetaTitle($metaTitle): void
-    {
-        $this->metaTitle = $metaTitle;
-    }
-
-    /**
-     * Retrieve the meta title.
-     * Falls back to title
-     *
-     * @return string|null
-     */
-    public function getMetaTitle(): ?string
-    {
-        return $this->metaTitle ? $this->metaTitle : $this->title;
-    }
-
-    /**
-     * Set the metaDescription.
-     *
-     * @param string $metaDescription
-     */
-    public function setMetaDescription($metaDescription): void
-    {
-        $this->metaDescription = $metaDescription;
-    }
-
-    /**
-     * Retrieve the metaDescription.
-     *
-     * @return null|string
-     */
-    public function getMetaDescription(): ?string
-    {
-        return $this->metaDescription;
     }
 }

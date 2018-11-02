@@ -25,23 +25,23 @@ class ListenerAttributesTest extends TestCase
     /**
      * Should return value
      */
-    public function testIsAcceptLanguageActive(): void
-    {
-        $this->assertFalse($this->attributes->isAcceptLanguageActive());
-
-        $attributes = new ListenerAttributes(['accept-language' => true]);
-        $this->assertTrue($attributes->isAcceptLanguageActive());
-    }
-
-    /**
-     * Should return value
-     */
     public function testIsAcceptActive(): void
     {
         $this->assertFalse($this->attributes->isAcceptActive());
 
         $attributes = new ListenerAttributes(['accept' => true]);
         $this->assertTrue($attributes->isAcceptActive());
+    }
+
+    /**
+     * Should return value
+     */
+    public function testIsAcceptLanguageActive(): void
+    {
+        $this->assertFalse($this->attributes->isAcceptLanguageActive());
+
+        $attributes = new ListenerAttributes(['accept-language' => true]);
+        $this->assertTrue($attributes->isAcceptLanguageActive());
     }
 
     /**

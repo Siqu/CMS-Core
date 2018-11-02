@@ -32,21 +32,6 @@ class RequestAttributeListenerTest extends TestCase
     }
 
     /**
-     * Should set empty listener.
-     */
-    public function testOnKernelRequestWithoutListener(): void
-    {
-        $request = new Request();
-
-        $event = new GetResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST);
-
-        $this->listener->onKernelRequest($event);
-
-        $attributes = new ListenerAttributes();
-        $this->assertEquals($attributes, $request->attributes->get('listener'));
-    }
-
-    /**
      * Should set attributes.
      */
     public function testOnKernelRequestWithRequestListener(): void
@@ -63,6 +48,21 @@ class RequestAttributeListenerTest extends TestCase
         $this->listener->onKernelRequest($event);
 
         $attributes = new ListenerAttributes(['test']);
+        $this->assertEquals($attributes, $request->attributes->get('listener'));
+    }
+
+    /**
+     * Should set empty listener.
+     */
+    public function testOnKernelRequestWithoutListener(): void
+    {
+        $request = new Request();
+
+        $event = new GetResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+
+        $this->listener->onKernelRequest($event);
+
+        $attributes = new ListenerAttributes();
         $this->assertEquals($attributes, $request->attributes->get('listener'));
     }
 

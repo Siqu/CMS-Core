@@ -15,12 +15,10 @@ use Siqu\CMS\Core\Entity\Page;
  */
 class EntityNormalizerTest extends TestCase
 {
-    /** @var EntityManagerInterface|MockObject */
-    private $entityManager;
-
     /** @var CircularReferenceHandlerInterface|MockObject */
     private $circularReferenceHandler;
-
+    /** @var EntityManagerInterface|MockObject */
+    private $entityManager;
     /** @var EntityNormalizer */
     private $normalizer;
 
@@ -50,6 +48,16 @@ class EntityNormalizerTest extends TestCase
     }
 
     /**
+     * Should return true for array with id key data.
+     */
+    public function testSupportsDenormalizationArray(): void
+    {
+        $this->assertTrue($this->normalizer->supportsDenormalization([
+            'id' => 1
+        ], Page::class));
+    }
+
+    /**
      * Should return true for integer data.
      */
     public function testSupportsDenormalizationInteger(): void
@@ -66,13 +74,14 @@ class EntityNormalizerTest extends TestCase
     }
 
     /**
-     * Should return true for array with id key data.
+     * Should return true for correct object.
+     *
+     * @throws \ReflectionException
      */
-    public function testSupportsDenormalizationArray(): void
+    public function testSupportsNormalizationCorrectObject(): void
     {
-        $this->assertTrue($this->normalizer->supportsDenormalization([
-            'id' => 1
-        ], Page::class));
+        $data = new Page();
+        $this->assertTrue($this->normalizer->supportsNormalization($data));
     }
 
     /**
@@ -83,17 +92,6 @@ class EntityNormalizerTest extends TestCase
     public function testSupportsNormalizationInvalidObject(): void
     {
         $this->assertFalse($this->normalizer->supportsNormalization(null));
-    }
-
-    /**
-     * Should return true for correct object.
-     *
-     * @throws \ReflectionException
-     */
-    public function testSupportsNormalizationCorrectObject(): void
-    {
-        $data = new Page();
-        $this->assertTrue($this->normalizer->supportsNormalization($data));
     }
 
     /**

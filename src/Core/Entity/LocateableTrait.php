@@ -33,16 +33,6 @@ trait LocateableTrait
     protected $location;
 
     /**
-     * Set latitude.
-     *
-     * @param string|null $lat
-     */
-    public function setLat(string $lat = null): void
-    {
-        $this->lat = $lat;
-    }
-
-    /**
      * Retrieve the latitude.
      *
      * @return null|string
@@ -50,16 +40,6 @@ trait LocateableTrait
     public function getLat(): ?string
     {
         return $this->lat;
-    }
-
-    /**
-     * Set longitude.
-     *
-     * @param string|null $lng
-     */
-    public function setLng(string $lng = null): void
-    {
-        $this->lng = $lng;
     }
 
     /**
@@ -73,15 +53,6 @@ trait LocateableTrait
     }
 
     /**
-     * Set the location.
-     * @param string|null $location
-     */
-    public function setLocation(string $location = null): void
-    {
-        $this->location = $location;
-    }
-
-    /**
      * Retrieve the location.
      *
      * @return null|string
@@ -89,5 +60,34 @@ trait LocateableTrait
     public function getLocation(): ?string
     {
         return $this->location;
+    }
+
+    /**
+     * Set latitude.
+     *
+     * @param string|null $lat
+     */
+    public function setLat(string $lat = null): void
+    {
+        $this->lat = $lat;
+    }
+
+    /**
+     * Set longitude.
+     *
+     * @param string|null $lng
+     */
+    public function setLng(string $lng = null): void
+    {
+        $this->lng = $lng;
+    }
+
+    /**
+     * Set the location.
+     * @param string|null $location
+     */
+    public function setLocation(string $location = null): void
+    {
+        $this->location = $location;
     }
 }

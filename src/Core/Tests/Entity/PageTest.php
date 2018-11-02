@@ -4,11 +4,11 @@ namespace Siqu\CMS\Core\Tests\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
-use Siqu\CMS\Core\Entity\Page;
 use Siqu\CMS\Core\Entity\BlameableTrait;
 use Siqu\CMS\Core\Entity\IdentifiableTrait;
 use Siqu\CMS\Core\Entity\LocateableTrait;
 use Siqu\CMS\Core\Entity\NameableTrait;
+use Siqu\CMS\Core\Entity\Page;
 use Siqu\CMS\Core\Entity\TimestampableTrait;
 
 /**
@@ -63,6 +63,36 @@ class PageTest extends TestCase
     }
 
     /**
+     * Should return title.
+     */
+    public function testGetMetaTitleEmpty(): void
+    {
+        $this->object->setTitle('title');
+
+        $this->assertEquals('title', $this->object->getMetaTitle());
+    }
+
+    /**
+     * Should get and set metaDescription.
+     */
+    public function testGetSetMetaDescription(): void
+    {
+        $this->assertNull($this->object->getMetaDescription());
+        $this->object->setMetaDescription('metaDescription');
+        $this->assertEquals('metaDescription', $this->object->getMetaDescription());
+    }
+
+    /**
+     * Should get and set metaTitle.
+     */
+    public function testGetSetMetaTitle(): void
+    {
+        $this->assertNull($this->object->getMetaTitle());
+        $this->object->setMetaTitle('metaTitle');
+        $this->assertEquals('metaTitle', $this->object->getMetaTitle());
+    }
+
+    /**
      * Should get and set parent
      */
     public function testGetSetParent(): void
@@ -85,16 +115,6 @@ class PageTest extends TestCase
     }
 
     /**
-     * Should not change visibility.
-     */
-    public function testSetVisibilityInvalid(): void
-    {
-        $this->object->setVisibility(-1);
-
-        $this->assertEquals(Page::VISIBILITY_NAVIGATION_CONTENT, $this->object->getVisibility());
-    }
-
-    /**
      * Should get and set visibility
      */
     public function testGetSetVisibility(): void
@@ -104,33 +124,13 @@ class PageTest extends TestCase
     }
 
     /**
-     * Should return title.
+     * Should not change visibility.
      */
-    public function testGetMetaTitleEmpty(): void
+    public function testSetVisibilityInvalid(): void
     {
-        $this->object->setTitle('title');
+        $this->object->setVisibility(-1);
 
-        $this->assertEquals('title', $this->object->getMetaTitle());
-    }
-
-    /**
-     * Should get and set metaTitle.
-     */
-    public function testGetSetMetaTitle(): void
-    {
-        $this->assertNull($this->object->getMetaTitle());
-        $this->object->setMetaTitle('metaTitle');
-        $this->assertEquals('metaTitle', $this->object->getMetaTitle());
-    }
-
-    /**
-     * Should get and set metaDescription.
-     */
-    public function testGetSetMetaDescription(): void
-    {
-        $this->assertNull($this->object->getMetaDescription());
-        $this->object->setMetaDescription('metaDescription');
-        $this->assertEquals('metaDescription', $this->object->getMetaDescription());
+        $this->assertEquals(Page::VISIBILITY_NAVIGATION_CONTENT, $this->object->getVisibility());
     }
 
     /**

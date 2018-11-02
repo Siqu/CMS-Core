@@ -30,6 +30,8 @@ class AbstractListenerTest extends TestCase
 
     /**
      * Should return events.
+     *
+     * @AbstractListener::getSubscribedEvents()
      */
     public function testGetSubscribedEvents(): void
     {
@@ -41,6 +43,8 @@ class AbstractListenerTest extends TestCase
 
     /**
      * Should recompute change set
+     *
+     * @AbstractListener::prePersist()
      */
     public function testPrePersist(): void
     {
@@ -52,6 +56,8 @@ class AbstractListenerTest extends TestCase
 
     /**
      * Should recompute change set
+     *
+     * @AbstractListener::preUpdate()
      */
     public function testPreUpdate(): void
     {

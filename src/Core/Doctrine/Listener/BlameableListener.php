@@ -3,8 +3,8 @@
 namespace Siqu\CMS\Core\Doctrine\Listener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Siqu\CMS\Core\Entity\CMSUser;
 use Siqu\CMS\Core\Entity\BlameableTrait;
+use Siqu\CMS\Core\Entity\CMSUser;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 /**

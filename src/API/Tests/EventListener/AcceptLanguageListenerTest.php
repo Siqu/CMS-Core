@@ -17,11 +17,10 @@ use Symfony\Component\HttpKernel\Kernel;
  */
 class AcceptLanguageListenerTest extends TestCase
 {
-    /** @var AcceptLanguageListener */
-    private $listener;
-
     /** @var Kernel|MockObject */
     private $kernel;
+    /** @var AcceptLanguageListener */
+    private $listener;
 
     /**
      * Should create instance
@@ -29,21 +28,6 @@ class AcceptLanguageListenerTest extends TestCase
     public function testConstruct(): void
     {
         $this->assertInstanceOf(AcceptLanguageListener::class, $this->listener);
-    }
-
-    /**
-     * Should not change locale.
-     */
-    public function testOnKernelRequestWithoutAcceptLanguageAttribute(): void
-    {
-        $request = new Request();
-        $request->setLocale('de');
-        $request->attributes->set('listener', new ListenerAttributes());
-        $event = new GetResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST);
-
-        $this->listener->onKernelRequest($event);
-
-        $this->assertEquals('de', $request->getLocale());
     }
 
     /**
@@ -80,6 +64,21 @@ class AcceptLanguageListenerTest extends TestCase
         $this->listener->onKernelRequest($event);
 
         $this->assertEquals('en', $request->getLocale());
+    }
+
+    /**
+     * Should not change locale.
+     */
+    public function testOnKernelRequestWithoutAcceptLanguageAttribute(): void
+    {
+        $request = new Request();
+        $request->setLocale('de');
+        $request->attributes->set('listener', new ListenerAttributes());
+        $event = new GetResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+
+        $this->listener->onKernelRequest($event);
+
+        $this->assertEquals('de', $request->getLocale());
     }
 
     /**

@@ -1,0 +1,8 @@
+services:
+  siqu.cms_api.deserializer.request:
+    class: Siqu\CMS\API\Deserializer\RequestDeserializer
+    public: true
+    arguments:
+    - '@serializer'
+    - '@validator'
+    - '@request_stack'

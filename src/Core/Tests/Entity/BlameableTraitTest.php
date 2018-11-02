@@ -3,8 +3,8 @@
 namespace Siqu\CMS\Core\Tests\Entity;
 
 use PHPUnit\Framework\TestCase;
-use Siqu\CMS\Core\Entity\CMSUser;
 use Siqu\CMS\Core\Entity\BlameableTrait;
+use Siqu\CMS\Core\Entity\CMSUser;
 
 /**
  * Class BlameableTraitTest
@@ -17,6 +17,8 @@ class BlameableTraitTest extends TestCase
 
     /**
      * Should set and return change user.
+     * @BlameableTrait::setChangeUser
+     * @BlameableTrait::getChangeUser
      */
     public function testSetGetChangeUser(): void
     {
@@ -29,6 +31,8 @@ class BlameableTraitTest extends TestCase
 
     /**
      * Should set and return user.
+     * @BlameableTrait::setUser
+     * @BlameableTrait::getUser
      */
     public function testSetGetUser(): void
     {

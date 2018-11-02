@@ -24,13 +24,16 @@ class EntityCircularReferenceHandlerTest extends TestCase
     }
 
     /**
-     * Should return data as is.
+     * Should return array with uuid.
      */
-    public function testHandleIncorrectObject(): void
+    public function testHandleCorrectClass(): void
     {
-        $data = [];
+        $data = new IdentifiableObject();
+        $data->setUuid('uuid');
 
-        $this->assertEquals($data, $this->handler->handle($data));
+        $this->assertEquals([
+            'uuid' => 'uuid'
+        ], $this->handler->handle($data));
     }
 
     /**
@@ -44,16 +47,13 @@ class EntityCircularReferenceHandlerTest extends TestCase
     }
 
     /**
-     * Should return array with uuid.
+     * Should return data as is.
      */
-    public function testHandleCorrectClass(): void
+    public function testHandleIncorrectObject(): void
     {
-        $data = new IdentifiableObject();
-        $data->setUuid('uuid');
+        $data = [];
 
-        $this->assertEquals([
-            'uuid' => 'uuid'
-        ], $this->handler->handle($data));
+        $this->assertEquals($data, $this->handler->handle($data));
     }
 
     /**

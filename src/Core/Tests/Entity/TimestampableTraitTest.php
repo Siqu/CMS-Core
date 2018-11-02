@@ -15,18 +15,9 @@ class TimestampableTraitTest extends TestCase
     private $object;
 
     /**
-     * Should set and return updated at.
-     */
-    public function testSetGetChangeUpdatedAt(): void
-    {
-        $date = new \DateTime();
-        $this->assertNull($this->object->getUpdatedAt());
-        $this->object->setUpdatedAt($date);
-        $this->assertEquals($date, $this->object->getUpdatedAt());
-    }
-
-    /**
      * Should set and return created at.
+     * @TimestampableTrait::setCreatedAt
+     * @TimestampableTrait::getCreatedAt
      */
     public function testSetGetCreatedAt(): void
     {
@@ -34,6 +25,19 @@ class TimestampableTraitTest extends TestCase
         $this->assertNull($this->object->getCreatedAt());
         $this->object->setCreatedAt($date);
         $this->assertEquals($date, $this->object->getCreatedAt());
+    }
+
+    /**
+     * Should set and return updated at.
+     * @TimestampableTrait::setUpdatedAt
+     * @TimestampableTrait::getUpdatedAt
+     */
+    public function testSetGetUpdatedAt(): void
+    {
+        $date = new \DateTime();
+        $this->assertNull($this->object->getUpdatedAt());
+        $this->object->setUpdatedAt($date);
+        $this->assertEquals($date, $this->object->getUpdatedAt());
     }
 
     /**

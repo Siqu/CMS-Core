@@ -37,7 +37,7 @@ class AcceptListener
         /** @var ListenerAttributes $listener */
         $listener = $request->attributes->get('listener');
         if (
-            !$listener->isAcceptActive()
+        !$listener->isAcceptActive()
         ) {
             return;
         }

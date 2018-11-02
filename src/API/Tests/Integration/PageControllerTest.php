@@ -2,6 +2,8 @@
 
 namespace Siqu\CMS\API\Tests\Integration;
 
+use Siqu\CMS\API\Controller\APIController;
+use Siqu\CMS\API\Controller\PageController;
 use Siqu\CMS\API\Tests\DataFixtures\PageFixture;
 use Siqu\CMS\API\Tests\FixtureAwareTestCase;
 
@@ -12,50 +14,28 @@ use Siqu\CMS\API\Tests\FixtureAwareTestCase;
 class PageControllerTest extends FixtureAwareTestCase
 {
     /**
-     * Should list all pages.
+     * Should return 201 and page
+     * @APIController::create
+     * @PageController::create
      */
-    public function testIndex(): void
+    public function testCreate(): void
     {
-        $this->callGet();
+        $this->callPost([
+            'title' => 'title2'
+        ]);
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $data = $this->client->getResponse()->getContent();
-        $data = json_decode($data, false);
-
-        $this->assertCount(1, $data);
-
-        $page = $data[0];
-        $this->assertEquals(PageFixture::TITLE, $page->title);
-    }
-
-    /**
-     * Should return 404
-     */
-    public function testShowNonExisting(): void
-    {
-        $this->callGet('1');
-
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
-    }
-
-    /**
-     * Should return 200 and page
-     */
-    public function testShow(): void
-    {
-        $uuid = $this->getExistingUuid();
-
-        $this->callGet($uuid);
-
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
         $data = $this->client->getResponse()->getContent();
         $page = json_decode($data, false);
-        $this->assertEquals(PageFixture::TITLE, $page->title);;
-        $this->assertEquals($uuid, $page->uuid);
+
+        $this->assertEquals('title2', $page->title);
+        $this->assertNotNull($page->uuid);
     }
 
     /**
      * Should return 400 and error messages.
+     * @APIController::create
+     * @PageController::create
      */
     public function testCreateInvalid(): void
     {
@@ -77,34 +57,9 @@ class PageControllerTest extends FixtureAwareTestCase
     }
 
     /**
-     * Should return 201 and page
-     */
-    public function testCreate(): void
-    {
-        $this->callPost([
-            'title' => 'title2'
-        ]);
-
-        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
-        $data = $this->client->getResponse()->getContent();
-        $page = json_decode($data, false);
-
-        $this->assertEquals('title2', $page->title);
-        $this->assertNotNull($page->uuid);
-    }
-
-    /**
      * Should return 404
-     */
-    public function testDeleteInvalid(): void
-    {
-        $this->callDelete('invalid');
-
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
-    }
-
-    /**
-     * Should return 404
+     * @APIController::delete
+     * @PageController::delete
      */
     public function testDelete(): void
     {
@@ -116,16 +71,69 @@ class PageControllerTest extends FixtureAwareTestCase
 
     /**
      * Should return 404
+     * @APIController::delete
+     * @PageController::delete
      */
-    public function testUpdateInvalid(): void
+    public function testDeleteInvalid(): void
     {
-        $this->callPatch('invalid', []);
+        $this->callDelete('invalid');
+
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Should list all pages.
+     * @APIController::index
+     * @PageController::index
+     */
+    public function testIndex(): void
+    {
+        $this->callGet();
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $data = $this->client->getResponse()->getContent();
+        $data = json_decode($data, false);
+
+        $this->assertCount(1, $data);
+
+        $page = $data[0];
+        $this->assertEquals(PageFixture::TITLE, $page->title);
+    }
+
+    /**
+     * Should return 200 and page
+     * @APIController::show
+     * @PageController::show
+     */
+    public function testShow(): void
+    {
+        $uuid = $this->getExistingUuid();
+
+        $this->callGet($uuid);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $data = $this->client->getResponse()->getContent();
+        $page = json_decode($data, false);
+        $this->assertEquals(PageFixture::TITLE, $page->title);;
+        $this->assertEquals($uuid, $page->uuid);
+    }
+
+    /**
+     * Should return 404
+     * @APIController::show
+     * @PageController::show
+     */
+    public function testShowNonExisting(): void
+    {
+        $this->callGet('1');
 
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
     }
 
     /**
      * Should return 200 and updated page
+     * @APIController::update
+     * @PageController::update
      */
     public function testUpdate(): void
     {
@@ -139,6 +147,18 @@ class PageControllerTest extends FixtureAwareTestCase
         $page = json_decode($data, false);
 
         $this->assertEquals('title2', $page->title);
+    }
+
+    /**
+     * Should return 404
+     * @APIController::update
+     * @PageController::update
+     */
+    public function testUpdateInvalid(): void
+    {
+        $this->callPatch('invalid', []);
+
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
     }
 
     /**

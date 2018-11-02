@@ -32,20 +32,6 @@ class AcceptListenerTest extends TestCase
     }
 
     /**
-     * Should not change request format.
-     */
-    public function testOnKernelRequestWithoutListener(): void
-    {
-        $request = new Request();
-        $request->attributes->set('listener', new ListenerAttributes());
-        $event = new GetResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST);
-
-        $this->listener->onKernelRequest($event);
-
-        $this->assertEquals('html', $request->getRequestFormat());
-    }
-
-    /**
      * Should change request format.
      */
     public function testOnKernelRequest(): void
@@ -77,6 +63,20 @@ class AcceptListenerTest extends TestCase
         $this->listener->onKernelRequest($event);
 
         $this->assertEquals('application/json', $request->getRequestFormat());
+    }
+
+    /**
+     * Should not change request format.
+     */
+    public function testOnKernelRequestWithoutListener(): void
+    {
+        $request = new Request();
+        $request->attributes->set('listener', new ListenerAttributes());
+        $event = new GetResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+
+        $this->listener->onKernelRequest($event);
+
+        $this->assertEquals('html', $request->getRequestFormat());
     }
 
     /**

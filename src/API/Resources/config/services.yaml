@@ -2,4 +2,5 @@ imports:
 - { resource: services/event_listener.yaml }
 - { resource: services/security.yaml }
 - { resource: services/normalizer.yaml }
+- { resource: services/deserializer.yaml }
 - { resource: services/fixtures.yaml }

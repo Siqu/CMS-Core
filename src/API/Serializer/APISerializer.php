@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Serializer;
  */
 class APISerializer extends Serializer
 {
-    public function __construct(array $normalizers = array(), array $encoders = array())
+    public function __construct(array $normalizers = [], array $encoders = [])
     {
         parent::__construct($normalizers, $encoders);
     }

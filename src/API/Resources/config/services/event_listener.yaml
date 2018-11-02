@@ -14,3 +14,15 @@ services:
     public: false
     tags:
     - { name: 'kernel.event_listener', event: 'kernel.request', priority: 18 }
+  siqu.cms_api.event_listener.response.api_formatter:
+    class: Siqu\CMS\API\EventListener\APIResponseListener
+    arguments:
+    - '@serializer'
+    public: false
+    tags:
+    - { name: 'kernel.event_listener', event: 'kernel.response', priority: 18 }
+  siqu.cms_api.event_listener.exception.api:
+    class: Siqu\CMS\API\EventListener\APIExceptionListener
+    public: false
+    tags:
+    - { name: 'kernel.event_listener', event: 'kernel.exception', priority: 18 }

@@ -13,11 +13,10 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
  */
 class APIValidationExceptionTest extends TestCase
 {
-    /** @var ConstraintViolationListInterface|MockObject */
-    private $violations;
-
     /** @var APIValidationException */
     private $exception;
+    /** @var ConstraintViolationListInterface|MockObject */
+    private $violations;
 
     /**
      * Should create proper instance

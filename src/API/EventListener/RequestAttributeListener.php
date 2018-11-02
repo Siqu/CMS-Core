@@ -21,7 +21,7 @@ class RequestAttributeListener
         $request = $event->getRequest();
 
         $listener = $request->attributes->get('listener');
-        if(!$listener || !array_key_exists('request', $listener)) {
+        if (!$listener || !array_key_exists('request', $listener)) {
             $request->attributes->set('listener', new ListenerAttributes());
             return;
         }
