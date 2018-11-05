@@ -31,7 +31,10 @@ class CMSAPIExtensionTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(CMSAPIExtension::class, $this->extension);
+        $this->assertInstanceOf(
+            CMSAPIExtension::class,
+            $this->extension
+        );
     }
 
     /**
@@ -39,73 +42,137 @@ class CMSAPIExtensionTest extends TestCase
      */
     public function testLoad(): void
     {
-        $this->extension->load([
-            'siqu_cms_api' => []
-        ], $this->container);
+        $this->extension->load(
+            [
+                'siqu_cms_api' => []
+            ],
+            $this->container
+        );
 
         $definition = $this->container->getDefinition('siqu.cms_api.event_listener.request.accept_language');
-        $this->assertEquals(AcceptLanguageListener::class, $definition->getClass());
+        $this->assertEquals(
+            AcceptLanguageListener::class,
+            $definition->getClass()
+        );
         $this->assertFalse($definition->isPublic());
         $tags = $definition->getTags();
-        $this->assertArrayHasKey('kernel.event_listener', $tags);
+        $this->assertArrayHasKey(
+            'kernel.event_listener',
+            $tags
+        );
         $tag = $tags['kernel.event_listener'];
-        $this->assertEquals(KernelEvents::REQUEST, $tag[0]['event']);
-        $this->assertEquals(15, $tag[0]['priority']);
+        $this->assertEquals(
+            KernelEvents::REQUEST,
+            $tag[0]['event']
+        );
+        $this->assertEquals(
+            15,
+            $tag[0]['priority']
+        );
 
         $definition = $this->container->getDefinition('siqu.cms_api.event_listener.request.accept');
-        $this->assertEquals(AcceptListener::class, $definition->getClass());
+        $this->assertEquals(
+            AcceptListener::class,
+            $definition->getClass()
+        );
         $this->assertFalse($definition->isPublic());
         $tags = $definition->getTags();
-        $this->assertArrayHasKey('kernel.event_listener', $tags);
+        $this->assertArrayHasKey(
+            'kernel.event_listener',
+            $tags
+        );
         $tag = $tags['kernel.event_listener'];
-        $this->assertEquals(KernelEvents::REQUEST, $tag[0]['event']);
-        $this->assertEquals(17, $tag[0]['priority']);
+        $this->assertEquals(
+            KernelEvents::REQUEST,
+            $tag[0]['event']
+        );
+        $this->assertEquals(
+            17,
+            $tag[0]['priority']
+        );
 
         $definition = $this->container->getDefinition('siqu.cms_api.normalizer.object.entity');
-        $this->assertEquals(EntityNormalizer::class, $definition->getClass());
+        $this->assertEquals(
+            EntityNormalizer::class,
+            $definition->getClass()
+        );
         $this->assertFalse($definition->isPublic());
         $tags = $definition->getTags();
-        $this->assertArrayHasKey('serializer.normalizer', $tags);
+        $this->assertArrayHasKey(
+            'serializer.normalizer',
+            $tags
+        );
         $arguments = $definition->getArguments();
         /** @var Reference $ref */
         $ref = $arguments[0];
-        $this->assertEquals('siqu.cms_api.normalizer.circular_reference_handler.identifiable_trait', $ref);
+        $this->assertEquals(
+            'siqu.cms_api.normalizer.circular_reference_handler.identifiable_trait',
+            $ref
+        );
         $arguments = $definition->getArguments();
         /** @var Reference $ref */
         $ref = $arguments[1];
-        $this->assertEquals('doctrine.orm.entity_manager', $ref);
+        $this->assertEquals(
+            'doctrine.orm.entity_manager',
+            $ref
+        );
         /** @var Reference $ref */
         $ref = $arguments[2];
-        $this->assertEquals('serializer.mapping.class_metadata_factory', $ref);
+        $this->assertEquals(
+            'serializer.mapping.class_metadata_factory',
+            $ref
+        );
         /** @var Reference $ref */
         $ref = $arguments[3];
         $this->assertNull($ref);
         /** @var Reference $ref */
         $ref = $arguments[4];
-        $this->assertEquals('serializer.property_accessor', $ref);
+        $this->assertEquals(
+            'serializer.property_accessor',
+            $ref
+        );
         /** @var Reference $ref */
         $ref = $arguments[5];
-        $this->assertEquals('property_info', $ref);
+        $this->assertEquals(
+            'property_info',
+            $ref
+        );
 
-        $definition = $this->container->getDefinition('siqu.cms_api.normalizer.circular_reference_handler.identifiable_trait');
-        $this->assertEquals(EntityCircularReferenceHandler::class, $definition->getClass());
+        $definition = $this->container->getDefinition(
+            'siqu.cms_api.normalizer.circular_reference_handler.identifiable_trait'
+        );
+        $this->assertEquals(
+            EntityCircularReferenceHandler::class,
+            $definition->getClass()
+        );
         $this->assertFalse($definition->isPublic());
 
         $definition = $this->container->getDefinition('siqu.cms_api.security.provider.user');
-        $this->assertEquals(ApiUserProvider::class, $definition->getClass());
+        $this->assertEquals(
+            ApiUserProvider::class,
+            $definition->getClass()
+        );
         $this->assertFalse($definition->isPublic());
         $arguments = $definition->getArguments();
         /** @var Reference $ref */
         $ref = $arguments[0];
-        $this->assertEquals('doctrine.orm.entity_manager', $ref);
+        $this->assertEquals(
+            'doctrine.orm.entity_manager',
+            $ref
+        );
         /** @var Reference $ref */
         $ref = $arguments[1];
-        $this->assertEquals('security.password_encoder', $ref);
+        $this->assertEquals(
+            'security.password_encoder',
+            $ref
+        );
 
         $definition = $this->container->getDefinition('siqu.cms_api.security.authenticator');
-        $this->assertEquals(ApiAuthenticator::class, $definition->getClass());
+        $this->assertEquals(
+            ApiAuthenticator::class,
+            $definition->getClass()
+        );
         $this->assertFalse($definition->isPublic());
-
     }
 
     /**

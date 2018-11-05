@@ -24,8 +24,10 @@ class CMSUserListener extends AbstractListener
      * @param PasswordUpdater $passwordUpdater
      * @param UuidGenerator $uuidGenerator
      */
-    public function __construct(PasswordUpdater $passwordUpdater, UuidGenerator $uuidGenerator)
-    {
+    public function __construct(
+        PasswordUpdater $passwordUpdater,
+        UuidGenerator $uuidGenerator
+    ) {
         $this->passwordUpdater = $passwordUpdater;
         $this->uuidGenerator = $uuidGenerator;
     }
@@ -56,7 +58,10 @@ class CMSUserListener extends AbstractListener
 
         if ($object instanceof CMSUser) {
             $this->updateUserFields($object);
-            $this->recomputeChangeSet($args->getObjectManager(), $object);
+            $this->recomputeChangeSet(
+                $args->getObjectManager(),
+                $object
+            );
         }
     }
 

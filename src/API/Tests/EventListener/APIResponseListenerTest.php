@@ -35,7 +35,10 @@ class APIResponseListenerTest extends TestCase
      */
     public function testInstance(): void
     {
-        $this->assertInstanceOf(APIResponseListener::class, $this->listener);
+        $this->assertInstanceOf(
+            APIResponseListener::class,
+            $this->listener
+        );
     }
 
     /**
@@ -47,23 +50,43 @@ class APIResponseListenerTest extends TestCase
             ->method('isResponseFormatterActive')
             ->willReturn(true);
 
-        $response = new APIResponse([]);
-        $request = new Request([], [], [
-            'listener' => $this->listenerAttributes
-        ]);
+        $response = new APIResponse(
+            []
+        );
+        $request = new Request(
+            [],
+            [],
+            [
+                'listener' => $this->listenerAttributes
+            ]
+        );
         $request->setRequestFormat('application/json');
 
         $this->serializer
             ->method('serialize')
-            ->with([], 'json')
+            ->with(
+                [],
+                'json'
+            )
             ->willReturn('serialized');
 
-        $event = new FilterResponseEvent($this->kernel, $request, KernelInterface::MASTER_REQUEST, $response);
+        $event = new FilterResponseEvent(
+            $this->kernel,
+            $request,
+            KernelInterface::MASTER_REQUEST,
+            $response
+        );
 
         $this->listener->onKernelResponse($event);
 
-        $this->assertEquals('serialized', $response->getContent());
-        $this->assertEquals('application/json', $response->headers->get('Content-Type'));
+        $this->assertEquals(
+            'serialized',
+            $response->getContent()
+        );
+        $this->assertEquals(
+            'application/json',
+            $response->headers->get('Content-Type')
+        );
     }
 
     /**
@@ -76,15 +99,27 @@ class APIResponseListenerTest extends TestCase
             ->willReturn(true);
 
         $response = new Response();
-        $request = new Request([], [], [
-            'listener' => $this->listenerAttributes
-        ]);
+        $request = new Request(
+            [],
+            [],
+            [
+                'listener' => $this->listenerAttributes
+            ]
+        );
 
-        $event = new FilterResponseEvent($this->kernel, $request, KernelInterface::MASTER_REQUEST, $response);
+        $event = new FilterResponseEvent(
+            $this->kernel,
+            $request,
+            KernelInterface::MASTER_REQUEST,
+            $response
+        );
 
         $this->listener->onKernelResponse($event);
 
-        $this->assertEquals('', $response->getContent());
+        $this->assertEquals(
+            '',
+            $response->getContent()
+        );
     }
 
     /**
@@ -97,15 +132,27 @@ class APIResponseListenerTest extends TestCase
             ->willReturn(false);
 
         $response = new Response();
-        $request = new Request([], [], [
-            'listener' => $this->listenerAttributes
-        ]);
+        $request = new Request(
+            [],
+            [],
+            [
+                'listener' => $this->listenerAttributes
+            ]
+        );
 
-        $event = new FilterResponseEvent($this->kernel, $request, KernelInterface::MASTER_REQUEST, $response);
+        $event = new FilterResponseEvent(
+            $this->kernel,
+            $request,
+            KernelInterface::MASTER_REQUEST,
+            $response
+        );
 
         $this->listener->onKernelResponse($event);
 
-        $this->assertEquals('', $response->getContent());
+        $this->assertEquals(
+            '',
+            $response->getContent()
+        );
     }
 
     /**
@@ -117,32 +164,59 @@ class APIResponseListenerTest extends TestCase
             ->method('isResponseFormatterActive')
             ->willReturn(true);
 
-        $violations = new ConstraintViolationList([
-            new ConstraintViolation('message', 'template', [], null, 'path', null)
-        ]);
+        $violations = new ConstraintViolationList(
+            [
+                new ConstraintViolation(
+                    'message',
+                    'template',
+                    [],
+                    null,
+                    'path',
+                    null
+                )
+            ]
+        );
         $response = new APIResponse($violations);
-        $request = new Request([], [], [
-            'listener' => $this->listenerAttributes
-        ]);
+        $request = new Request(
+            [],
+            [],
+            [
+                'listener' => $this->listenerAttributes
+            ]
+        );
         $request->setRequestFormat('application/json');
 
         $this->serializer
             ->method('serialize')
-            ->with([
+            ->with(
                 [
-                    'message' => 'message',
-                    'path' => 'path',
-                    'data' => null
-                ]
-            ], 'json')
+                    [
+                        'message' => 'message',
+                        'path' => 'path',
+                        'data' => null
+                    ]
+                ],
+                'json'
+            )
             ->willReturn('serialized');
 
-        $event = new FilterResponseEvent($this->kernel, $request, KernelInterface::MASTER_REQUEST, $response);
+        $event = new FilterResponseEvent(
+            $this->kernel,
+            $request,
+            KernelInterface::MASTER_REQUEST,
+            $response
+        );
 
         $this->listener->onKernelResponse($event);
 
-        $this->assertEquals('serialized', $response->getContent());
-        $this->assertEquals('application/json', $response->headers->get('Content-Type'));
+        $this->assertEquals(
+            'serialized',
+            $response->getContent()
+        );
+        $this->assertEquals(
+            'application/json',
+            $response->headers->get('Content-Type')
+        );
     }
 
     /**

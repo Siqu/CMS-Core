@@ -36,9 +36,7 @@ class AcceptListener
 
         /** @var ListenerAttributes $listener */
         $listener = $request->attributes->get('listener');
-        if (
-        !$listener->isAcceptActive()
-        ) {
+        if (!$listener->isAcceptActive()) {
             return;
         }
         $acceptableContentTypes = $request->getAcceptableContentTypes();

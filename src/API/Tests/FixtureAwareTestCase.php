@@ -39,9 +39,15 @@ abstract class FixtureAwareTestCase extends WebTestCase
             $url .= '/' . $uuid;
         }
 
-        $this->client->request('DELETE', $url, [], [], [
-            'HTTP_Accept' => 'application/json'
-        ]);
+        $this->client->request(
+            'DELETE',
+            $url,
+            [],
+            [],
+            [
+                'HTTP_Accept' => 'application/json'
+            ]
+        );
     }
 
     /**
@@ -55,9 +61,15 @@ abstract class FixtureAwareTestCase extends WebTestCase
             $url .= '/' . $uuid;
         }
 
-        $this->client->request('GET', $url, [], [], [
-            'HTTP_Accept' => 'application/json'
-        ]);
+        $this->client->request(
+            'GET',
+            $url,
+            [],
+            [],
+            [
+                'HTTP_Accept' => 'application/json'
+            ]
+        );
     }
 
     /**
@@ -66,12 +78,21 @@ abstract class FixtureAwareTestCase extends WebTestCase
      * @param string $uuid
      * @param array $data
      */
-    protected function callPatch(string $uuid, array $data): void
-    {
-        $this->client->request('PATCH', '/api/v1/' . $this->getEndpoint() . '/' . $uuid, [], [], [
-            'HTTP_Accept' => 'application/json',
-            'CONTENT_TYPE' => 'application/json'
-        ], json_encode($data));
+    protected function callPatch(
+        string $uuid,
+        array $data
+    ): void {
+        $this->client->request(
+            'PATCH',
+            '/api/v1/' . $this->getEndpoint() . '/' . $uuid,
+            [],
+            [],
+            [
+                'HTTP_Accept' => 'application/json',
+                'CONTENT_TYPE' => 'application/json'
+            ],
+            json_encode($data)
+        );
     }
 
     /**
@@ -81,10 +102,17 @@ abstract class FixtureAwareTestCase extends WebTestCase
      */
     protected function callPost(array $data): void
     {
-        $this->client->request('POST', '/api/v1/' . $this->getEndpoint(), [], [], [
-            'HTTP_Accept' => 'application/json',
-            'CONTENT_TYPE' => 'application/json'
-        ], json_encode($data));
+        $this->client->request(
+            'POST',
+            '/api/v1/' . $this->getEndpoint(),
+            [],
+            [],
+            [
+                'HTTP_Accept' => 'application/json',
+                'CONTENT_TYPE' => 'application/json'
+            ],
+            json_encode($data)
+        );
     }
 
     /**
@@ -93,13 +121,25 @@ abstract class FixtureAwareTestCase extends WebTestCase
      */
     protected function getExistingUuid(): string
     {
-        $this->client->request('GET', '/api/v1/' . $this->getEndpoint(), [], [], [
-            'HTTP_Accept' => 'application/json'
-        ]);
+        $this->client->request(
+            'GET',
+            '/api/v1/' . $this->getEndpoint(),
+            [],
+            [],
+            [
+                'HTTP_Accept' => 'application/json'
+            ]
+        );
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            200,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $data = json_decode($data, false);
+        $data = json_decode(
+            $data,
+            false
+        );
         $entry = $data[0];
 
         return $entry->uuid;
@@ -112,10 +152,13 @@ abstract class FixtureAwareTestCase extends WebTestCase
     {
         parent::setUp();
 
-        $this->client = static::createClient([], [
-            'PHP_AUTH_USER' => CMSUserFixture::USERNAME,
-            'PHP_AUTH_PW' => CMSUserFixture::PASSWORD
-        ]);
+        $this->client = static::createClient(
+            [],
+            [
+                'PHP_AUTH_USER' => CMSUserFixture::USERNAME,
+                'PHP_AUTH_PW' => CMSUserFixture::PASSWORD
+            ]
+        );
 
         $container = $this->client->getContainer();
         /** @var EntityManagerInterface $entityManager */
@@ -127,10 +170,12 @@ abstract class FixtureAwareTestCase extends WebTestCase
 
         $purger = new ORMPurger($entityManager);
         $purger->setPurgeMode(ORMPurger::PURGE_MODE_TRUNCATE);
-        $executor = new ORMExecutor($entityManager, $purger);
+        $executor = new ORMExecutor(
+            $entityManager,
+            $purger
+        );
         $executor->execute($loader->getFixtures());
 
         $entityManager->clear();
-
     }
 }

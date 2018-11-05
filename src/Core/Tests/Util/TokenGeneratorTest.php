@@ -19,7 +19,10 @@ class TokenGeneratorTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(TokenGenerator::class, $this->generator);
+        $this->assertInstanceOf(
+            TokenGenerator::class,
+            $this->generator
+        );
     }
 
     /**
@@ -29,7 +32,10 @@ class TokenGeneratorTest extends TestCase
     {
         $token = $this->generator->generateToken();
 
-        $this->assertEquals(43, strlen($token));
+        $this->assertEquals(
+            43,
+            strlen($token)
+        );
     }
 
     /**

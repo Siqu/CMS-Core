@@ -33,8 +33,7 @@ class ApiUserProvider implements UserProviderInterface
     public function __construct(
         EntityManagerInterface $entityManager,
         UserPasswordEncoderInterface $encoder
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->encoder = $encoder;
     }
@@ -84,7 +83,10 @@ class ApiUserProvider implements UserProviderInterface
     {
         if (!$user instanceof CMSUser) {
             throw new UnsupportedUserException(
-                sprintf('Instances of "%s" are not supported.', get_class($user))
+                sprintf(
+                    'Instances of "%s" are not supported.',
+                    get_class($user)
+                )
             );
         }
 
@@ -114,13 +116,18 @@ class ApiUserProvider implements UserProviderInterface
         $repository = $this->entityManager->getRepository(CMSUser::class);
 
         /** @var CMSUser $user */
-        $user = $repository->findOneBy([
-            'username' => $username
-        ]);
+        $user = $repository->findOneBy(
+            [
+                'username' => $username
+            ]
+        );
 
         if (!$user) {
             throw new UsernameNotFoundException(
-                sprintf('Username "%s" does not exist.', $username)
+                sprintf(
+                    'Username "%s" does not exist.',
+                    $username
+                )
             );
         }
 

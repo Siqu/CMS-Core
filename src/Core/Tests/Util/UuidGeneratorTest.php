@@ -19,7 +19,10 @@ class UuidGeneratorTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(UuidGenerator::class, $this->generator);
+        $this->assertInstanceOf(
+            UuidGenerator::class,
+            $this->generator
+        );
     }
 
     /**
@@ -27,7 +30,10 @@ class UuidGeneratorTest extends TestCase
      */
     public function testGenerate()
     {
-        $this->assertRegExp('/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i', $this->generator->generate());
+        $this->assertRegExp(
+            '/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i',
+            $this->generator->generate()
+        );
     }
 
     /**

@@ -19,7 +19,10 @@ class APISerializerTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(APISerializer::class, $this->serializer);
+        $this->assertInstanceOf(
+            APISerializer::class,
+            $this->serializer
+        );
     }
 
     /**

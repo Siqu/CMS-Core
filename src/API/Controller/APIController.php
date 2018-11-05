@@ -37,7 +37,10 @@ abstract class APIController extends Controller
         $manager->persist($entry);
         $manager->flush();
 
-        return new APIResponse($entry, Response::HTTP_CREATED);
+        return new APIResponse(
+            $entry,
+            Response::HTTP_CREATED
+        );
     }
 
     /**
@@ -54,9 +57,12 @@ abstract class APIController extends Controller
         $manager->remove($entry);
         $manager->flush();
 
-        $response = new APIResponse([
-            'message' => 'Delete success.'
-        ], Response::HTTP_NO_CONTENT);
+        $response = new APIResponse(
+            [
+                'message' => 'Delete success.'
+            ],
+            Response::HTTP_NO_CONTENT
+        );
 
         return $response;
     }
@@ -100,13 +106,20 @@ abstract class APIController extends Controller
         $entry = $this->loadEntry($uuid);
 
         $deserializer = $this->get('siqu.cms_api.deserializer.request');
-        $entry = $deserializer->deserializerRequest($this->getEntityClass(), 'update', $entry);
+        $entry = $deserializer->deserializerRequest(
+            $this->getEntityClass(),
+            'update',
+            $entry
+        );
 
         $manager = $this->getDoctrine()->getManager();
         $manager->persist($entry);
         $manager->flush();
 
-        return new APIResponse($entry, Response::HTTP_OK);
+        return new APIResponse(
+            $entry,
+            Response::HTTP_OK
+        );
     }
 
     /**
@@ -128,9 +141,11 @@ abstract class APIController extends Controller
      */
     protected function loadEntry(string $uuid): ?object
     {
-        $entry = $this->getRepository()->findOneBy([
-            'uuid' => $uuid
-        ]);
+        $entry = $this->getRepository()->findOneBy(
+            [
+                'uuid' => $uuid
+            ]
+        );
 
         if (!$entry) {
             throw new NotFoundHttpException();

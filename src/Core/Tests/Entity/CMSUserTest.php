@@ -28,7 +28,10 @@ class CMSUserTest extends TestCase
         $this->assertEmpty($this->object->getGroups());
         $this->object->addGroup($group);
         $this->object->addGroup($group);
-        $this->assertCount(1, $this->object->getGroups());
+        $this->assertCount(
+            1,
+            $this->object->getGroups()
+        );
         $this->object->removeGroup($group);
         $this->object->removeGroup($group);
         $this->assertEmpty($this->object->getGroups());
@@ -36,7 +39,10 @@ class CMSUserTest extends TestCase
         $groups = new ArrayCollection();
         $groups->add($group);
         $this->object->setGroups($groups);
-        $this->assertCount(1, $this->object->getGroups());
+        $this->assertCount(
+            1,
+            $this->object->getGroups()
+        );
     }
 
     /**
@@ -44,19 +50,43 @@ class CMSUserTest extends TestCase
      */
     public function testAddSetRemoveRoles(): void
     {
-        $this->assertCount(1, $this->object->getRoles());
-        $this->assertEquals([CMSUser::ROLE_DEFAULT], $this->object->getRoles());
+        $this->assertCount(
+            1,
+            $this->object->getRoles()
+        );
+        $this->assertEquals(
+            [CMSUser::ROLE_DEFAULT],
+            $this->object->getRoles()
+        );
         $this->object->addRole('role1');
         $this->object->addRole(CMSUser::ROLE_DEFAULT);
-        $this->assertCount(2, $this->object->getRoles());
-        $this->assertEquals(['ROLE1', CMSUser::ROLE_DEFAULT], $this->object->getRoles());
+        $this->assertCount(
+            2,
+            $this->object->getRoles()
+        );
+        $this->assertEquals(
+            ['ROLE1', CMSUser::ROLE_DEFAULT],
+            $this->object->getRoles()
+        );
         $this->object->removeRole('role1');
-        $this->assertCount(1, $this->object->getRoles());
-        $this->assertEquals([CMSUser::ROLE_DEFAULT], $this->object->getRoles());
+        $this->assertCount(
+            1,
+            $this->object->getRoles()
+        );
+        $this->assertEquals(
+            [CMSUser::ROLE_DEFAULT],
+            $this->object->getRoles()
+        );
 
         $this->object->setRoles(['role1']);
-        $this->assertCount(2, $this->object->getRoles());
-        $this->assertEquals(['ROLE1', CMSUser::ROLE_DEFAULT], $this->object->getRoles());
+        $this->assertCount(
+            2,
+            $this->object->getRoles()
+        );
+        $this->assertEquals(
+            ['ROLE1', CMSUser::ROLE_DEFAULT],
+            $this->object->getRoles()
+        );
     }
 
     /**
@@ -65,18 +95,30 @@ class CMSUserTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(CMSUser::class, $this->object);
+        $this->assertInstanceOf(
+            CMSUser::class,
+            $this->object
+        );
         $this->assertTrue($this->object->isEnabled());
-        $this->assertEquals([CMSUser::ROLE_DEFAULT], $this->object->getRoles());
-        $this->assertInstanceOf(ArrayCollection::class, $this->object->getGroups());
+        $this->assertEquals(
+            [CMSUser::ROLE_DEFAULT],
+            $this->object->getRoles()
+        );
+        $this->assertInstanceOf(
+            ArrayCollection::class,
+            $this->object->getGroups()
+        );
         $this->assertEmpty($this->object->getGroups());
 
         $reflection = new \ReflectionClass($this->object);
         $traits = $reflection->getTraitNames();
 
-        $this->assertEquals([
-            IdentifiableTrait::class
-        ], $traits);
+        $this->assertEquals(
+            [
+                IdentifiableTrait::class
+            ],
+            $traits
+        );
     }
 
     /**
@@ -91,10 +133,13 @@ class CMSUserTest extends TestCase
         $this->object->addGroup($group1);
         $this->object->addGroup($group2);
 
-        $this->assertEquals([
-            'name1',
-            'name2'
-        ], $this->object->getGroupNames());
+        $this->assertEquals(
+            [
+                'name1',
+                'name2'
+            ],
+            $this->object->getGroupNames()
+        );
     }
 
     /**
@@ -108,11 +153,17 @@ class CMSUserTest extends TestCase
         $this->object->addGroup($group);
         $this->object->addRole('role1');
 
-        $this->assertCount(2, $this->object->getRoles());
-        $this->assertEquals([
-            'ROLE1',
-            CMSUser::ROLE_DEFAULT
-        ], $this->object->getRoles());
+        $this->assertCount(
+            2,
+            $this->object->getRoles()
+        );
+        $this->assertEquals(
+            [
+                'ROLE1',
+                CMSUser::ROLE_DEFAULT
+            ],
+            $this->object->getRoles()
+        );
     }
 
     /**
@@ -192,7 +243,10 @@ class CMSUserTest extends TestCase
     {
         $this->assertNull($this->object->getConfirmationToken());
         $this->object->setConfirmationToken('confirmationtoken');
-        $this->assertEquals('confirmationtoken', $this->object->getConfirmationToken());
+        $this->assertEquals(
+            'confirmationtoken',
+            $this->object->getConfirmationToken()
+        );
     }
 
     /**
@@ -212,7 +266,10 @@ class CMSUserTest extends TestCase
     {
         $this->assertNull($this->object->getEmail());
         $this->object->setEmail('email');
-        $this->assertEquals('email', $this->object->getEmail());
+        $this->assertEquals(
+            'email',
+            $this->object->getEmail()
+        );
     }
 
     /**
@@ -233,7 +290,10 @@ class CMSUserTest extends TestCase
         $date = new \DateTime();
         $this->assertNull($this->object->getLastLogin());
         $this->object->setLastLogin($date);
-        $this->assertEquals($date, $this->object->getLastLogin());
+        $this->assertEquals(
+            $date,
+            $this->object->getLastLogin()
+        );
     }
 
     /**
@@ -243,7 +303,10 @@ class CMSUserTest extends TestCase
     {
         $this->assertNull($this->object->getPassword());
         $this->object->setPassword('password');
-        $this->assertEquals('password', $this->object->getPassword());
+        $this->assertEquals(
+            'password',
+            $this->object->getPassword()
+        );
     }
 
     /**
@@ -253,7 +316,10 @@ class CMSUserTest extends TestCase
     {
         $this->assertNull($this->object->getPlainPassword());
         $this->object->setPlainPassword('plainpassword');
-        $this->assertEquals('plainpassword', $this->object->getPlainPassword());
+        $this->assertEquals(
+            'plainpassword',
+            $this->object->getPlainPassword()
+        );
     }
 
     /**
@@ -275,7 +341,10 @@ class CMSUserTest extends TestCase
     {
         $this->assertNull($this->object->getUsername());
         $this->object->setUsername('username');
-        $this->assertEquals('username', $this->object->getUsername());
+        $this->assertEquals(
+            'username',
+            $this->object->getUsername()
+        );
     }
 
     /**
@@ -286,7 +355,10 @@ class CMSUserTest extends TestCase
         $user = new CMSUser();
         $user->setUsername('username');
 
-        $this->assertEquals('username', $user);
+        $this->assertEquals(
+            'username',
+            $user
+        );
     }
 
     /**
@@ -295,13 +367,30 @@ class CMSUserTest extends TestCase
     public function testUnserialize(): void
     {
         $user = new CMSUser();
-        $user->unserialize('a:6:{i:0;i:1;i:1;s:4:"uuid";i:2;s:8:"username";i:3;s:8:"password";i:4;s:4:"mail";i:5;b:1;}');
+        $user->unserialize(
+            'a:6:{i:0;i:1;i:1;s:4:"uuid";i:2;s:8:"username";i:3;s:8:"password";i:4;s:4:"mail";i:5;b:1;}'
+        );
 
-        $this->assertEquals(1, $user->getId());
-        $this->assertEquals('uuid', $user->getUuid());
-        $this->assertEquals('username', $user->getUsername());
-        $this->assertEquals('password', $user->getPassword());
-        $this->assertEquals('mail', $user->getEmail());
+        $this->assertEquals(
+            1,
+            $user->getId()
+        );
+        $this->assertEquals(
+            'uuid',
+            $user->getUuid()
+        );
+        $this->assertEquals(
+            'username',
+            $user->getUsername()
+        );
+        $this->assertEquals(
+            'password',
+            $user->getPassword()
+        );
+        $this->assertEquals(
+            'mail',
+            $user->getEmail()
+        );
         $this->assertTrue($user->isEnabled());
     }
 

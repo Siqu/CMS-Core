@@ -20,21 +20,35 @@ class GroupControllerTest extends FixtureAwareTestCase
      */
     public function testCreate(): void
     {
-        $this->callPost([
-            'name' => 'name2',
-            'roles' => [
-                'ROLE_TEST'
+        $this->callPost(
+            [
+                'name' => 'name2',
+                'roles' => [
+                    'ROLE_TEST'
+                ]
             ]
-        ]);
+        );
 
-        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            201,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $group = json_decode($data, false);
+        $group = json_decode(
+            $data,
+            false
+        );
 
-        $this->assertEquals('name2', $group->name);
-        $this->assertEquals([
-            'ROLE_TEST'
-        ], $group->roles);
+        $this->assertEquals(
+            'name2',
+            $group->name
+        );
+        $this->assertEquals(
+            [
+                'ROLE_TEST'
+            ],
+            $group->roles
+        );
         $this->assertNotNull($group->uuid);
     }
 
@@ -47,12 +61,24 @@ class GroupControllerTest extends FixtureAwareTestCase
     {
         $this->callPost([]);
 
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            400,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $errors = json_decode($data, false);
+        $errors = json_decode(
+            $data,
+            false
+        );
 
-        $this->assertCount(1, $errors);
-        $this->assertEquals('name', $errors[0]->path);
+        $this->assertCount(
+            1,
+            $errors
+        );
+        $this->assertEquals(
+            'name',
+            $errors[0]->path
+        );
     }
 
     /**
@@ -65,7 +91,10 @@ class GroupControllerTest extends FixtureAwareTestCase
         $uuid = $this->getExistingUuid();
         $this->callDelete($uuid);
 
-        $this->assertEquals(204, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            204,
+            $this->client->getResponse()->getStatusCode()
+        );
     }
 
     /**
@@ -77,7 +106,10 @@ class GroupControllerTest extends FixtureAwareTestCase
     {
         $this->callDelete('invalid');
 
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            404,
+            $this->client->getResponse()->getStatusCode()
+        );
     }
 
     /**
@@ -89,15 +121,30 @@ class GroupControllerTest extends FixtureAwareTestCase
     {
         $this->callGet();
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            200,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $data = json_decode($data, false);
+        $data = json_decode(
+            $data,
+            false
+        );
 
-        $this->assertCount(1, $data);
+        $this->assertCount(
+            1,
+            $data
+        );
 
         $group = $data[0];
-        $this->assertEquals(GroupFixture::NAME, $group->name);
-        $this->assertEquals(GroupFixture::ROLES, $group->roles);
+        $this->assertEquals(
+            GroupFixture::NAME,
+            $group->name
+        );
+        $this->assertEquals(
+            GroupFixture::ROLES,
+            $group->roles
+        );
     }
 
     /**
@@ -111,12 +158,27 @@ class GroupControllerTest extends FixtureAwareTestCase
 
         $this->callGet($uuid);
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            200,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $group = json_decode($data, false);
-        $this->assertEquals(GroupFixture::NAME, $group->name);
-        $this->assertEquals(GroupFixture::ROLES, $group->roles);
-        $this->assertEquals($uuid, $group->uuid);
+        $group = json_decode(
+            $data,
+            false
+        );
+        $this->assertEquals(
+            GroupFixture::NAME,
+            $group->name
+        );
+        $this->assertEquals(
+            GroupFixture::ROLES,
+            $group->roles
+        );
+        $this->assertEquals(
+            $uuid,
+            $group->uuid
+        );
     }
 
     /**
@@ -128,7 +190,10 @@ class GroupControllerTest extends FixtureAwareTestCase
     {
         $this->callGet('1');
 
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            404,
+            $this->client->getResponse()->getStatusCode()
+        );
     }
 
     /**
@@ -139,15 +204,27 @@ class GroupControllerTest extends FixtureAwareTestCase
     public function testUpdate(): void
     {
         $uuid = $this->getExistingUuid();
-        $this->callPatch($uuid, [
-            'name' => 'name2'
-        ]);
+        $this->callPatch(
+            $uuid,
+            [
+                'name' => 'name2'
+            ]
+        );
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            200,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $group = json_decode($data, false);
+        $group = json_decode(
+            $data,
+            false
+        );
 
-        $this->assertEquals('name2', $group->name);
+        $this->assertEquals(
+            'name2',
+            $group->name
+        );
     }
 
     /**
@@ -157,9 +234,15 @@ class GroupControllerTest extends FixtureAwareTestCase
      */
     public function testUpdateInvalid(): void
     {
-        $this->callPatch('invalid', []);
+        $this->callPatch(
+            'invalid',
+            []
+        );
 
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            404,
+            $this->client->getResponse()->getStatusCode()
+        );
     }
 
     /**

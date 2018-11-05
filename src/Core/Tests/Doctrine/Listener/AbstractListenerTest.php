@@ -35,10 +35,13 @@ class AbstractListenerTest extends TestCase
      */
     public function testGetSubscribedEvents(): void
     {
-        $this->assertEquals([
-            'prePersist',
-            'preUpdate'
-        ], $this->listener->getSubscribedEvents());
+        $this->assertEquals(
+            [
+                'prePersist',
+                'preUpdate'
+            ],
+            $this->listener->getSubscribedEvents()
+        );
     }
 
     /**
@@ -49,7 +52,10 @@ class AbstractListenerTest extends TestCase
     public function testPrePersist(): void
     {
         $this->mockMethods();
-        $args = new LifecycleEventArgs($this->object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $this->object,
+            $this->entityManager
+        );
 
         $this->listener->prePersist($args);
     }
@@ -62,7 +68,10 @@ class AbstractListenerTest extends TestCase
     public function testPreUpdate(): void
     {
         $this->mockMethods();
-        $args = new LifecycleEventArgs($this->object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $this->object,
+            $this->entityManager
+        );
 
         $this->listener->prePersist($args);
     }
@@ -99,7 +108,10 @@ class AbstractListenerTest extends TestCase
         $this->unitOfWork
             ->expects($this->once())
             ->method('recomputeSingleEntityChangeSet')
-            ->with($this->metadata, $this->object);
+            ->with(
+                $this->metadata,
+                $this->object
+            );
 
         $this->entityManager
             ->expects($this->once())

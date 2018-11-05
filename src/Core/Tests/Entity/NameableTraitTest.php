@@ -23,7 +23,10 @@ class NameableTraitTest extends TestCase
     {
         $this->assertNull($this->object->getTitle());
         $this->object->setTitle('title');
-        $this->assertEquals('title', $this->object->getTitle());
+        $this->assertEquals(
+            'title',
+            $this->object->getTitle()
+        );
     }
 
     /**
@@ -35,7 +38,10 @@ class NameableTraitTest extends TestCase
     {
         $this->assertNull($this->object->getTitleShown());
         $this->object->setTitleShown('titleShown');
-        $this->assertEquals('titleShown', $this->object->getTitleShown());
+        $this->assertEquals(
+            'titleShown',
+            $this->object->getTitleShown()
+        );
     }
 
     /**

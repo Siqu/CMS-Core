@@ -22,9 +22,7 @@ class AcceptLanguageListener
 
         /** @var ListenerAttributes $listener */
         $listener = $request->attributes->get('listener');
-        if (
-        !$listener->isAcceptLanguageActive()
-        ) {
+        if (!$listener->isAcceptLanguageActive()) {
             return;
         }
         $preferredLocale = $request->getPreferredLanguage(['en', 'de']);

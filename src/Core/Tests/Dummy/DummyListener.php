@@ -18,7 +18,10 @@ class DummyListener extends AbstractListener
      */
     public function prePersist(LifecycleEventArgs $args): void
     {
-        $this->recomputeChangeSet($args->getObjectManager(), $args->getObject());
+        $this->recomputeChangeSet(
+            $args->getObjectManager(),
+            $args->getObject()
+        );
     }
 
     /**
@@ -27,6 +30,9 @@ class DummyListener extends AbstractListener
      */
     public function preUpdate(LifecycleEventArgs $args): void
     {
-        $this->recomputeChangeSet($args->getObjectManager(), $args->getObject());
+        $this->recomputeChangeSet(
+            $args->getObjectManager(),
+            $args->getObject()
+        );
     }
 }

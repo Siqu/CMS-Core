@@ -26,9 +26,7 @@ class APIExceptionListener
 
         /** @var ListenerAttributes $listener */
         $listener = $request->attributes->get('listener');
-        if (
-        !$listener->isAPIExceptionActive()
-        ) {
+        if (!$listener->isAPIExceptionActive()) {
             return;
         }
 
@@ -37,15 +35,23 @@ class APIExceptionListener
         $class = get_class($exception);
         if ($class === APIValidationException::class) {
             /** @var APIValidationException $exception */
-            $response = new APIResponse($exception->getViolations(), Response::HTTP_BAD_REQUEST);
+            $response = new APIResponse(
+                $exception->getViolations(),
+                Response::HTTP_BAD_REQUEST
+            );
 
             $event->setResponse($response);
-        } else if ($class === NotFoundHttpException::class) {
-            $response = new APIResponse([
-                'message' => 'No Entry for found.'
-            ], Response::HTTP_NOT_FOUND);
+        } else {
+            if ($class === NotFoundHttpException::class) {
+                $response = new APIResponse(
+                    [
+                        'message' => 'No Entry for found.'
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
 
-            $event->setResponse($response);
+                $event->setResponse($response);
+            }
         }
     }
 }

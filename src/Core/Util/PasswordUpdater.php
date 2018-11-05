@@ -38,7 +38,10 @@ class PasswordUpdater
 
         $encoder = $this->encoderFactory->getEncoder($user);
 
-        $hashedPassword = $encoder->encodePassword($plainPassword, $user->getSalt());
+        $hashedPassword = $encoder->encodePassword(
+            $plainPassword,
+            $user->getSalt()
+        );
         $user->setPassword($hashedPassword);
         $user->eraseCredentials();
     }

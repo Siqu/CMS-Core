@@ -22,10 +22,16 @@ class RequestAttributeListener
 
         $listener = $request->attributes->get('listener');
         if (!$listener || !array_key_exists('request', $listener)) {
-            $request->attributes->set('listener', new ListenerAttributes());
+            $request->attributes->set(
+                'listener',
+                new ListenerAttributes()
+            );
             return;
         }
 
-        $request->attributes->set('listener', new ListenerAttributes($listener['request']));
+        $request->attributes->set(
+            'listener',
+            new ListenerAttributes($listener['request'])
+        );
     }
 }

@@ -23,8 +23,7 @@ class APIResponseListener
      */
     public function __construct(
         SerializerInterface $serializer
-    )
-    {
+    ) {
         $this->serializer = $serializer;
     }
 
@@ -40,10 +39,7 @@ class APIResponseListener
 
         /** @var ListenerAttributes $listener */
         $listener = $request->attributes->get('listener');
-        if (
-            !$listener->isResponseFormatterActive() ||
-            get_class($response) !== APIResponse::class
-        ) {
+        if (!$listener->isResponseFormatterActive() || get_class($response) !== APIResponse::class) {
             return;
         }
 
@@ -72,7 +68,9 @@ class APIResponseListener
         }
 
         $response->setContent($serialized);
-        $response->headers->set('Content-Type', $request->getRequestFormat());
-
+        $response->headers->set(
+            'Content-Type',
+            $request->getRequestFormat()
+        );
     }
 }

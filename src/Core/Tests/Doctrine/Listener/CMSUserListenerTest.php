@@ -29,7 +29,10 @@ class CMSUserListenerTest extends AbstractBaseListenerTest
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(CMSUserListener::class, $this->listener);
+        $this->assertInstanceOf(
+            CMSUserListener::class,
+            $this->listener
+        );
     }
 
     /**
@@ -49,7 +52,10 @@ class CMSUserListenerTest extends AbstractBaseListenerTest
             ->method('generate')
             ->willReturn('1');
 
-        $event = new LifecycleEventArgs($object, $this->entityManager);
+        $event = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->prePersist($event);
     }
@@ -69,7 +75,10 @@ class CMSUserListenerTest extends AbstractBaseListenerTest
 
         $object = new \stdClass();
 
-        $event = new LifecycleEventArgs($object, $this->entityManager);
+        $event = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->prePersist($event);
     }
@@ -86,7 +95,10 @@ class CMSUserListenerTest extends AbstractBaseListenerTest
             ->method('hashPassword')
             ->with($object);
 
-        $event = new LifecycleEventArgs($object, $this->entityManager);
+        $event = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->preUpdate($event);
     }
@@ -102,7 +114,10 @@ class CMSUserListenerTest extends AbstractBaseListenerTest
 
         $object = new \stdClass();
 
-        $event = new LifecycleEventArgs($object, $this->entityManager);
+        $event = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->preUpdate($event);
     }
@@ -122,6 +137,9 @@ class CMSUserListenerTest extends AbstractBaseListenerTest
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->listener = new CMSUserListener($this->passwordUpdater, $this->uuidGenerator);
+        $this->listener = new CMSUserListener(
+            $this->passwordUpdater,
+            $this->uuidGenerator
+        );
     }
 }

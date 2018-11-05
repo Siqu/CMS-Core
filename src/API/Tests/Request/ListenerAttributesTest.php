@@ -19,7 +19,10 @@ class ListenerAttributesTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(ListenerAttributes::class, $this->attributes);
+        $this->assertInstanceOf(
+            ListenerAttributes::class,
+            $this->attributes
+        );
     }
 
     /**

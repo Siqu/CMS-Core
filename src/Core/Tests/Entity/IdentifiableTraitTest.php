@@ -24,7 +24,10 @@ class IdentifiableTraitTest extends TestCase
     {
         $this->assertNull($this->object->getId());
         $this->object->setId(1);
-        $this->assertEquals(1, $this->object->getId());
+        $this->assertEquals(
+            1,
+            $this->object->getId()
+        );
     }
 
     /**
@@ -36,7 +39,10 @@ class IdentifiableTraitTest extends TestCase
     {
         $this->assertNull($this->object->getUuid());
         $this->object->setUuid('1');
-        $this->assertEquals('1', $this->object->getUuid());
+        $this->assertEquals(
+            '1',
+            $this->object->getUuid()
+        );
     }
 
     /**

@@ -38,7 +38,10 @@ class TimestampableListener extends AbstractListener
         if ($this->shouldTraitObjectBeHandled($object, TimestampableTrait::class)) {
             /** @var TimestampableTrait $object */
             $object->setUpdatedAt(new \DateTime());
-            $this->recomputeChangeSet($args->getObjectManager(), $object);
+            $this->recomputeChangeSet(
+                $args->getObjectManager(),
+                $object
+            );
         }
     }
 }

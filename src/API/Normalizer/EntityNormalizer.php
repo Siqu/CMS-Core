@@ -36,9 +36,13 @@ class EntityNormalizer extends ObjectNormalizer
         NameConverterInterface $nameConverter = null,
         PropertyAccessorInterface $propertyAccessor = null,
         PropertyTypeExtractorInterface $propertyTypeExtractor = null
-    )
-    {
-        parent::__construct($classMetadataFactory, $nameConverter, $propertyAccessor, $propertyTypeExtractor);
+    ) {
+        parent::__construct(
+            $classMetadataFactory,
+            $nameConverter,
+            $propertyAccessor,
+            $propertyTypeExtractor
+        );
 
         $this->entityManager = $entityManager;
         $this->uuidCircularReferenceHandler = $uuidCircularReferenceHandler;
@@ -53,9 +57,16 @@ class EntityNormalizer extends ObjectNormalizer
      * @param array $context
      * @return null|object
      */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        return $this->entityManager->find($class, $data);
+    public function denormalize(
+        $data,
+        $class,
+        $format = null,
+        array $context = []
+    ) {
+        return $this->entityManager->find(
+            $class,
+            $data
+        );
     }
 
     /**
@@ -66,10 +77,18 @@ class EntityNormalizer extends ObjectNormalizer
      * @param null $format
      * @return bool|mixed
      */
-    public function supportsDenormalization($data, $type, $format = null)
-    {
+    public function supportsDenormalization(
+        $data,
+        $type,
+        $format = null
+    ) {
         return
-            (strpos($type, 'Siqu\\CMS\\Core\\Entity') === 0) &&
+            (
+                strpos(
+                    $type,
+                    'Siqu\\CMS\\Core\\Entity'
+                ) === 0
+            ) &&
             (is_numeric($data) || is_string($data) || (isset($data['id'])));
     }
 
@@ -81,8 +100,10 @@ class EntityNormalizer extends ObjectNormalizer
      * @return bool
      * @throws \ReflectionException
      */
-    public function supportsNormalization($data, $format = null)
-    {
+    public function supportsNormalization(
+        $data,
+        $format = null
+    ) {
         if (!is_object($data)) {
             return false;
         }

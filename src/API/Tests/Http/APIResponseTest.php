@@ -20,7 +20,10 @@ class APIResponseTest extends TestCase
      */
     public function testGetData(): void
     {
-        $this->assertEquals([], $this->response->getData());
+        $this->assertEquals(
+            [],
+            $this->response->getData()
+        );
     }
 
     /**
@@ -28,9 +31,18 @@ class APIResponseTest extends TestCase
      */
     public function testInstance(): void
     {
-        $this->assertInstanceOf(APIResponse::class, $this->response);
-        $this->assertEquals('', $this->response->getContent());
-        $this->assertEquals(Response::HTTP_OK, $this->response->getStatusCode());
+        $this->assertInstanceOf(
+            APIResponse::class,
+            $this->response
+        );
+        $this->assertEquals(
+            '',
+            $this->response->getContent()
+        );
+        $this->assertEquals(
+            Response::HTTP_OK,
+            $this->response->getStatusCode()
+        );
     }
 
     /**

@@ -20,7 +20,10 @@ class ConfigurationTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(Configuration::class, $this->configuration);
+        $this->assertInstanceOf(
+            Configuration::class,
+            $this->configuration
+        );
     }
 
     /**
@@ -30,11 +33,17 @@ class ConfigurationTest extends TestCase
     {
         $builder = $this->configuration->getConfigTreeBuilder();
 
-        $this->assertInstanceOf(TreeBuilder::class, $builder);
+        $this->assertInstanceOf(
+            TreeBuilder::class,
+            $builder
+        );
 
         $tree = $builder->buildTree();
 
-        $this->assertEquals('siqu_cms_core', $tree->getName());
+        $this->assertEquals(
+            'siqu_cms_core',
+            $tree->getName()
+        );
     }
 
     /**

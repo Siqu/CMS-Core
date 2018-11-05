@@ -20,7 +20,10 @@ class TimestampableListenerTest extends AbstractBaseListenerTest
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(TimestampableListener::class, $this->listener);
+        $this->assertInstanceOf(
+            TimestampableListener::class,
+            $this->listener
+        );
     }
 
     /**
@@ -29,7 +32,10 @@ class TimestampableListenerTest extends AbstractBaseListenerTest
     public function testPrePersist(): void
     {
         $object = new TimestampableObject();
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->prePersist($args);
 
@@ -49,7 +55,10 @@ class TimestampableListenerTest extends AbstractBaseListenerTest
             ->expects($this->never())
             ->method('setCreatedAt');
 
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->prePersist($args);
     }
@@ -60,7 +69,10 @@ class TimestampableListenerTest extends AbstractBaseListenerTest
     public function testPreUpdate(): void
     {
         $object = new TimestampableObject();
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->preUpdate($args);
 
@@ -80,7 +92,10 @@ class TimestampableListenerTest extends AbstractBaseListenerTest
             ->expects($this->never())
             ->method('setUpdatedAt');
 
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->preUpdate($args);
     }

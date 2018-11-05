@@ -26,7 +26,10 @@ class BlameableTraitTest extends TestCase
 
         $this->assertNull($this->object->getChangeUser());
         $this->object->setChangeUser($user);
-        $this->assertEquals($user, $this->object->getChangeUser());
+        $this->assertEquals(
+            $user,
+            $this->object->getChangeUser()
+        );
     }
 
     /**
@@ -40,7 +43,10 @@ class BlameableTraitTest extends TestCase
 
         $this->assertNull($this->object->getUser());
         $this->object->setUser($user);
-        $this->assertEquals($user, $this->object->getUser());
+        $this->assertEquals(
+            $user,
+            $this->object->getUser()
+        );
     }
 
     /**

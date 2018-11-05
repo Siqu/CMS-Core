@@ -252,7 +252,10 @@ class CMSUser implements UserInterface, \Serializable
         $roles = $this->roles;
 
         foreach ($this->getGroups() as $group) {
-            $roles = array_merge($roles, $group->getRoles());
+            $roles = array_merge(
+                $roles,
+                $group->getRoles()
+            );
         }
 
         $roles[] = static::ROLE_DEFAULT;
@@ -290,7 +293,10 @@ class CMSUser implements UserInterface, \Serializable
      */
     public function hasGroup($name): bool
     {
-        return in_array($name, $this->getGroupNames());
+        return in_array(
+            $name,
+            $this->getGroupNames()
+        );
     }
 
     /**
@@ -301,7 +307,11 @@ class CMSUser implements UserInterface, \Serializable
      */
     public function hasRole($role): bool
     {
-        return in_array(strtoupper($role), $this->getRoles(), true);
+        return in_array(
+            strtoupper($role),
+            $this->getRoles(),
+            true
+        );
     }
 
     /**
@@ -389,7 +399,11 @@ class CMSUser implements UserInterface, \Serializable
     public function removeRole($role): void
     {
         if ($this->hasRole($role)) {
-            $key = array_search(strtoupper($role), $this->roles, true);
+            $key = array_search(
+                strtoupper($role),
+                $this->roles,
+                true
+            );
             unset($this->roles[$key]);
             $this->roles = array_values($this->roles);
         }
@@ -403,14 +417,16 @@ class CMSUser implements UserInterface, \Serializable
      */
     public function serialize(): string
     {
-        return serialize([
-            $this->id,
-            $this->uuid,
-            $this->username,
-            $this->password,
-            $this->email,
-            $this->enabled
-        ]);
+        return serialize(
+            [
+                $this->id,
+                $this->uuid,
+                $this->username,
+                $this->password,
+                $this->email,
+                $this->enabled
+            ]
+        );
     }
 
     /**
@@ -552,13 +568,9 @@ class CMSUser implements UserInterface, \Serializable
      */
     public function unserialize($serialized): void
     {
-        list(
-            $this->id,
-            $this->uuid,
-            $this->username,
-            $this->password,
-            $this->email,
-            $this->enabled
-            ) = unserialize($serialized, ['allowed_classes' => false]);
+        list($this->id, $this->uuid, $this->username, $this->password, $this->email, $this->enabled) = unserialize(
+            $serialized,
+            ['allowed_classes' => false]
+        );
     }
 }

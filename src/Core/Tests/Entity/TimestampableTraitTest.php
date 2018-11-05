@@ -24,7 +24,10 @@ class TimestampableTraitTest extends TestCase
         $date = new \DateTime();
         $this->assertNull($this->object->getCreatedAt());
         $this->object->setCreatedAt($date);
-        $this->assertEquals($date, $this->object->getCreatedAt());
+        $this->assertEquals(
+            $date,
+            $this->object->getCreatedAt()
+        );
     }
 
     /**
@@ -37,7 +40,10 @@ class TimestampableTraitTest extends TestCase
         $date = new \DateTime();
         $this->assertNull($this->object->getUpdatedAt());
         $this->object->setUpdatedAt($date);
-        $this->assertEquals($date, $this->object->getUpdatedAt());
+        $this->assertEquals(
+            $date,
+            $this->object->getUpdatedAt()
+        );
     }
 
     /**

@@ -28,7 +28,10 @@ class AcceptListenerTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(AcceptListener::class, $this->listener);
+        $this->assertInstanceOf(
+            AcceptListener::class,
+            $this->listener
+        );
     }
 
     /**
@@ -37,15 +40,30 @@ class AcceptListenerTest extends TestCase
     public function testOnKernelRequest(): void
     {
         $request = new Request();
-        $request->headers->set('Accept', 'application/json');
-        $request->attributes->set('listener', new ListenerAttributes([
-            'accept' => true
-        ]));
-        $event = new GetResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+        $request->headers->set(
+            'Accept',
+            'application/json'
+        );
+        $request->attributes->set(
+            'listener',
+            new ListenerAttributes(
+                [
+                    'accept' => true
+                ]
+            )
+        );
+        $event = new GetResponseEvent(
+            $this->kernel,
+            $request,
+            HttpKernelInterface::MASTER_REQUEST
+        );
 
         $this->listener->onKernelRequest($event);
 
-        $this->assertEquals('application/json', $request->getRequestFormat());
+        $this->assertEquals(
+            'application/json',
+            $request->getRequestFormat()
+        );
     }
 
     /**
@@ -54,15 +72,30 @@ class AcceptListenerTest extends TestCase
     public function testOnKernelRequestUnknownFormat(): void
     {
         $request = new Request();
-        $request->headers->set('Accept', 'application/javascript');
-        $request->attributes->set('listener', new ListenerAttributes([
-            'accept' => true
-        ]));
-        $event = new GetResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+        $request->headers->set(
+            'Accept',
+            'application/javascript'
+        );
+        $request->attributes->set(
+            'listener',
+            new ListenerAttributes(
+                [
+                    'accept' => true
+                ]
+            )
+        );
+        $event = new GetResponseEvent(
+            $this->kernel,
+            $request,
+            HttpKernelInterface::MASTER_REQUEST
+        );
 
         $this->listener->onKernelRequest($event);
 
-        $this->assertEquals('application/json', $request->getRequestFormat());
+        $this->assertEquals(
+            'application/json',
+            $request->getRequestFormat()
+        );
     }
 
     /**
@@ -71,12 +104,22 @@ class AcceptListenerTest extends TestCase
     public function testOnKernelRequestWithoutListener(): void
     {
         $request = new Request();
-        $request->attributes->set('listener', new ListenerAttributes());
-        $event = new GetResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+        $request->attributes->set(
+            'listener',
+            new ListenerAttributes()
+        );
+        $event = new GetResponseEvent(
+            $this->kernel,
+            $request,
+            HttpKernelInterface::MASTER_REQUEST
+        );
 
         $this->listener->onKernelRequest($event);
 
-        $this->assertEquals('html', $request->getRequestFormat());
+        $this->assertEquals(
+            'html',
+            $request->getRequestFormat()
+        );
     }
 
     /**

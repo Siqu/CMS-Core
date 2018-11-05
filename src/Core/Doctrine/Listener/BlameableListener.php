@@ -60,7 +60,10 @@ class BlameableListener extends AbstractListener
             if ($user) {
                 $object->setChangeUser($user);
             }
-            $this->recomputeChangeSet($args->getObjectManager(), $object);
+            $this->recomputeChangeSet(
+                $args->getObjectManager(),
+                $object
+            );
         }
     }
 

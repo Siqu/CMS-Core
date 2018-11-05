@@ -24,8 +24,11 @@ class ApiAuthenticator implements SimplePreAuthenticatorInterface
      * @param $providerKey
      * @return PreAuthenticatedToken
      */
-    public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
-    {
+    public function authenticateToken(
+        TokenInterface $token,
+        UserProviderInterface $userProvider,
+        $providerKey
+    ) {
         if (!$userProvider instanceof ApiUserProvider) {
             throw new \InvalidArgumentException(
                 sprintf(
@@ -40,7 +43,10 @@ class ApiAuthenticator implements SimplePreAuthenticatorInterface
 
         if (!$username) {
             throw new CustomUserMessageAuthenticationException(
-                sprintf('Could not authenticate user "%s"', $username)
+                sprintf(
+                    'Could not authenticate user "%s"',
+                    $username
+                )
             );
         }
 
@@ -61,8 +67,10 @@ class ApiAuthenticator implements SimplePreAuthenticatorInterface
      * @param string $providerKey
      * @return PreAuthenticatedToken
      */
-    public function createToken(Request $request, $providerKey): PreAuthenticatedToken
-    {
+    public function createToken(
+        Request $request,
+        $providerKey
+    ): PreAuthenticatedToken {
         $username = $request->getUser();
         $password = $request->getPassword();
 
@@ -70,7 +78,10 @@ class ApiAuthenticator implements SimplePreAuthenticatorInterface
             throw new BadCredentialsException();
         }
 
-        $credentials = new Credentials($username, $password);
+        $credentials = new Credentials(
+            $username,
+            $password
+        );
 
         return new PreAuthenticatedToken(
             'anon.',
@@ -86,8 +97,10 @@ class ApiAuthenticator implements SimplePreAuthenticatorInterface
      * @param string $providerKey
      * @return bool
      */
-    public function supportsToken(TokenInterface $token, $providerKey)
-    {
+    public function supportsToken(
+        TokenInterface $token,
+        $providerKey
+    ) {
         return $token instanceof PreAuthenticatedToken && $token->getProviderKey() === $providerKey;
     }
 }

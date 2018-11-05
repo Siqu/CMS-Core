@@ -27,7 +27,10 @@ class PasswordUpdaterTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(PasswordUpdater::class, $this->updater);
+        $this->assertInstanceOf(
+            PasswordUpdater::class,
+            $this->updater
+        );
     }
 
     /**
@@ -44,13 +47,19 @@ class PasswordUpdaterTest extends TestCase
         $this->encoder
             ->expects($this->once())
             ->method('encodePassword')
-            ->with($plainPassword, $user->getSalt())
+            ->with(
+                $plainPassword,
+                $user->getSalt()
+            )
             ->willReturn($encodedPassword);
 
         $this->updater->hashPassword($user);
 
         $this->assertNull($user->getPlainPassword());
-        $this->assertEquals($encodedPassword, $user->getPassword());
+        $this->assertEquals(
+            $encodedPassword,
+            $user->getPassword()
+        );
     }
 
     /**

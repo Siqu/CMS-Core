@@ -34,7 +34,10 @@ class APIExceptionListenerTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(APIExceptionListener::class, $this->listener);
+        $this->assertInstanceOf(
+            APIExceptionListener::class,
+            $this->listener
+        );
     }
 
     /**
@@ -46,24 +49,51 @@ class APIExceptionListenerTest extends TestCase
             ->method('isAPIExceptionActive')
             ->willReturn(true);
 
-        $request = new Request([], [], [
-            'listener' => $this->listenerAttributes
-        ]);
+        $request = new Request(
+            [],
+            [],
+            [
+                'listener' => $this->listenerAttributes
+            ]
+        );
 
-        $list = new ConstraintViolationList([
-            new ConstraintViolation('message', 'template', [], null, null, null)
-        ]);
+        $list = new ConstraintViolationList(
+            [
+                new ConstraintViolation(
+                    'message',
+                    'template',
+                    [],
+                    null,
+                    null,
+                    null
+                )
+            ]
+        );
         $exception = new APIValidationException($list);
 
-        $event = new GetResponseForExceptionEvent($this->kernel, $request, KernelInterface::MASTER_REQUEST, $exception);
+        $event = new GetResponseForExceptionEvent(
+            $this->kernel,
+            $request,
+            KernelInterface::MASTER_REQUEST,
+            $exception
+        );
 
         $this->listener->onKernelException($event);
 
         $response = $event->getResponse();
-        $this->assertInstanceOf(APIResponse::class, $response);
+        $this->assertInstanceOf(
+            APIResponse::class,
+            $response
+        );
         /** @var APIResponse $response */
-        $this->assertEquals($list, $response->getData());
-        $this->assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+        $this->assertEquals(
+            $list,
+            $response->getData()
+        );
+        $this->assertEquals(
+            Response::HTTP_BAD_REQUEST,
+            $response->getStatusCode()
+        );
     }
 
     /**
@@ -75,11 +105,20 @@ class APIExceptionListenerTest extends TestCase
             ->method('isAPIExceptionActive')
             ->willReturn(true);
 
-        $request = new Request([], [], [
-            'listener' => $this->listenerAttributes
-        ]);
+        $request = new Request(
+            [],
+            [],
+            [
+                'listener' => $this->listenerAttributes
+            ]
+        );
 
-        $event = new GetResponseForExceptionEvent($this->kernel, $request, KernelInterface::MASTER_REQUEST, new \Exception());
+        $event = new GetResponseForExceptionEvent(
+            $this->kernel,
+            $request,
+            KernelInterface::MASTER_REQUEST,
+            new \Exception()
+        );
 
         $this->listener->onKernelException($event);
 
@@ -95,11 +134,20 @@ class APIExceptionListenerTest extends TestCase
             ->method('isAPIExceptionActive')
             ->willReturn(false);
 
-        $request = new Request([], [], [
-            'listener' => $this->listenerAttributes
-        ]);
+        $request = new Request(
+            [],
+            [],
+            [
+                'listener' => $this->listenerAttributes
+            ]
+        );
 
-        $event = new GetResponseForExceptionEvent($this->kernel, $request, KernelInterface::MASTER_REQUEST, new \Exception());
+        $event = new GetResponseForExceptionEvent(
+            $this->kernel,
+            $request,
+            KernelInterface::MASTER_REQUEST,
+            new \Exception()
+        );
 
         $this->listener->onKernelException($event);
 
@@ -115,22 +163,40 @@ class APIExceptionListenerTest extends TestCase
             ->method('isAPIExceptionActive')
             ->willReturn(true);
 
-        $request = new Request([], [], [
-            'listener' => $this->listenerAttributes
-        ]);
+        $request = new Request(
+            [],
+            [],
+            [
+                'listener' => $this->listenerAttributes
+            ]
+        );
         $exception = new NotFoundHttpException();
 
-        $event = new GetResponseForExceptionEvent($this->kernel, $request, KernelInterface::MASTER_REQUEST, $exception);
+        $event = new GetResponseForExceptionEvent(
+            $this->kernel,
+            $request,
+            KernelInterface::MASTER_REQUEST,
+            $exception
+        );
 
         $this->listener->onKernelException($event);
 
         $response = $event->getResponse();
-        $this->assertInstanceOf(APIResponse::class, $response);
+        $this->assertInstanceOf(
+            APIResponse::class,
+            $response
+        );
         /** @var APIResponse $response */
-        $this->assertEquals([
-            'message' => 'No Entry for found.'
-        ], $response->getData());
-        $this->assertEquals(Response::HTTP_NOT_FOUND, $response->getStatusCode());
+        $this->assertEquals(
+            [
+                'message' => 'No Entry for found.'
+            ],
+            $response->getData()
+        );
+        $this->assertEquals(
+            Response::HTTP_NOT_FOUND,
+            $response->getStatusCode()
+        );
     }
 
     /**

@@ -27,7 +27,10 @@ class EntityNormalizerTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(EntityNormalizer::class, $this->normalizer);
+        $this->assertInstanceOf(
+            EntityNormalizer::class,
+            $this->normalizer
+        );
     }
 
     /**
@@ -42,9 +45,15 @@ class EntityNormalizerTest extends TestCase
         $this->entityManager
             ->expects($this->once())
             ->method('find')
-            ->with(\stdClass::class, $data);
+            ->with(
+                \stdClass::class,
+                $data
+            );
 
-        $this->normalizer->denormalize($data, \stdClass::class);
+        $this->normalizer->denormalize(
+            $data,
+            \stdClass::class
+        );
     }
 
     /**
@@ -52,9 +61,14 @@ class EntityNormalizerTest extends TestCase
      */
     public function testSupportsDenormalizationArray(): void
     {
-        $this->assertTrue($this->normalizer->supportsDenormalization([
-            'id' => 1
-        ], Page::class));
+        $this->assertTrue(
+            $this->normalizer->supportsDenormalization(
+                [
+                    'id' => 1
+                ],
+                Page::class
+            )
+        );
     }
 
     /**
@@ -62,7 +76,12 @@ class EntityNormalizerTest extends TestCase
      */
     public function testSupportsDenormalizationInteger(): void
     {
-        $this->assertTrue($this->normalizer->supportsDenormalization(1, Page::class));
+        $this->assertTrue(
+            $this->normalizer->supportsDenormalization(
+                1,
+                Page::class
+            )
+        );
     }
 
     /**
@@ -70,7 +89,12 @@ class EntityNormalizerTest extends TestCase
      */
     public function testSupportsDenormalizationString(): void
     {
-        $this->assertTrue($this->normalizer->supportsDenormalization('1', Page::class));
+        $this->assertTrue(
+            $this->normalizer->supportsDenormalization(
+                '1',
+                Page::class
+            )
+        );
     }
 
     /**
@@ -109,6 +133,9 @@ class EntityNormalizerTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->normalizer = new EntityNormalizer($this->circularReferenceHandler, $this->entityManager);
+        $this->normalizer = new EntityNormalizer(
+            $this->circularReferenceHandler,
+            $this->entityManager
+        );
     }
 }

@@ -20,18 +20,32 @@ class CMSUserControllerTest extends FixtureAwareTestCase
      */
     public function testCreate(): void
     {
-        $this->callPost([
-            'email' => 'mail2@mail2.test',
-            'username' => 'username2',
-            'plainpassword' => 'password'
-        ]);
+        $this->callPost(
+            [
+                'email' => 'mail2@mail2.test',
+                'username' => 'username2',
+                'plainpassword' => 'password'
+            ]
+        );
 
-        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            201,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $user = json_decode($data, false);
+        $user = json_decode(
+            $data,
+            false
+        );
 
-        $this->assertEquals('username2', $user->username);
-        $this->assertEquals('mail2@mail2.test', $user->email);
+        $this->assertEquals(
+            'username2',
+            $user->username
+        );
+        $this->assertEquals(
+            'mail2@mail2.test',
+            $user->email
+        );
         $this->assertNotNull($user->uuid);
     }
 
@@ -44,37 +58,80 @@ class CMSUserControllerTest extends FixtureAwareTestCase
     {
         $this->callPost([]);
 
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            400,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $errors = json_decode($data, false);
+        $errors = json_decode(
+            $data,
+            false
+        );
 
-        $this->assertCount(3, $errors);
-        $this->assertEquals('email', $errors[0]->path);
-        $this->assertEquals('plainPassword', $errors[1]->path);
-        $this->assertEquals('username', $errors[2]->path);
+        $this->assertCount(
+            3,
+            $errors
+        );
+        $this->assertEquals(
+            'email',
+            $errors[0]->path
+        );
+        $this->assertEquals(
+            'plainPassword',
+            $errors[1]->path
+        );
+        $this->assertEquals(
+            'username',
+            $errors[2]->path
+        );
 
-        $this->callPost([
-            'email' => 'invalid',
-            'username' => CMSUserFixture::USERNAME,
-            'plainpassword' => 'password'
-        ]);
+        $this->callPost(
+            [
+                'email' => 'invalid',
+                'username' => CMSUserFixture::USERNAME,
+                'plainpassword' => 'password'
+            ]
+        );
         $data = $this->client->getResponse()->getContent();
-        $errors = json_decode($data, false);
+        $errors = json_decode(
+            $data,
+            false
+        );
 
-        $this->assertCount(2, $errors);
-        $this->assertEquals('username', $errors[0]->path);
-        $this->assertEquals('email', $errors[1]->path);
+        $this->assertCount(
+            2,
+            $errors
+        );
+        $this->assertEquals(
+            'username',
+            $errors[0]->path
+        );
+        $this->assertEquals(
+            'email',
+            $errors[1]->path
+        );
 
-        $this->callPost([
-            'email' => CMSUserFixture::EMAIL,
-            'username' => 'username2',
-            'plainpassword' => 'password'
-        ]);
+        $this->callPost(
+            [
+                'email' => CMSUserFixture::EMAIL,
+                'username' => 'username2',
+                'plainpassword' => 'password'
+            ]
+        );
         $data = $this->client->getResponse()->getContent();
-        $errors = json_decode($data, false);
+        $errors = json_decode(
+            $data,
+            false
+        );
 
-        $this->assertCount(1, $errors);
-        $this->assertEquals('email', $errors[0]->path);
+        $this->assertCount(
+            1,
+            $errors
+        );
+        $this->assertEquals(
+            'email',
+            $errors[0]->path
+        );
     }
 
     /**
@@ -87,7 +144,10 @@ class CMSUserControllerTest extends FixtureAwareTestCase
         $uuid = $this->getExistingUuid();
         $this->callDelete($uuid);
 
-        $this->assertEquals(204, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            204,
+            $this->client->getResponse()->getStatusCode()
+        );
     }
 
     /**
@@ -99,7 +159,10 @@ class CMSUserControllerTest extends FixtureAwareTestCase
     {
         $this->callDelete('invalid');
 
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            404,
+            $this->client->getResponse()->getStatusCode()
+        );
     }
 
     /**
@@ -112,15 +175,30 @@ class CMSUserControllerTest extends FixtureAwareTestCase
     {
         $this->callGet();
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            200,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $data = json_decode($data, false);
+        $data = json_decode(
+            $data,
+            false
+        );
 
-        $this->assertCount(1, $data);
+        $this->assertCount(
+            1,
+            $data
+        );
 
         $user = $data[0];
-        $this->assertEquals(CMSUserFixture::USERNAME, $user->username);
-        $this->assertEquals(CMSUserFixture::EMAIL, $user->email);
+        $this->assertEquals(
+            CMSUserFixture::USERNAME,
+            $user->username
+        );
+        $this->assertEquals(
+            CMSUserFixture::EMAIL,
+            $user->email
+        );
     }
 
     /**
@@ -134,12 +212,27 @@ class CMSUserControllerTest extends FixtureAwareTestCase
 
         $this->callGet($uuid);
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            200,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $user = json_decode($data, false);
-        $this->assertEquals(CMSUserFixture::USERNAME, $user->username);
-        $this->assertEquals(CMSUserFixture::EMAIL, $user->email);
-        $this->assertEquals($uuid, $user->uuid);
+        $user = json_decode(
+            $data,
+            false
+        );
+        $this->assertEquals(
+            CMSUserFixture::USERNAME,
+            $user->username
+        );
+        $this->assertEquals(
+            CMSUserFixture::EMAIL,
+            $user->email
+        );
+        $this->assertEquals(
+            $uuid,
+            $user->uuid
+        );
     }
 
     /**
@@ -152,7 +245,10 @@ class CMSUserControllerTest extends FixtureAwareTestCase
     {
         $this->callGet('1');
 
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            404,
+            $this->client->getResponse()->getStatusCode()
+        );
     }
 
     /**
@@ -163,15 +259,27 @@ class CMSUserControllerTest extends FixtureAwareTestCase
     public function testUpdate(): void
     {
         $uuid = $this->getExistingUuid();
-        $this->callPatch($uuid, [
-            'email' => 'mail2@mail2.test'
-        ]);
+        $this->callPatch(
+            $uuid,
+            [
+                'email' => 'mail2@mail2.test'
+            ]
+        );
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            200,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $user = json_decode($data, false);
+        $user = json_decode(
+            $data,
+            false
+        );
 
-        $this->assertEquals('mail2@mail2.test', $user->email);
+        $this->assertEquals(
+            'mail2@mail2.test',
+            $user->email
+        );
     }
 
     /**
@@ -181,21 +289,42 @@ class CMSUserControllerTest extends FixtureAwareTestCase
      */
     public function testUpdateInvalid(): void
     {
-        $this->callPatch('invalid', []);
+        $this->callPatch(
+            'invalid',
+            []
+        );
 
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            404,
+            $this->client->getResponse()->getStatusCode()
+        );
 
         $uuid = $this->getExistingUuid();
-        $this->callPatch($uuid, [
-            'email' => 'invalid'
-        ]);
+        $this->callPatch(
+            $uuid,
+            [
+                'email' => 'invalid'
+            ]
+        );
 
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            400,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $errors = json_decode($data, false);
+        $errors = json_decode(
+            $data,
+            false
+        );
 
-        $this->assertCount(1, $errors);
-        $this->assertEquals('email', $errors[0]->path);
+        $this->assertCount(
+            1,
+            $errors
+        );
+        $this->assertEquals(
+            'email',
+            $errors[0]->path
+        );
     }
 
     /**

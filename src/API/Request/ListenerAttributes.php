@@ -19,8 +19,7 @@ class ListenerAttributes
      */
     public function __construct(
         array $attributes = []
-    )
-    {
+    ) {
         $this->attributes = new ParameterBag($attributes);
     }
 
@@ -31,7 +30,10 @@ class ListenerAttributes
      */
     public function isAPIExceptionActive(): bool
     {
-        return $this->attributes->get('api-exception', false);
+        return $this->attributes->get(
+            'api-exception',
+            false
+        );
     }
 
     /**
@@ -41,7 +43,10 @@ class ListenerAttributes
      */
     public function isAcceptActive(): bool
     {
-        return $this->attributes->get('accept', false);
+        return $this->attributes->get(
+            'accept',
+            false
+        );
     }
 
     /**
@@ -51,7 +56,10 @@ class ListenerAttributes
      */
     public function isAcceptLanguageActive(): bool
     {
-        return $this->attributes->get('accept-language', false);
+        return $this->attributes->get(
+            'accept-language',
+            false
+        );
     }
 
     /**
@@ -61,6 +69,9 @@ class ListenerAttributes
      */
     public function isResponseFormatterActive(): bool
     {
-        return $this->attributes->get('response-formatter', false);
+        return $this->attributes->get(
+            'response-formatter',
+            false
+        );
     }
 }

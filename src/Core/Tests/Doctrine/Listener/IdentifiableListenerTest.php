@@ -25,7 +25,10 @@ class IdentifiableListenerTest extends AbstractBaseListenerTest
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(IdentifiableListener::class, $this->listener);
+        $this->assertInstanceOf(
+            IdentifiableListener::class,
+            $this->listener
+        );
     }
 
     /**
@@ -34,11 +37,17 @@ class IdentifiableListenerTest extends AbstractBaseListenerTest
     public function testPrePersist(): void
     {
         $object = new IdentifiableObject();
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->prePersist($args);
 
-        $this->assertEquals('uuid', $object->getUuid());
+        $this->assertEquals(
+            'uuid',
+            $object->getUuid()
+        );
     }
 
     /**
@@ -54,7 +63,10 @@ class IdentifiableListenerTest extends AbstractBaseListenerTest
             ->expects($this->never())
             ->method('setUuid');
 
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->prePersist($args);
     }
@@ -71,7 +83,10 @@ class IdentifiableListenerTest extends AbstractBaseListenerTest
             ->expects($this->never())
             ->method('setUuid');
 
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->preUpdate($args);
     }
@@ -89,7 +104,10 @@ class IdentifiableListenerTest extends AbstractBaseListenerTest
             ->expects($this->never())
             ->method('setUuid');
 
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->preUpdate($args);
     }

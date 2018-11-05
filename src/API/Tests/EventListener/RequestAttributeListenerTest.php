@@ -28,7 +28,10 @@ class RequestAttributeListenerTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(RequestAttributeListener::class, $this->listener);
+        $this->assertInstanceOf(
+            RequestAttributeListener::class,
+            $this->listener
+        );
     }
 
     /**
@@ -37,18 +40,28 @@ class RequestAttributeListenerTest extends TestCase
     public function testOnKernelRequestWithRequestListener(): void
     {
         $request = new Request();
-        $request->attributes->set('listener', [
-            'request' => [
-                'test'
+        $request->attributes->set(
+            'listener',
+            [
+                'request' => [
+                    'test'
+                ]
             ]
-        ]);
+        );
 
-        $event = new GetResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+        $event = new GetResponseEvent(
+            $this->kernel,
+            $request,
+            HttpKernelInterface::MASTER_REQUEST
+        );
 
         $this->listener->onKernelRequest($event);
 
         $attributes = new ListenerAttributes(['test']);
-        $this->assertEquals($attributes, $request->attributes->get('listener'));
+        $this->assertEquals(
+            $attributes,
+            $request->attributes->get('listener')
+        );
     }
 
     /**
@@ -58,12 +71,19 @@ class RequestAttributeListenerTest extends TestCase
     {
         $request = new Request();
 
-        $event = new GetResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+        $event = new GetResponseEvent(
+            $this->kernel,
+            $request,
+            HttpKernelInterface::MASTER_REQUEST
+        );
 
         $this->listener->onKernelRequest($event);
 
         $attributes = new ListenerAttributes();
-        $this->assertEquals($attributes, $request->attributes->get('listener'));
+        $this->assertEquals(
+            $attributes,
+            $request->attributes->get('listener')
+        );
     }
 
     /**

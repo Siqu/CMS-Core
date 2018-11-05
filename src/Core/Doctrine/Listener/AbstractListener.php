@@ -43,11 +43,16 @@ abstract class AbstractListener implements EventSubscriber
      * @param ObjectManager $om
      * @param $object
      */
-    protected function recomputeChangeSet(ObjectManager $om, $object): void
-    {
+    protected function recomputeChangeSet(
+        ObjectManager $om,
+        $object
+    ): void {
         $meta = $om->getClassMetadata(get_class($object));
 
-        $om->getUnitOfWork()->recomputeSingleEntityChangeSet($meta, $object);
+        $om->getUnitOfWork()->recomputeSingleEntityChangeSet(
+            $meta,
+            $object
+        );
     }
 
     /**
@@ -57,8 +62,10 @@ abstract class AbstractListener implements EventSubscriber
      * @param string $trait
      * @return bool
      */
-    protected function shouldTraitObjectBeHandled($object, string $trait): bool
-    {
+    protected function shouldTraitObjectBeHandled(
+        $object,
+        string $trait
+    ): bool {
         // @codeCoverageIgnoreStart
         try {
             $reflection = new \ReflectionClass($object);
@@ -69,6 +76,9 @@ abstract class AbstractListener implements EventSubscriber
 
         $traits = $reflection->getTraitNames();
 
-        return in_array($trait, $traits);
+        return in_array(
+            $trait,
+            $traits
+        );
     }
 }

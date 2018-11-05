@@ -25,7 +25,10 @@ class PageListenerTest extends AbstractBaseListenerTest
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(PageListener::class, $this->listener);
+        $this->assertInstanceOf(
+            PageListener::class,
+            $this->listener
+        );
     }
 
     /**
@@ -35,11 +38,17 @@ class PageListenerTest extends AbstractBaseListenerTest
     {
         $object = new Page();
         $object->setTitle('title');
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->prePersist($args);
 
-        $this->assertEquals('title', $object->getSlug());
+        $this->assertEquals(
+            'title',
+            $object->getSlug()
+        );
     }
 
     /**
@@ -55,7 +64,10 @@ class PageListenerTest extends AbstractBaseListenerTest
             ->expects($this->never())
             ->method('setSlug');
 
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->prePersist($args);
     }
@@ -70,11 +82,17 @@ class PageListenerTest extends AbstractBaseListenerTest
         $parent = new Page();
         $parent->setSlug('parent');
         $object->setParent($parent);
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->prePersist($args);
 
-        $this->assertEquals('parent/title', $object->getSlug());
+        $this->assertEquals(
+            'parent/title',
+            $object->getSlug()
+        );
     }
 
     /**
@@ -85,11 +103,17 @@ class PageListenerTest extends AbstractBaseListenerTest
         $object = new Page();
         $object->setTitle('title');
 
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->preUpdate($args);
 
-        $this->assertEquals('title', $object->getSlug());
+        $this->assertEquals(
+            'title',
+            $object->getSlug()
+        );
     }
 
     /**
@@ -105,7 +129,10 @@ class PageListenerTest extends AbstractBaseListenerTest
             ->expects($this->never())
             ->method('setSlug');
 
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->preUpdate($args);
     }
@@ -123,9 +150,11 @@ class PageListenerTest extends AbstractBaseListenerTest
 
         $this->urlizer
             ->method('generateSlug')
-            ->willReturnCallback(function ($slug) {
-                return $slug;
-            });
+            ->willReturnCallback(
+                function ($slug) {
+                    return $slug;
+                }
+            );
 
         $this->listener = new PageListener($this->urlizer);
     }

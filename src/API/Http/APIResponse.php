@@ -18,9 +18,14 @@ class APIResponse extends Response
      * @param $data
      * @param int $status
      */
-    public function __construct($data, int $status = Response::HTTP_OK)
-    {
-        parent::__construct('', $status);
+    public function __construct(
+        $data,
+        int $status = Response::HTTP_OK
+    ) {
+        parent::__construct(
+            '',
+            $status
+        );
 
         $this->data = $data;
     }

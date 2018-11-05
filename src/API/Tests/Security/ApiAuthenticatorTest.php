@@ -29,8 +29,15 @@ class ApiAuthenticatorTest extends TestCase
     public function testAuthenticate(): void
     {
         $user = new CMSUser();
-        $credentials = new Credentials('username', 'password');
-        $token = new PreAuthenticatedToken('user', $credentials, 'key');
+        $credentials = new Credentials(
+            'username',
+            'password'
+        );
+        $token = new PreAuthenticatedToken(
+            'user',
+            $credentials,
+            'key'
+        );
 
         /** @var UserProviderInterface|MockObject $provider */
         $provider = $this->getMockBuilder(ApiUserProvider::class)
@@ -46,16 +53,32 @@ class ApiAuthenticatorTest extends TestCase
             ->with('username')
             ->willReturn($user);
 
-        $token = $this->authenticator->authenticateToken($token, $provider, 'key');
+        $token = $this->authenticator->authenticateToken(
+            $token,
+            $provider,
+            'key'
+        );
 
-        $this->assertEquals($user, $token->getUser());
-        $this->assertEquals($credentials, $token->getCredentials());
-        $this->assertEquals('key', $token->getProviderKey());
+        $this->assertEquals(
+            $user,
+            $token->getUser()
+        );
+        $this->assertEquals(
+            $credentials,
+            $token->getCredentials()
+        );
+        $this->assertEquals(
+            'key',
+            $token->getProviderKey()
+        );
 
         $roles = $token->getRoles();
         /** @var Role $role */
         $role = $roles[0];
-        $this->assertEquals('ROLE_USER', $role->getRole());
+        $this->assertEquals(
+            'ROLE_USER',
+            $role->getRole()
+        );
     }
 
     /**
@@ -73,7 +96,11 @@ class ApiAuthenticatorTest extends TestCase
         $provider = $this->getMockBuilder(UserProviderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $this->authenticator->authenticateToken($token, $provider, 'key');
+        $this->authenticator->authenticateToken(
+            $token,
+            $provider,
+            'key'
+        );
     }
 
     /**
@@ -83,8 +110,15 @@ class ApiAuthenticatorTest extends TestCase
      */
     public function testAuthenticateTokenNoUsername(): void
     {
-        $credentials = new Credentials('username', 'password');
-        $token = new PreAuthenticatedToken('user', $credentials, 'key');
+        $credentials = new Credentials(
+            'username',
+            'password'
+        );
+        $token = new PreAuthenticatedToken(
+            'user',
+            $credentials,
+            'key'
+        );
         /** @var ApiUserProvider|MockObject $provider */
         $provider = $this->getMockBuilder(ApiUserProvider::class)
             ->disableOriginalConstructor()
@@ -92,7 +126,11 @@ class ApiAuthenticatorTest extends TestCase
         $provider
             ->method('getUsernameForCredentials')
             ->willReturn(null);
-        $this->authenticator->authenticateToken($token, $provider, 'key');
+        $this->authenticator->authenticateToken(
+            $token,
+            $provider,
+            'key'
+        );
     }
 
     /**
@@ -100,7 +138,10 @@ class ApiAuthenticatorTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(ApiAuthenticator::class, $this->authenticator);
+        $this->assertInstanceOf(
+            ApiAuthenticator::class,
+            $this->authenticator
+        );
     }
 
     /**
@@ -109,20 +150,41 @@ class ApiAuthenticatorTest extends TestCase
     public function testCreateToken(): void
     {
         $request = new Request();
-        $request->headers->set('PHP_AUTH_USER', 'username');
-        $request->headers->set('PHP_AUTH_PW', 'password');
+        $request->headers->set(
+            'PHP_AUTH_USER',
+            'username'
+        );
+        $request->headers->set(
+            'PHP_AUTH_PW',
+            'password'
+        );
 
-        $token = $this->authenticator->createToken($request, 'key');
+        $token = $this->authenticator->createToken(
+            $request,
+            'key'
+        );
 
-        $this->assertEquals('anon.', $token->getUser());
+        $this->assertEquals(
+            'anon.',
+            $token->getUser()
+        );
 
         /** @var Credentials $credentials */
         $credentials = $token->getCredentials();
 
-        $this->assertEquals('username', $credentials->getUsername());
-        $this->assertEquals('password', $credentials->getPassword());
+        $this->assertEquals(
+            'username',
+            $credentials->getUsername()
+        );
+        $this->assertEquals(
+            'password',
+            $credentials->getPassword()
+        );
 
-        $this->assertEquals('key', $token->getProviderKey());
+        $this->assertEquals(
+            'key',
+            $token->getProviderKey()
+        );
     }
 
     /**
@@ -134,7 +196,10 @@ class ApiAuthenticatorTest extends TestCase
     {
         $request = new Request();
 
-        $this->authenticator->createToken($request, 'key');
+        $this->authenticator->createToken(
+            $request,
+            'key'
+        );
     }
 
     /**
@@ -145,9 +210,15 @@ class ApiAuthenticatorTest extends TestCase
     public function testCreateTokenNoPassword(): void
     {
         $request = new Request();
-        $request->headers->set('PHP_AUTH_USER', 'username');
+        $request->headers->set(
+            'PHP_AUTH_USER',
+            'username'
+        );
 
-        $this->authenticator->createToken($request, 'key');
+        $this->authenticator->createToken(
+            $request,
+            'key'
+        );
     }
 
     /**
@@ -158,9 +229,15 @@ class ApiAuthenticatorTest extends TestCase
     public function testCreateTokenNoUser(): void
     {
         $request = new Request();
-        $request->headers->set('PHP_AUTH_PW', 'password');
+        $request->headers->set(
+            'PHP_AUTH_PW',
+            'password'
+        );
 
-        $this->authenticator->createToken($request, 'key');
+        $this->authenticator->createToken(
+            $request,
+            'key'
+        );
     }
 
     /**
@@ -168,8 +245,17 @@ class ApiAuthenticatorTest extends TestCase
      */
     public function testSupportsToken(): void
     {
-        $token = new PreAuthenticatedToken('user', 'credentials', 'key');
-        $this->assertTrue($this->authenticator->supportsToken($token, 'key'));
+        $token = new PreAuthenticatedToken(
+            'user',
+            'credentials',
+            'key'
+        );
+        $this->assertTrue(
+            $this->authenticator->supportsToken(
+                $token,
+                'key'
+            )
+        );
     }
 
     /**
@@ -177,8 +263,17 @@ class ApiAuthenticatorTest extends TestCase
      */
     public function testSupportsTokenInvalidProviderKey(): void
     {
-        $token = new PreAuthenticatedToken('user', 'credentials', 'key');
-        $this->assertFalse($this->authenticator->supportsToken($token, 'invalid_key'));
+        $token = new PreAuthenticatedToken(
+            'user',
+            'credentials',
+            'key'
+        );
+        $this->assertFalse(
+            $this->authenticator->supportsToken(
+                $token,
+                'invalid_key'
+            )
+        );
     }
 
     /**
@@ -190,7 +285,12 @@ class ApiAuthenticatorTest extends TestCase
         $token = $this->getMockBuilder(TokenInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $this->assertFalse($this->authenticator->supportsToken($token, 'key'));
+        $this->assertFalse(
+            $this->authenticator->supportsToken(
+                $token,
+                'key'
+            )
+        );
     }
 
     /**

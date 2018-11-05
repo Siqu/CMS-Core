@@ -30,7 +30,10 @@ class CMSCoreExtensionTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(CMSCoreExtension::class, $this->extension);
+        $this->assertInstanceOf(
+            CMSCoreExtension::class,
+            $this->extension
+        );
     }
 
     /**
@@ -38,55 +41,100 @@ class CMSCoreExtensionTest extends TestCase
      */
     public function testLoad(): void
     {
-        $this->extension->load([
-            'siqu_cms_core' => []
-        ], $this->container);
+        $this->extension->load(
+            [
+                'siqu_cms_core' => []
+            ],
+            $this->container
+        );
 
         $definition = $this->container->getDefinition('siqu.cms_core.doctrine.listener.cms_user');
-        $this->assertEquals(CMSUserListener::class, $definition->getClass());
+        $this->assertEquals(
+            CMSUserListener::class,
+            $definition->getClass()
+        );
         $this->assertFalse($definition->isPublic());
         $tags = $definition->getTags();
-        $this->assertArrayHasKey('doctrine.event_subscriber', $tags);
+        $this->assertArrayHasKey(
+            'doctrine.event_subscriber',
+            $tags
+        );
         $arguments = $definition->getArguments();
         /** @var Reference $ref */
         $ref = $arguments[0];
-        $this->assertEquals('siqu.cms_core.util.password_updater', $ref);
+        $this->assertEquals(
+            'siqu.cms_core.util.password_updater',
+            $ref
+        );
         /** @var Reference $ref */
         $ref = $arguments[1];
-        $this->assertEquals('siqu.cms_core.util.uuid_generator', $ref);
+        $this->assertEquals(
+            'siqu.cms_core.util.uuid_generator',
+            $ref
+        );
 
         $definition = $this->container->getDefinition('siqu.cms_core.doctrine.listener.blameable');
-        $this->assertEquals(BlameableListener::class, $definition->getClass());
+        $this->assertEquals(
+            BlameableListener::class,
+            $definition->getClass()
+        );
         $this->assertFalse($definition->isPublic());
         $tags = $definition->getTags();
-        $this->assertArrayHasKey('doctrine.event_subscriber', $tags);
+        $this->assertArrayHasKey(
+            'doctrine.event_subscriber',
+            $tags
+        );
         $arguments = $definition->getArguments();
         /** @var Reference $ref */
         $ref = $arguments[0];
-        $this->assertEquals('security.token_storage', $ref);
+        $this->assertEquals(
+            'security.token_storage',
+            $ref
+        );
 
         $definition = $this->container->getDefinition('siqu.cms_core.doctrine.listener.timestampable');
-        $this->assertEquals(TimestampableListener::class, $definition->getClass());
+        $this->assertEquals(
+            TimestampableListener::class,
+            $definition->getClass()
+        );
         $this->assertFalse($definition->isPublic());
         $tags = $definition->getTags();
-        $this->assertArrayHasKey('doctrine.event_subscriber', $tags);
+        $this->assertArrayHasKey(
+            'doctrine.event_subscriber',
+            $tags
+        );
 
         $definition = $this->container->getDefinition('siqu.cms_core.doctrine.listener.identifiable');
-        $this->assertEquals(IdentifiableListener::class, $definition->getClass());
+        $this->assertEquals(
+            IdentifiableListener::class,
+            $definition->getClass()
+        );
         $this->assertFalse($definition->isPublic());
         $tags = $definition->getTags();
-        $this->assertArrayHasKey('doctrine.event_subscriber', $tags);
+        $this->assertArrayHasKey(
+            'doctrine.event_subscriber',
+            $tags
+        );
 
         $definition = $this->container->getDefinition('siqu.cms_core.util.password_updater');
-        $this->assertEquals(PasswordUpdater::class, $definition->getClass());
+        $this->assertEquals(
+            PasswordUpdater::class,
+            $definition->getClass()
+        );
         $this->assertFalse($definition->isPublic());
         $arguments = $definition->getArguments();
         /** @var Reference $ref */
         $ref = $arguments[0];
-        $this->assertEquals('security.encoder_factory', $ref);
+        $this->assertEquals(
+            'security.encoder_factory',
+            $ref
+        );
 
         $definition = $this->container->getDefinition('siqu.cms_core.util.uuid_generator');
-        $this->assertEquals(UuidGenerator::class, $definition->getClass());
+        $this->assertEquals(
+            UuidGenerator::class,
+            $definition->getClass()
+        );
         $this->assertFalse($definition->isPublic());
     }
 

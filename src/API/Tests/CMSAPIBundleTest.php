@@ -19,7 +19,10 @@ class CMSAPIBundleTest extends TestCase
      */
     public function testInstance(): void
     {
-        $this->assertInstanceOf(CMSAPIBundle::class, $this->bundle);
+        $this->assertInstanceOf(
+            CMSAPIBundle::class,
+            $this->bundle
+        );
     }
 
     /**

@@ -20,7 +20,10 @@ class EntityCircularReferenceHandlerTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(EntityCircularReferenceHandler::class, $this->handler);
+        $this->assertInstanceOf(
+            EntityCircularReferenceHandler::class,
+            $this->handler
+        );
     }
 
     /**
@@ -31,9 +34,12 @@ class EntityCircularReferenceHandlerTest extends TestCase
         $data = new IdentifiableObject();
         $data->setUuid('uuid');
 
-        $this->assertEquals([
-            'uuid' => 'uuid'
-        ], $this->handler->handle($data));
+        $this->assertEquals(
+            [
+                'uuid' => 'uuid'
+            ],
+            $this->handler->handle($data)
+        );
     }
 
     /**
@@ -43,7 +49,10 @@ class EntityCircularReferenceHandlerTest extends TestCase
     {
         $data = new \stdClass();
 
-        $this->assertEquals($data, $this->handler->handle($data));
+        $this->assertEquals(
+            $data,
+            $this->handler->handle($data)
+        );
     }
 
     /**
@@ -53,7 +62,10 @@ class EntityCircularReferenceHandlerTest extends TestCase
     {
         $data = [];
 
-        $this->assertEquals($data, $this->handler->handle($data));
+        $this->assertEquals(
+            $data,
+            $this->handler->handle($data)
+        );
     }
 
     /**

@@ -27,7 +27,10 @@ class AcceptLanguageListenerTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(AcceptLanguageListener::class, $this->listener);
+        $this->assertInstanceOf(
+            AcceptLanguageListener::class,
+            $this->listener
+        );
     }
 
     /**
@@ -36,16 +39,31 @@ class AcceptLanguageListenerTest extends TestCase
     public function testOnKernelRequest(): void
     {
         $request = new Request();
-        $request->headers->set('Accept-Language', 'en-EN');
+        $request->headers->set(
+            'Accept-Language',
+            'en-EN'
+        );
         $request->setLocale('de');
-        $request->attributes->set('listener', new ListenerAttributes([
-            'accept-language' => true
-        ]));
-        $event = new GetResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+        $request->attributes->set(
+            'listener',
+            new ListenerAttributes(
+                [
+                    'accept-language' => true
+                ]
+            )
+        );
+        $event = new GetResponseEvent(
+            $this->kernel,
+            $request,
+            HttpKernelInterface::MASTER_REQUEST
+        );
 
         $this->listener->onKernelRequest($event);
 
-        $this->assertEquals('en', $request->getLocale());
+        $this->assertEquals(
+            'en',
+            $request->getLocale()
+        );
     }
 
     /**
@@ -54,16 +72,31 @@ class AcceptLanguageListenerTest extends TestCase
     public function testOnKernelRequestWithUnknownLocale(): void
     {
         $request = new Request();
-        $request->headers->set('Accept-Language', 'ru-RU');
+        $request->headers->set(
+            'Accept-Language',
+            'ru-RU'
+        );
         $request->setLocale('de');
-        $request->attributes->set('listener', new ListenerAttributes([
-            'accept-language' => true
-        ]));
-        $event = new GetResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+        $request->attributes->set(
+            'listener',
+            new ListenerAttributes(
+                [
+                    'accept-language' => true
+                ]
+            )
+        );
+        $event = new GetResponseEvent(
+            $this->kernel,
+            $request,
+            HttpKernelInterface::MASTER_REQUEST
+        );
 
         $this->listener->onKernelRequest($event);
 
-        $this->assertEquals('en', $request->getLocale());
+        $this->assertEquals(
+            'en',
+            $request->getLocale()
+        );
     }
 
     /**
@@ -73,12 +106,22 @@ class AcceptLanguageListenerTest extends TestCase
     {
         $request = new Request();
         $request->setLocale('de');
-        $request->attributes->set('listener', new ListenerAttributes());
-        $event = new GetResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+        $request->attributes->set(
+            'listener',
+            new ListenerAttributes()
+        );
+        $event = new GetResponseEvent(
+            $this->kernel,
+            $request,
+            HttpKernelInterface::MASTER_REQUEST
+        );
 
         $this->listener->onKernelRequest($event);
 
-        $this->assertEquals('de', $request->getLocale());
+        $this->assertEquals(
+            'de',
+            $request->getLocale()
+        );
     }
 
     /**

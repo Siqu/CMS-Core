@@ -23,7 +23,10 @@ class APIValidationExceptionTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(APIValidationException::class, $this->exception);
+        $this->assertInstanceOf(
+            APIValidationException::class,
+            $this->exception
+        );
     }
 
     /**
@@ -31,7 +34,10 @@ class APIValidationExceptionTest extends TestCase
      */
     public function testGetViolations(): void
     {
-        $this->assertEquals($this->violations, $this->exception->getViolations());
+        $this->assertEquals(
+            $this->violations,
+            $this->exception->getViolations()
+        );
     }
 
     /**

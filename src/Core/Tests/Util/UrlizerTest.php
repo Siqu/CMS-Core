@@ -19,7 +19,10 @@ class UrlizerTest extends TestCase
      */
     public function testGenerateSlug()
     {
-        $this->assertEquals('title', $this->object->generateSlug('Title'));
+        $this->assertEquals(
+            'title',
+            $this->object->generateSlug('Title')
+        );
     }
 
     /**

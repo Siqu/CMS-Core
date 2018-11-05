@@ -30,8 +30,7 @@ class RequestDeserializer
         SerializerInterface $serializer,
         ValidatorInterface $validator,
         RequestStack $requestStack
-    )
-    {
+    ) {
         $this->serializer = $serializer;
         $this->validator = $validator;
         $this->requestStack = $requestStack;
@@ -46,8 +45,11 @@ class RequestDeserializer
      * @return object
      * @throws APIValidationException
      */
-    public function deserializerRequest(string $entity, string $validationGroup = 'new', $entry = null): object
-    {
+    public function deserializerRequest(
+        string $entity,
+        string $validationGroup = 'new',
+        $entry = null
+    ): object {
         if (!$entry) {
             $entry = new $entity();
         }
@@ -62,7 +64,11 @@ class RequestDeserializer
             ]
         );
 
-        $errors = $this->validator->validate($entry, null, $validationGroup);
+        $errors = $this->validator->validate(
+            $entry,
+            null,
+            $validationGroup
+        );
 
         if (count($errors) > 0) {
             throw new APIValidationException($errors);

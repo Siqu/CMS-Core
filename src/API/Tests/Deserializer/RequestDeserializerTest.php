@@ -32,7 +32,15 @@ class RequestDeserializerTest extends TestCase
      */
     public function testDeserializerRequest(): void
     {
-        $request = new Request([], [], [], [], [], [], 'content');
+        $request = new Request(
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            'content'
+        );
         $request->setRequestFormat('application/json');
 
         $this->requestStack
@@ -45,20 +53,32 @@ class RequestDeserializerTest extends TestCase
         $this->serializer
             ->expects($this->once())
             ->method('deserialize')
-            ->with('content', \stdClass::class, 'json', [
-                'object_to_populate' => $data
-            ])
+            ->with(
+                'content',
+                \stdClass::class,
+                'json',
+                [
+                    'object_to_populate' => $data
+                ]
+            )
             ->willReturn($data);
 
         $this->validator
             ->expects($this->once())
             ->method('validate')
-            ->with($data, null, 'new')
+            ->with(
+                $data,
+                null,
+                'new'
+            )
             ->willReturn(new ConstraintViolationList());
 
         $object = $this->deserializer->deserializerRequest(\stdClass::class);
 
-        $this->assertEquals($data, $object);
+        $this->assertEquals(
+            $data,
+            $object
+        );
     }
 
     /**
@@ -66,7 +86,15 @@ class RequestDeserializerTest extends TestCase
      */
     public function testDeserializerRequestWithDifferentValidation(): void
     {
-        $request = new Request([], [], [], [], [], [], 'content');
+        $request = new Request(
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            'content'
+        );
         $request->setRequestFormat('application/json');
 
         $this->requestStack
@@ -79,20 +107,35 @@ class RequestDeserializerTest extends TestCase
         $this->serializer
             ->expects($this->once())
             ->method('deserialize')
-            ->with('content', \stdClass::class, 'json', [
-                'object_to_populate' => $data
-            ])
+            ->with(
+                'content',
+                \stdClass::class,
+                'json',
+                [
+                    'object_to_populate' => $data
+                ]
+            )
             ->willReturn($data);
 
         $this->validator
             ->expects($this->once())
             ->method('validate')
-            ->with($data, null, 'test')
+            ->with(
+                $data,
+                null,
+                'test'
+            )
             ->willReturn(new ConstraintViolationList());
 
-        $object = $this->deserializer->deserializerRequest(\stdClass::class, 'test');
+        $object = $this->deserializer->deserializerRequest(
+            \stdClass::class,
+            'test'
+        );
 
-        $this->assertEquals($data, $object);
+        $this->assertEquals(
+            $data,
+            $object
+        );
     }
 
     /**
@@ -102,7 +145,15 @@ class RequestDeserializerTest extends TestCase
      */
     public function testDeserializerRequestWithErrors(): void
     {
-        $request = new Request([], [], [], [], [], [], 'content');
+        $request = new Request(
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            'content'
+        );
         $request->setRequestFormat('application/json');
 
         $this->requestStack
@@ -115,18 +166,38 @@ class RequestDeserializerTest extends TestCase
         $this->serializer
             ->expects($this->once())
             ->method('deserialize')
-            ->with('content', \stdClass::class, 'json', [
-                'object_to_populate' => $data
-            ])
+            ->with(
+                'content',
+                \stdClass::class,
+                'json',
+                [
+                    'object_to_populate' => $data
+                ]
+            )
             ->willReturn($data);
 
         $this->validator
             ->expects($this->once())
             ->method('validate')
-            ->with($data, null, 'new')
-            ->willReturn(new ConstraintViolationList([
-                new ConstraintViolation('message', 'template', [], null, null, null)
-            ]));
+            ->with(
+                $data,
+                null,
+                'new'
+            )
+            ->willReturn(
+                new ConstraintViolationList(
+                    [
+                        new ConstraintViolation(
+                            'message',
+                            'template',
+                            [],
+                            null,
+                            null,
+                            null
+                        )
+                    ]
+                )
+            );
 
         $object = $this->deserializer->deserializerRequest(\stdClass::class);
     }
@@ -136,7 +207,15 @@ class RequestDeserializerTest extends TestCase
      */
     public function testDeserializerRequestWithExistingObject(): void
     {
-        $request = new Request([], [], [], [], [], [], 'content');
+        $request = new Request(
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            'content'
+        );
         $request->setRequestFormat('application/json');
 
         $this->requestStack
@@ -149,20 +228,36 @@ class RequestDeserializerTest extends TestCase
         $this->serializer
             ->expects($this->once())
             ->method('deserialize')
-            ->with('content', \stdClass::class, 'json', [
-                'object_to_populate' => $data
-            ])
+            ->with(
+                'content',
+                \stdClass::class,
+                'json',
+                [
+                    'object_to_populate' => $data
+                ]
+            )
             ->willReturn($data);
 
         $this->validator
             ->expects($this->once())
             ->method('validate')
-            ->with($data, null, 'new')
+            ->with(
+                $data,
+                null,
+                'new'
+            )
             ->willReturn(new ConstraintViolationList());
 
-        $object = $this->deserializer->deserializerRequest(\stdClass::class, 'new', $data);
+        $object = $this->deserializer->deserializerRequest(
+            \stdClass::class,
+            'new',
+            $data
+        );
 
-        $this->assertEquals($data, $object);
+        $this->assertEquals(
+            $data,
+            $object
+        );
     }
 
     /**
@@ -170,7 +265,10 @@ class RequestDeserializerTest extends TestCase
      */
     public function testInstance(): void
     {
-        $this->assertInstanceOf(RequestDeserializer::class, $this->deserializer);
+        $this->assertInstanceOf(
+            RequestDeserializer::class,
+            $this->deserializer
+        );
     }
 
     /**
@@ -192,6 +290,10 @@ class RequestDeserializerTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->deserializer = new RequestDeserializer($this->serializer, $this->validator, $this->requestStack);
+        $this->deserializer = new RequestDeserializer(
+            $this->serializer,
+            $this->validator,
+            $this->requestStack
+        );
     }
 }

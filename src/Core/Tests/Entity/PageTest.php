@@ -29,16 +29,24 @@ class PageTest extends TestCase
         $this->assertEmpty($this->object->getChildren());
         $this->object->addChild($child);
         $this->object->addChild($child);
-        $this->assertCount(1, $this->object->getChildren());
+        $this->assertCount(
+            1,
+            $this->object->getChildren()
+        );
         $this->object->removeChild($child);
         $this->object->removeChild($child);
         $this->assertEmpty($this->object->getChildren());
 
-        $collection = new ArrayCollection([
-            $child
-        ]);
+        $collection = new ArrayCollection(
+            [
+                $child
+            ]
+        );
         $this->object->setChildren($collection);
-        $this->assertEquals($collection, $this->object->getChildren());
+        $this->assertEquals(
+            $collection,
+            $this->object->getChildren()
+        );
     }
 
     /**
@@ -47,19 +55,28 @@ class PageTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(Page::class, $this->object);
-        $this->assertEquals(Page::VISIBILITY_NAVIGATION_CONTENT, $this->object->getVisibility());
+        $this->assertInstanceOf(
+            Page::class,
+            $this->object
+        );
+        $this->assertEquals(
+            Page::VISIBILITY_NAVIGATION_CONTENT,
+            $this->object->getVisibility()
+        );
 
         $reflection = new \ReflectionClass($this->object);
         $traits = $reflection->getTraitNames();
 
-        $this->assertEquals([
-            IdentifiableTrait::class,
-            NameableTrait::class,
-            TimestampableTrait::class,
-            BlameableTrait::class,
-            LocateableTrait::class
-        ], $traits);
+        $this->assertEquals(
+            [
+                IdentifiableTrait::class,
+                NameableTrait::class,
+                TimestampableTrait::class,
+                BlameableTrait::class,
+                LocateableTrait::class
+            ],
+            $traits
+        );
     }
 
     /**
@@ -69,7 +86,10 @@ class PageTest extends TestCase
     {
         $this->object->setTitle('title');
 
-        $this->assertEquals('title', $this->object->getMetaTitle());
+        $this->assertEquals(
+            'title',
+            $this->object->getMetaTitle()
+        );
     }
 
     /**
@@ -79,7 +99,10 @@ class PageTest extends TestCase
     {
         $this->assertNull($this->object->getMetaDescription());
         $this->object->setMetaDescription('metaDescription');
-        $this->assertEquals('metaDescription', $this->object->getMetaDescription());
+        $this->assertEquals(
+            'metaDescription',
+            $this->object->getMetaDescription()
+        );
     }
 
     /**
@@ -89,7 +112,10 @@ class PageTest extends TestCase
     {
         $this->assertNull($this->object->getMetaTitle());
         $this->object->setMetaTitle('metaTitle');
-        $this->assertEquals('metaTitle', $this->object->getMetaTitle());
+        $this->assertEquals(
+            'metaTitle',
+            $this->object->getMetaTitle()
+        );
     }
 
     /**
@@ -101,7 +127,10 @@ class PageTest extends TestCase
 
         $this->assertNull($this->object->getParent());
         $this->object->setParent($parent);
-        $this->assertEquals($parent, $this->object->getParent());
+        $this->assertEquals(
+            $parent,
+            $this->object->getParent()
+        );
     }
 
     /**
@@ -111,7 +140,10 @@ class PageTest extends TestCase
     {
         $this->assertNull($this->object->getSlug());
         $this->object->setSlug('slug');
-        $this->assertEquals('slug', $this->object->getSlug());
+        $this->assertEquals(
+            'slug',
+            $this->object->getSlug()
+        );
     }
 
     /**
@@ -120,7 +152,10 @@ class PageTest extends TestCase
     public function testGetSetVisibility(): void
     {
         $this->object->setVisibility(Page::VISIBILITY_NAVIGATION);
-        $this->assertEquals(Page::VISIBILITY_NAVIGATION, $this->object->getVisibility());
+        $this->assertEquals(
+            Page::VISIBILITY_NAVIGATION,
+            $this->object->getVisibility()
+        );
     }
 
     /**
@@ -130,7 +165,10 @@ class PageTest extends TestCase
     {
         $this->object->setVisibility(-1);
 
-        $this->assertEquals(Page::VISIBILITY_NAVIGATION_CONTENT, $this->object->getVisibility());
+        $this->assertEquals(
+            Page::VISIBILITY_NAVIGATION_CONTENT,
+            $this->object->getVisibility()
+        );
     }
 
     /**

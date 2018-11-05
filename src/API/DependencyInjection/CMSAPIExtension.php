@@ -21,10 +21,18 @@ class CMSAPIExtension extends Extension
      * @param ContainerBuilder $container
      * @throws \Exception When service yaml files could not be loaded
      */
-    public function load(array $configs, ContainerBuilder $container)
-    {
-        $configuration = $this->getConfiguration($configs, $container);
-        $this->processConfiguration($configuration, $configs);
+    public function load(
+        array $configs,
+        ContainerBuilder $container
+    ) {
+        $configuration = $this->getConfiguration(
+            $configs,
+            $container
+        );
+        $this->processConfiguration(
+            $configuration,
+            $configs
+        );
 
         $this->loadServices($container);
     }
@@ -37,7 +45,10 @@ class CMSAPIExtension extends Extension
      */
     private function loadServices(ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new YamlFileLoader(
+            $container,
+            new FileLocator(__DIR__ . '/../Resources/config')
+        );
         $loader->load('services.yaml');
     }
 }

@@ -19,7 +19,10 @@ class CMSCoreBundleTest extends TestCase
      */
     public function testCreateInstance(): void
     {
-        $this->assertInstanceOf(CMSCoreBundle::class, $this->bundle);
+        $this->assertInstanceOf(
+            CMSCoreBundle::class,
+            $this->bundle
+        );
     }
 
     /**

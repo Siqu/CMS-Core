@@ -21,8 +21,7 @@ class PageListener extends AbstractListener
      */
     public function __construct(
         Urlizer $urlizer
-    )
-    {
+    ) {
         $this->urlizer = $urlizer;
     }
 
@@ -51,7 +50,10 @@ class PageListener extends AbstractListener
 
         if ($object instanceof Page) {
             $this->updateSlug($object);
-            $this->recomputeChangeSet($args->getObjectManager(), $object);
+            $this->recomputeChangeSet(
+                $args->getObjectManager(),
+                $object
+            );
         }
     }
 

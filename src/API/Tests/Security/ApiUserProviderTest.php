@@ -33,7 +33,10 @@ class ApiUserProviderTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(ApiUserProvider::class, $this->provider);
+        $this->assertInstanceOf(
+            ApiUserProvider::class,
+            $this->provider
+        );
     }
 
     /**
@@ -47,17 +50,26 @@ class ApiUserProviderTest extends TestCase
             ->method('findOneBy')
             ->willReturn($user);
 
-        $credentials = new Credentials('username', 'password');
+        $credentials = new Credentials(
+            'username',
+            'password'
+        );
         $this->encoder
             ->method('isPasswordValid')
-            ->with($user, 'password')
+            ->with(
+                $user,
+                'password'
+            )
             ->willReturn(true);
 
         $this->entityManager
             ->expects($this->once())
             ->method('flush');
 
-        $this->assertEquals('username', $this->provider->getUsernameForCredentials($credentials));
+        $this->assertEquals(
+            'username',
+            $this->provider->getUsernameForCredentials($credentials)
+        );
         $this->assertNotNull($user->getLastLogin());
     }
 
@@ -72,18 +84,32 @@ class ApiUserProviderTest extends TestCase
             ->method('findOneBy')
             ->willReturn($user);
 
-        $credentials = new Credentials('username', 'password');
+        $credentials = new Credentials(
+            'username',
+            'password'
+        );
         $this->encoder
             ->method('isPasswordValid')
-            ->with($user, 'password')
+            ->with(
+                $user,
+                'password'
+            )
             ->willReturn(true);
 
         $this->entityManager
             ->expects($this->once())
             ->method('flush')
-            ->willThrowException(new OptimisticLockException('', $user));
+            ->willThrowException(
+                new OptimisticLockException(
+                    '',
+                    $user
+                )
+            );
 
-        $this->assertEquals('username', $this->provider->getUsernameForCredentials($credentials));
+        $this->assertEquals(
+            'username',
+            $this->provider->getUsernameForCredentials($credentials)
+        );
         $this->assertNull($user->getLastLogin());
     }
 
@@ -97,10 +123,16 @@ class ApiUserProviderTest extends TestCase
             ->method('findOneBy')
             ->willReturn($user);
 
-        $credentials = new Credentials('username', 'password');
+        $credentials = new Credentials(
+            'username',
+            'password'
+        );
         $this->encoder
             ->method('isPasswordValid')
-            ->with($user, 'password')
+            ->with(
+                $user,
+                'password'
+            )
             ->willReturn(false);
 
         $this->assertNull($this->provider->getUsernameForCredentials($credentials));
@@ -114,13 +146,18 @@ class ApiUserProviderTest extends TestCase
         $user = new CMSUser();
         $this->repository
             ->method('findOneBy')
-            ->with([
-                'username' => 'username'
-            ])
+            ->with(
+                [
+                    'username' => 'username'
+                ]
+            )
             ->willReturn($user);
 
         $readUser = $this->provider->loadUserByUsername('username');
-        $this->assertEquals($user, $readUser);
+        $this->assertEquals(
+            $user,
+            $readUser
+        );
     }
 
     /**
@@ -132,9 +169,11 @@ class ApiUserProviderTest extends TestCase
     {
         $this->repository
             ->method('findOneBy')
-            ->with([
-                'username' => 'invalid'
-            ])
+            ->with(
+                [
+                    'username' => 'invalid'
+                ]
+            )
             ->willReturn(null);
 
         $this->provider->loadUserByUsername('invalid');
@@ -149,14 +188,19 @@ class ApiUserProviderTest extends TestCase
         $user->setUsername('username');
         $this->repository
             ->method('findOneBy')
-            ->with([
-                'username' => 'username'
-            ])
+            ->with(
+                [
+                    'username' => 'username'
+                ]
+            )
             ->willReturn($user);
 
         $refreshedUser = $this->provider->refreshUser($user);
 
-        $this->assertEquals($user, $refreshedUser);
+        $this->assertEquals(
+            $user,
+            $refreshedUser
+        );
     }
 
     /**
@@ -213,6 +257,9 @@ class ApiUserProviderTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->provider = new ApiUserProvider($this->entityManager, $this->encoder);
+        $this->provider = new ApiUserProvider(
+            $this->entityManager,
+            $this->encoder
+        );
     }
 }

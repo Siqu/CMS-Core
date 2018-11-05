@@ -20,15 +20,26 @@ class PageControllerTest extends FixtureAwareTestCase
      */
     public function testCreate(): void
     {
-        $this->callPost([
-            'title' => 'title2'
-        ]);
+        $this->callPost(
+            [
+                'title' => 'title2'
+            ]
+        );
 
-        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            201,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $page = json_decode($data, false);
+        $page = json_decode(
+            $data,
+            false
+        );
 
-        $this->assertEquals('title2', $page->title);
+        $this->assertEquals(
+            'title2',
+            $page->title
+        );
         $this->assertNotNull($page->uuid);
     }
 
@@ -41,19 +52,39 @@ class PageControllerTest extends FixtureAwareTestCase
     {
         $this->callPost([]);
 
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            400,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $errors = json_decode($data, false);
+        $errors = json_decode(
+            $data,
+            false
+        );
 
-        $this->assertCount(1, $errors);
-        $this->assertEquals('title', $errors[0]->path);
+        $this->assertCount(
+            1,
+            $errors
+        );
+        $this->assertEquals(
+            'title',
+            $errors[0]->path
+        );
 
-        $this->callPost([
-            'title' => 'title'
-        ]);
+        $this->callPost(
+            [
+                'title' => 'title'
+            ]
+        );
 
-        $this->assertCount(1, $errors);
-        $this->assertEquals('title', $errors[0]->path);
+        $this->assertCount(
+            1,
+            $errors
+        );
+        $this->assertEquals(
+            'title',
+            $errors[0]->path
+        );
     }
 
     /**
@@ -66,7 +97,10 @@ class PageControllerTest extends FixtureAwareTestCase
         $uuid = $this->getExistingUuid();
         $this->callDelete($uuid);
 
-        $this->assertEquals(204, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            204,
+            $this->client->getResponse()->getStatusCode()
+        );
     }
 
     /**
@@ -78,7 +112,10 @@ class PageControllerTest extends FixtureAwareTestCase
     {
         $this->callDelete('invalid');
 
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            404,
+            $this->client->getResponse()->getStatusCode()
+        );
     }
 
     /**
@@ -90,14 +127,26 @@ class PageControllerTest extends FixtureAwareTestCase
     {
         $this->callGet();
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            200,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $data = json_decode($data, false);
+        $data = json_decode(
+            $data,
+            false
+        );
 
-        $this->assertCount(1, $data);
+        $this->assertCount(
+            1,
+            $data
+        );
 
         $page = $data[0];
-        $this->assertEquals(PageFixture::TITLE, $page->title);
+        $this->assertEquals(
+            PageFixture::TITLE,
+            $page->title
+        );
     }
 
     /**
@@ -111,11 +160,23 @@ class PageControllerTest extends FixtureAwareTestCase
 
         $this->callGet($uuid);
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            200,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $page = json_decode($data, false);
-        $this->assertEquals(PageFixture::TITLE, $page->title);;
-        $this->assertEquals($uuid, $page->uuid);
+        $page = json_decode(
+            $data,
+            false
+        );
+        $this->assertEquals(
+            PageFixture::TITLE,
+            $page->title
+        );
+        $this->assertEquals(
+            $uuid,
+            $page->uuid
+        );
     }
 
     /**
@@ -127,7 +188,10 @@ class PageControllerTest extends FixtureAwareTestCase
     {
         $this->callGet('1');
 
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            404,
+            $this->client->getResponse()->getStatusCode()
+        );
     }
 
     /**
@@ -138,15 +202,27 @@ class PageControllerTest extends FixtureAwareTestCase
     public function testUpdate(): void
     {
         $uuid = $this->getExistingUuid();
-        $this->callPatch($uuid, [
-            'title' => 'title2'
-        ]);
+        $this->callPatch(
+            $uuid,
+            [
+                'title' => 'title2'
+            ]
+        );
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            200,
+            $this->client->getResponse()->getStatusCode()
+        );
         $data = $this->client->getResponse()->getContent();
-        $page = json_decode($data, false);
+        $page = json_decode(
+            $data,
+            false
+        );
 
-        $this->assertEquals('title2', $page->title);
+        $this->assertEquals(
+            'title2',
+            $page->title
+        );
     }
 
     /**
@@ -156,9 +232,15 @@ class PageControllerTest extends FixtureAwareTestCase
      */
     public function testUpdateInvalid(): void
     {
-        $this->callPatch('invalid', []);
+        $this->callPatch(
+            'invalid',
+            []
+        );
 
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(
+            404,
+            $this->client->getResponse()->getStatusCode()
+        );
     }
 
     /**

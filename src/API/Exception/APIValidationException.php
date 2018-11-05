@@ -26,9 +26,12 @@ class APIValidationException extends \Exception
         string $message = "",
         int $code = 0,
         Throwable $previous = null
-    )
-    {
-        parent::__construct($message, $code, $previous);
+    ) {
+        parent::__construct(
+            $message,
+            $code,
+            $previous
+        );
 
         $this->violations = $violations;
     }

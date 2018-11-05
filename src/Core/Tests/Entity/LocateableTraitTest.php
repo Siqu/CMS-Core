@@ -24,7 +24,10 @@ class LocateableTraitTest extends TestCase
     {
         $this->assertNull($this->object->getLat());
         $this->object->setLat('99.99999999');
-        $this->assertEquals('99.99999999', $this->object->getLat());
+        $this->assertEquals(
+            '99.99999999',
+            $this->object->getLat()
+        );
     }
 
     /**
@@ -37,7 +40,10 @@ class LocateableTraitTest extends TestCase
     {
         $this->assertNull($this->object->getLng());
         $this->object->setLng('99.99999999');
-        $this->assertEquals('99.99999999', $this->object->getLng());
+        $this->assertEquals(
+            '99.99999999',
+            $this->object->getLng()
+        );
     }
 
     /**
@@ -49,7 +55,10 @@ class LocateableTraitTest extends TestCase
     {
         $this->assertNull($this->object->getLocation());
         $this->object->setLocation('location');
-        $this->assertEquals('location', $this->object->getLocation());
+        $this->assertEquals(
+            'location',
+            $this->object->getLocation()
+        );
     }
 
     /**

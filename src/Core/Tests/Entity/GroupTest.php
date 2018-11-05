@@ -23,19 +23,31 @@ class GroupTest extends TestCase
         $this->assertEmpty($this->object->getRoles());
         $this->object->addRole('role1');
         $this->object->addRole('role1');
-        $this->assertCount(1, $this->object->getRoles());
-        $this->assertEquals([
-            'ROLE1'
-        ], $this->object->getRoles());
+        $this->assertCount(
+            1,
+            $this->object->getRoles()
+        );
+        $this->assertEquals(
+            [
+                'ROLE1'
+            ],
+            $this->object->getRoles()
+        );
         $this->object->removeRole('role1');
         $this->object->removeRole('role1');
         $this->assertEmpty($this->object->getRoles());
 
         $this->object->setRoles(['role1']);
-        $this->assertCount(1, $this->object->getRoles());
-        $this->assertEquals([
-            'ROLE1'
-        ], $this->object->getRoles());
+        $this->assertCount(
+            1,
+            $this->object->getRoles()
+        );
+        $this->assertEquals(
+            [
+                'ROLE1'
+            ],
+            $this->object->getRoles()
+        );
     }
 
     /**
@@ -44,14 +56,20 @@ class GroupTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(Group::class, $this->object);
+        $this->assertInstanceOf(
+            Group::class,
+            $this->object
+        );
 
         $reflection = new \ReflectionClass($this->object);
         $traits = $reflection->getTraitNames();
 
-        $this->assertEquals([
-            IdentifiableTrait::class
-        ], $traits);
+        $this->assertEquals(
+            [
+                IdentifiableTrait::class
+            ],
+            $traits
+        );
     }
 
     /**
@@ -61,7 +79,10 @@ class GroupTest extends TestCase
     {
         $this->assertNull($this->object->getName());
         $this->object->setName('name');
-        $this->assertEquals('name', $this->object->getName());
+        $this->assertEquals(
+            'name',
+            $this->object->getName()
+        );
     }
 
     /**

@@ -30,7 +30,10 @@ class BlameableListenerTest extends AbstractBaseListenerTest
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(BlameableListener::class, $this->listener);
+        $this->assertInstanceOf(
+            BlameableListener::class,
+            $this->listener
+        );
     }
 
     /**
@@ -39,7 +42,10 @@ class BlameableListenerTest extends AbstractBaseListenerTest
     public function testPrePersist(): void
     {
         $object = new BlameableObject();
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->preUpdate($args);
 
@@ -55,7 +61,10 @@ class BlameableListenerTest extends AbstractBaseListenerTest
 
         $this->listener->prePersist($args);
 
-        $this->assertEquals($this->user, $object->getUser());
+        $this->assertEquals(
+            $this->user,
+            $object->getUser()
+        );
     }
 
     /**
@@ -71,7 +80,10 @@ class BlameableListenerTest extends AbstractBaseListenerTest
             ->expects($this->never())
             ->method('setUser');
 
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->prePersist($args);
     }
@@ -82,7 +94,10 @@ class BlameableListenerTest extends AbstractBaseListenerTest
     public function testPrePersistWithoutUser(): void
     {
         $object = new BlameableObject();
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->prePersist($args);
 
@@ -107,7 +122,10 @@ class BlameableListenerTest extends AbstractBaseListenerTest
     public function testPreUpdate(): void
     {
         $object = new BlameableObject();
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->preUpdate($args);
 
@@ -123,7 +141,10 @@ class BlameableListenerTest extends AbstractBaseListenerTest
 
         $this->listener->preUpdate($args);
 
-        $this->assertEquals($this->user, $object->getChangeUser());
+        $this->assertEquals(
+            $this->user,
+            $object->getChangeUser()
+        );
     }
 
     /**
@@ -139,7 +160,10 @@ class BlameableListenerTest extends AbstractBaseListenerTest
             ->expects($this->never())
             ->method('setUser');
 
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->preUpdate($args);
     }
@@ -150,7 +174,10 @@ class BlameableListenerTest extends AbstractBaseListenerTest
     public function testPreUpdateWithoutUser(): void
     {
         $object = new BlameableObject();
-        $args = new LifecycleEventArgs($object, $this->entityManager);
+        $args = new LifecycleEventArgs(
+            $object,
+            $this->entityManager
+        );
 
         $this->listener->preUpdate($args);
 

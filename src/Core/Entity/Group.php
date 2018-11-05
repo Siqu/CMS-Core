@@ -79,7 +79,11 @@ class Group
      */
     public function hasRole(string $role): bool
     {
-        return in_array(strtoupper($role), $this->roles, true);
+        return in_array(
+            strtoupper($role),
+            $this->roles,
+            true
+        );
     }
 
     /**
@@ -90,7 +94,11 @@ class Group
     public function removeRole(string $role): void
     {
         if ($this->hasRole($role)) {
-            $key = array_search(strtoupper($role), $this->roles, true);
+            $key = array_search(
+                strtoupper($role),
+                $this->roles,
+                true
+            );
             unset($this->roles[$key]);
             $this->roles = array_values($this->roles);
         }
