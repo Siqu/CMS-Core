@@ -9,23 +9,21 @@ cache:
   paths:
   - vendor/
 
-before_script:
-- apt-get update -yqq
-- apt-get install git -yqq
-- apt-get install -yqq zlib1g-dev
-- pecl install xdebug
-- docker-php-ext-install zip
-- docker-php-ext-enable xdebug
-- docker-php-ext-enable zip
-- curl -sS https://getcomposer.org/installer | php
-- php composer.phar install
-- echo "Setting up test database"
-- bin/console doctrine:database:create --env=test
-- bin/console doctrine:schema:update --force --env=test --complete
-
 test:
   stage: test
   script:
+    - apt-get update -yqq
+    - apt-get install git -yqq
+    - apt-get install -yqq zlib1g-dev
+    - pecl install xdebug
+    - docker-php-ext-install zip
+    - docker-php-ext-enable xdebug
+    - docker-php-ext-enable zip
+    - curl -sS https://getcomposer.org/installer | php
+    - php composer.phar install
+    - echo "Setting up test database"
+    - bin/console doctrine:database:create --env=test
+    - bin/console doctrine:schema:update --force --env=test --complete
     - bin/phpunit --colors=never
   artifacts:
     paths:
@@ -34,12 +32,25 @@ test:
 phpmetrics_quality:
   stage: quality
   script:
+    - apt-get update -yqq
+    - apt-get install git -yqq
+    - apt-get install -yqq zlib1g-dev
+    - pecl install xdebug
+    - docker-php-ext-install zip
+    - docker-php-ext-enable xdebug
+    - docker-php-ext-enable zip
+    - curl -sS https://getcomposer.org/installer | php
+    - php composer.phar install
+    - echo "Setting up test database"
+    - bin/console doctrine:database:create --env=test
+    - bin/console doctrine:schema:update --force --env=test --complete
     - vendor/phpmetrics/phpmetrics/bin/phpmetrics --report-html=doc/metrics --exclude=bin,vendor,var,Tests --junit=./doc/coverage/logs/junit.xml .
   artifacts:
     paths:
     - doc/metrics
 
 code_quality:
+  stage: quality
   image: docker:stable
   variables:
     DOCKER_DRIVER: overlay2
