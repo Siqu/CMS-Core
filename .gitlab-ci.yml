@@ -11,6 +11,7 @@ cache:
 
 test:
   stage: test
+  allow_failure: true
   script:
     - apt-get update -yqq
     - apt-get install git -yqq
@@ -31,6 +32,7 @@ test:
 
 phpmetrics_quality:
   stage: quality
+  allow_failure: true
   script:
     - apt-get update -yqq
     - apt-get install git -yqq
@@ -41,32 +43,29 @@ phpmetrics_quality:
     - docker-php-ext-enable zip
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
-    - echo "Setting up test database"
-    - bin/console doctrine:database:create --env=test
-    - bin/console doctrine:schema:update --force --env=test --complete
     - vendor/phpmetrics/phpmetrics/bin/phpmetrics --report-html=doc/metrics --exclude=bin,vendor,var,Tests --junit=./doc/coverage/logs/junit.xml .
   artifacts:
     paths:
     - doc/metrics
 
-code_quality:
+phpcs_quality:
   stage: quality
-  image: docker:stable
-  variables:
-    DOCKER_DRIVER: overlay2
   allow_failure: true
-  services:
-  - docker:stable-dind
   script:
-  - export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')
-  - docker run
-      --env SOURCE_CODE="$PWD"
-      --volume "$PWD":/code
-      --volume /var/run/docker.sock:/var/run/docker.sock
-      "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
+    - apt-get update -yqq
+    - apt-get install git -yqq
+    - apt-get install -yqq zlib1g-dev
+    - pecl install xdebug
+    - docker-php-ext-install zip
+    - docker-php-ext-enable xdebug
+    - docker-php-ext-enable zip
+    - curl -sS https://getcomposer.org/installer | php
+    - php composer.phar install
+    - mkdir ./doc/phpcs
+    - vendor/squizlabs/php_codesniffer/bin/phpcs src/ --report-junit=./doc/phpcs/junit.xml --report-info=./doc/phpcs/info.txt
   artifacts:
-    reports:
-      codequality: [gl-code-quality-report.json]
+    paths:
+    - doc/phpcs
 
 pages:
   stage: deploy
