@@ -61,8 +61,8 @@ phpcs_quality:
     - docker-php-ext-enable zip
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
-    - mkdir ./doc/phpcs
-    - vendor/squizlabs/php_codesniffer/bin/phpcs src/ --report-junit=./doc/phpcs/junit.xml --report-info=./doc/phpcs/info.txt
+    - mkdir doc/phpcs
+    - vendor/squizlabs/php_codesniffer/bin/phpcs src/ --report-junit=doc/phpcs/junit.xml --report-info=doc/phpcs/info.txt --report-source
   artifacts:
     paths:
     - doc/phpcs
