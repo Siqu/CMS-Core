@@ -48,6 +48,24 @@ class APIResponseListener extends APIAttributeListener
         /** @var APIResponse $response */
         $data = $response->getData();
 
+        $serialized = $this->getSerializedResponse($data, $request->getFormat($request->getRequestFormat()));
+
+        $response->setContent($serialized);
+        $response->headers->set(
+            'Content-Type',
+            $request->getRequestFormat()
+        );
+    }
+
+    /**
+     * Serialize the given data for the response.
+     *
+     * @param object $data
+     * @param string $format
+     * @return string
+     */
+    private function getSerializedResponse($data, string $format): string
+    {
         if ($data instanceof ConstraintViolationListInterface) {
             $errors = [];
             foreach ($data as $error) {
@@ -59,20 +77,16 @@ class APIResponseListener extends APIAttributeListener
             }
             $serialized = $this->serializer->serialize(
                 $errors,
-                $request->getFormat($request->getRequestFormat())
+                $format
             );
         } else {
             $serialized = $this->serializer->serialize(
                 $data,
-                $request->getFormat($request->getRequestFormat()),
+                $format,
                 ['groups' => ['api']]
             );
         }
 
-        $response->setContent($serialized);
-        $response->headers->set(
-            'Content-Type',
-            $request->getRequestFormat()
-        );
+        return $serialized;
     }
 }
