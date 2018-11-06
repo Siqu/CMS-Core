@@ -10,6 +10,11 @@ use Symfony\Component\HttpFoundation\ParameterBag;
  */
 class ListenerAttributes
 {
+    const ACCEPT_LANGUAGE_LISTENER = 'accept-language';
+    const ACCEPT_LISTENER = 'accept';
+    const API_EXCEPTION_LISTENER = 'api-exception';
+    const RESPONSE_FORMATTER_LISTENER = 'response-formatter';
+
     /** @var ParameterBag */
     private $attributes;
 
@@ -24,53 +29,15 @@ class ListenerAttributes
     }
 
     /**
-     * Check if api exception listener is active.
+     * Check if the given listener is active.
      *
+     * @param string $listener
      * @return bool
      */
-    public function isAPIExceptionActive(): bool
+    public function isListenerActive(string $listener): bool
     {
         return $this->attributes->get(
-            'api-exception',
-            false
-        );
-    }
-
-    /**
-     * Check if accept attribute is active.
-     *
-     * @return bool
-     */
-    public function isAcceptActive(): bool
-    {
-        return $this->attributes->get(
-            'accept',
-            false
-        );
-    }
-
-    /**
-     * Check if accept language attribute is active.
-     *
-     * @return bool
-     */
-    public function isAcceptLanguageActive(): bool
-    {
-        return $this->attributes->get(
-            'accept-language',
-            false
-        );
-    }
-
-    /**
-     * Check if the response formatter is active.
-     *
-     * @return bool
-     */
-    public function isResponseFormatterActive(): bool
-    {
-        return $this->attributes->get(
-            'response-formatter',
+            $listener,
             false
         );
     }

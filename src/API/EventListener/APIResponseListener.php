@@ -4,7 +4,8 @@ namespace Siqu\CMS\API\EventListener;
 
 use Siqu\CMS\API\Http\APIResponse;
 use Siqu\CMS\API\Request\ListenerAttributes;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
  * Class APIResponseListener
  * @package Siqu\CMS\API\EventListener
  */
-class APIResponseListener
+class APIResponseListener extends APIAttributeListener
 {
     /** @var SerializerInterface */
     private $serializer;
@@ -28,21 +29,22 @@ class APIResponseListener
     }
 
     /**
-     * Serialize data for a api response.
-     *
-     * @param FilterResponseEvent $event
+     * Only listener for response formatter.
+     * @return string
      */
-    public function onKernelResponse(FilterResponseEvent $event): void
+    protected function getListenerName(): string
     {
-        $request = $event->getRequest();
-        $response = $event->getResponse();
+        return ListenerAttributes::RESPONSE_FORMATTER_LISTENER;
+    }
 
-        /** @var ListenerAttributes $listener */
-        $listener = $request->attributes->get('listener');
-        if (!$listener->isResponseFormatterActive() || get_class($response) !== APIResponse::class) {
-            return;
-        }
-
+    /**
+     * Set response content depending on the request format.
+     *
+     * @param Request $request
+     * @param Response $response
+     */
+    protected function handleKernelResponse(Request $request, Response $response): void
+    {
         /** @var APIResponse $response */
         $data = $response->getData();
 

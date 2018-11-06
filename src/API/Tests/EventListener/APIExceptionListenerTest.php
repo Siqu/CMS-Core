@@ -46,7 +46,8 @@ class APIExceptionListenerTest extends TestCase
     public function testOnKernelResponseAPIValidationException(): void
     {
         $this->listenerAttributes
-            ->method('isAPIExceptionActive')
+            ->method('isListenerActive')
+            ->with(ListenerAttributes::API_EXCEPTION_LISTENER)
             ->willReturn(true);
 
         $request = new Request(
@@ -102,7 +103,8 @@ class APIExceptionListenerTest extends TestCase
     public function testOnKernelResponseInvalidException(): void
     {
         $this->listenerAttributes
-            ->method('isAPIExceptionActive')
+            ->method('isListenerActive')
+            ->with(ListenerAttributes::API_EXCEPTION_LISTENER)
             ->willReturn(true);
 
         $request = new Request(
@@ -131,7 +133,8 @@ class APIExceptionListenerTest extends TestCase
     public function testOnKernelResponseNoListener(): void
     {
         $this->listenerAttributes
-            ->method('isAPIExceptionActive')
+            ->method('isListenerActive')
+            ->with(ListenerAttributes::API_EXCEPTION_LISTENER)
             ->willReturn(false);
 
         $request = new Request(
@@ -160,7 +163,8 @@ class APIExceptionListenerTest extends TestCase
     public function testOnKernelResponseNotFoundHttpException(): void
     {
         $this->listenerAttributes
-            ->method('isAPIExceptionActive')
+            ->method('isListenerActive')
+            ->with(ListenerAttributes::API_EXCEPTION_LISTENER)
             ->willReturn(true);
 
         $request = new Request(

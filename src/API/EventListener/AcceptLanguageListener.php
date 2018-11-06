@@ -3,28 +3,31 @@
 namespace Siqu\CMS\API\EventListener;
 
 use Siqu\CMS\API\Request\ListenerAttributes;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class AcceptLanguageListener
  * @package Siqu\CMS\API\EventListener
  */
-class AcceptLanguageListener
+class AcceptLanguageListener extends APIAttributeListener
 {
     /**
-     * Retrieve locale from accept locale header and set current locale.
+     * Only listen for accept-language listener.
      *
-     * @param GetResponseEvent $event
+     * @return string
      */
-    public function onKernelRequest(GetResponseEvent $event): void
+    protected function getListenerName(): string
     {
-        $request = $event->getRequest();
+        return ListenerAttributes::ACCEPT_LANGUAGE_LISTENER;
+    }
 
-        /** @var ListenerAttributes $listener */
-        $listener = $request->attributes->get('listener');
-        if (!$listener->isAcceptLanguageActive()) {
-            return;
-        }
+    /**
+     * Set locale from preferred languages of request.
+     *
+     * @param Request $request
+     */
+    protected function handleKernelRequest(Request $request): void
+    {
         $preferredLocale = $request->getPreferredLanguage(['en', 'de']);
 
         $request->setLocale($preferredLocale);

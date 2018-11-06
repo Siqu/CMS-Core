@@ -16,6 +16,7 @@ class ListenerAttributesTest extends TestCase
 
     /**
      * Should create instance and return default values
+     * @throws \ReflectionException
      */
     public function testConstruct(): void
     {
@@ -23,28 +24,32 @@ class ListenerAttributesTest extends TestCase
             ListenerAttributes::class,
             $this->attributes
         );
+
+        $reflection = new \ReflectionClass($this->attributes);
+
+        $constants = $reflection->getConstants();
+
+        $this->assertCount(4, $constants);
+        $this->assertArrayHasKey('API_EXCEPTION_LISTENER', $constants);
+        $this->assertArrayHasKey('ACCEPT_LISTENER', $constants);
+        $this->assertArrayHasKey('ACCEPT_LANGUAGE_LISTENER', $constants);
+        $this->assertArrayHasKey('RESPONSE_FORMATTER_LISTENER', $constants);
     }
 
     /**
-     * Should return value
+     * Should return true.
      */
-    public function testIsAcceptActive(): void
+    public function testIsListenerActive(): void
     {
-        $this->assertFalse($this->attributes->isAcceptActive());
-
-        $attributes = new ListenerAttributes(['accept' => true]);
-        $this->assertTrue($attributes->isAcceptActive());
+        $this->assertTrue($this->attributes->isListenerActive(ListenerAttributes::RESPONSE_FORMATTER_LISTENER));
     }
 
     /**
-     * Should return value
+     * Should return false.
      */
-    public function testIsAcceptLanguageActive(): void
+    public function testIsListenerActiveUnknown(): void
     {
-        $this->assertFalse($this->attributes->isAcceptLanguageActive());
-
-        $attributes = new ListenerAttributes(['accept-language' => true]);
-        $this->assertTrue($attributes->isAcceptLanguageActive());
+        $this->assertFalse($this->attributes->isListenerActive('unknown'));
     }
 
     /**
@@ -54,6 +59,10 @@ class ListenerAttributesTest extends TestCase
     {
         parent::setUp();
 
-        $this->attributes = new ListenerAttributes();
+        $this->attributes = new ListenerAttributes(
+            [
+                ListenerAttributes::RESPONSE_FORMATTER_LISTENER => true
+            ]
+        );
     }
 }

@@ -13,25 +13,25 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * Class APIExceptionListener
  * @package Siqu\CMS\API\EventListener
  */
-class APIExceptionListener
+class APIExceptionListener extends APIAttributeListener
 {
+    /**
+     * Only listen for api exceptions
+     * @return string
+     */
+    protected function getListenerName(): string
+    {
+        return ListenerAttributes::API_EXCEPTION_LISTENER;
+    }
+
     /**
      * Handle API Exceptions.
      *
      * @param GetResponseForExceptionEvent $event
      */
-    public function onKernelException(GetResponseForExceptionEvent $event): void
+    protected function handleKernelException(GetResponseForExceptionEvent $event): void
     {
-        $request = $event->getRequest();
-
-        /** @var ListenerAttributes $listener */
-        $listener = $request->attributes->get('listener');
-        if (!$listener->isAPIExceptionActive()) {
-            return;
-        }
-
         $exception = $event->getException();
-
         $class = get_class($exception);
         if ($class === APIValidationException::class) {
             /** @var APIValidationException $exception */

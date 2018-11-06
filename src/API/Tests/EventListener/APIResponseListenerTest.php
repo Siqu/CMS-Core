@@ -47,7 +47,8 @@ class APIResponseListenerTest extends TestCase
     public function testOnKernelResponse(): void
     {
         $this->listenerAttributes
-            ->method('isResponseFormatterActive')
+            ->method('isListenerActive')
+            ->with(ListenerAttributes::RESPONSE_FORMATTER_LISTENER)
             ->willReturn(true);
 
         $response = new APIResponse(
@@ -95,10 +96,11 @@ class APIResponseListenerTest extends TestCase
     public function testOnKernelResponseIncorrectResponse(): void
     {
         $this->listenerAttributes
-            ->method('isResponseFormatterActive')
+            ->method('isListenerActive')
+            ->with(ListenerAttributes::RESPONSE_FORMATTER_LISTENER)
             ->willReturn(true);
 
-        $response = new Response();
+        $response = new APIResponse([]);
         $request = new Request(
             [],
             [],
@@ -128,7 +130,8 @@ class APIResponseListenerTest extends TestCase
     public function testOnKernelResponseNoListener(): void
     {
         $this->listenerAttributes
-            ->method('isResponseFormatterActive')
+            ->method('isListenerActive')
+            ->with(ListenerAttributes::RESPONSE_FORMATTER_LISTENER)
             ->willReturn(false);
 
         $response = new Response();
@@ -161,7 +164,8 @@ class APIResponseListenerTest extends TestCase
     public function testOnKernelResponseWithViolation(): void
     {
         $this->listenerAttributes
-            ->method('isResponseFormatterActive')
+            ->method('isListenerActive')
+            ->with(ListenerAttributes::RESPONSE_FORMATTER_LISTENER)
             ->willReturn(true);
 
         $violations = new ConstraintViolationList(

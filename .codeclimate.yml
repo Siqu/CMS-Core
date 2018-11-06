@@ -1,5 +1,5 @@
----
-exclude_paths:
+version: 2
+exclude_patterns:
 - bin/
 - vendor/
 - var/

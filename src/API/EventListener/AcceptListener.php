@@ -3,13 +3,13 @@
 namespace Siqu\CMS\API\EventListener;
 
 use Siqu\CMS\API\Request\ListenerAttributes;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class AcceptListener
  * @package Siqu\CMS\API\EventListener
  */
-class AcceptListener
+class AcceptListener extends APIAttributeListener
 {
     /** @var array */
     private $contentTypes;
@@ -26,19 +26,20 @@ class AcceptListener
     }
 
     /**
-     * Retrieve accept header from request and set content type of request
-     *
-     * @param GetResponseEvent $event
+     * Only listen for accept attributes.
+     * @return string
      */
-    public function onKernelRequest(GetResponseEvent $event): void
+    protected function getListenerName(): string
     {
-        $request = $event->getRequest();
+        return ListenerAttributes::ACCEPT_LISTENER;
+    }
 
-        /** @var ListenerAttributes $listener */
-        $listener = $request->attributes->get('listener');
-        if (!$listener->isAcceptActive()) {
-            return;
-        }
+    /**
+     * Set request format depending on acceptable content type.
+     * @param Request $request
+     */
+    protected function handleKernelRequest(Request $request): void
+    {
         $acceptableContentTypes = $request->getAcceptableContentTypes();
 
         foreach ($acceptableContentTypes as $acceptableContentType) {
