@@ -108,6 +108,17 @@ class APIResponseListenerTest extends TestCase
                 'listener' => $this->listenerAttributes
             ]
         );
+        $request->setRequestFormat('application/json');
+
+        $this->serializer
+            ->method('serialize')
+            ->with(
+                [
+
+                ],
+                'json'
+            )
+            ->willReturn('serialized');
 
         $event = new FilterResponseEvent(
             $this->kernel,
@@ -119,7 +130,7 @@ class APIResponseListenerTest extends TestCase
         $this->listener->onKernelResponse($event);
 
         $this->assertEquals(
-            '',
+            'serialized',
             $response->getContent()
         );
     }
@@ -142,6 +153,7 @@ class APIResponseListenerTest extends TestCase
                 'listener' => $this->listenerAttributes
             ]
         );
+        $request->setRequestFormat('application/json');
 
         $event = new FilterResponseEvent(
             $this->kernel,
